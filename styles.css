@@ -1314,12 +1314,12 @@ input, textarea, select {
   top: 0;
   left: 0;
   height: 100vh;
-  background-color: var(--bg-card);
-  border-right: 1px solid var(--border-light);
+  background: linear-gradient(180deg, #fafbfc 0%, #f6f8fa 100%);
+  border-right: 1px solid #e1e4e8;
   display: flex;
   flex-direction: column;
   padding: var(--spacing-xl) var(--spacing-md);
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.04);
   z-index: 100;
 }
 
@@ -1330,18 +1330,24 @@ input, textarea, select {
   padding: var(--spacing-lg) var(--spacing-md);
   margin-bottom: var(--spacing-xl);
   gap: var(--spacing-sm);
+  background: linear-gradient(135deg, rgba(168, 216, 234, 0.15), rgba(212, 197, 249, 0.15));
+  border-radius: var(--radius-lg);
+  margin-left: var(--spacing-xs);
+  margin-right: var(--spacing-xs);
 }
 
 .logo-icon {
   font-size: 48px;
   margin-bottom: var(--spacing-xs);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .logo-text {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #1a1a1a;
   text-align: center;
+  letter-spacing: 0.3px;
 }
 
 .nav-items-container {
@@ -1354,7 +1360,7 @@ input, textarea, select {
 .sidebar-footer {
   margin-top: auto;
   padding-top: var(--spacing-lg);
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .user-stats {
@@ -1367,16 +1373,26 @@ input, textarea, select {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
-  background: var(--gradient-green);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
   border-radius: var(--radius-md);
-  color: white;
-  font-size: 13px;
+  color: #495057;
+  font-size: 12px;
   font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .stat-item i {
   font-size: 16px;
+  color: #6c757d;
+}
+
+.stat-item:first-child i {
+  color: #ff6b6b;
+}
+
+.stat-item:last-child i {
+  color: #51cf66;
 }
 
 /* ============================================

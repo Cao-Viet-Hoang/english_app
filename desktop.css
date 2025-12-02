@@ -29,13 +29,14 @@
   }
 
   .nav-item:hover {
-    background-color: var(--bg-hover);
-    color: var(--text-primary);
+    background-color: rgba(168, 216, 234, 0.15);
+    color: #1a1a1a;
   }
 
   .nav-item.active {
-    background: var(--gradient-blue);
+    background: linear-gradient(135deg, #84c5db, #a3b8e8);
     color: white;
+    box-shadow: 0 2px 8px rgba(132, 197, 219, 0.3);
   }
 
   .nav-item.active i {
