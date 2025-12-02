@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Learning App</title>
+  <link rel="stylesheet" href="colors.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  
+  <!-- Main App Container -->
+  <div id="app" class="app-container">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <h1 class="app-title">English Journey</h1>
+        <button class="header-btn" id="settingsBtn">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="mainContent">
+      
+      <!-- Journey Screen (Topics List) -->
+      <div class="screen active" id="journeyScreen">
+        <div class="screen-header">
+          <h2 class="screen-title">Vocabulary Journey</h2>
+          <p class="screen-subtitle">Learn topics from basic to advanced</p>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="beginner">Beginner</button>
+          <button class="chip" data-filter="intermediate">Intermediate</button>
+          <button class="chip" data-filter="advanced">Advanced</button>
+        </div>
+
+        <!-- Topics List -->
+        <div class="topics-list" id="topicsList">
+          <!-- Topics will be dynamically inserted here -->
+        </div>
+      </div>
+
+      <!-- Word List Screen -->
+      <div class="screen" id="wordListScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToJourneyBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="topicTitle">Daily Routine</h2>
+            <p class="screen-subtitle" id="topicStats">20/50 words • A1-A2</p>
+          </div>
+          <button class="header-btn primary" id="reviewAllBtn">
+            <i class="fas fa-play"></i> Review
+          </button>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search words in this topic..." id="wordSearch">
+          </div>
+          <button class="filter-btn" id="wordFilterBtn">
+            <i class="fas fa-filter"></i>
+          </button>
+        </div>
+
+        <!-- Word Cards List -->
+        <div class="word-cards-list" id="wordCardsList">
+          <!-- Word cards will be dynamically inserted here -->
+        </div>
+      </div>
+
+      <!-- My Words Screen -->
+      <div class="screen" id="myWordsScreen">
+        <div class="screen-header">
+          <h2 class="screen-title">My Words</h2>
+          <p class="screen-subtitle">Your personal vocabulary collection</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-tab="all">All</button>
+          <button class="tab-btn" data-tab="work">Work</button>
+          <button class="tab-btn" data-tab="ielts">IELTS</button>
+          <button class="tab-btn" data-tab="custom">Custom</button>
+        </div>
+
+        <!-- My Word Cards List -->
+        <div class="word-cards-list" id="myWordsList">
+          <!-- User's words will be dynamically inserted here -->
+        </div>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="addWordBtn">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-screen="journeyScreen">
+        <i class="fas fa-route"></i>
+        <span>Journey</span>
+      </button>
+      <button class="nav-item" data-screen="myWordsScreen">
+        <i class="fas fa-book"></i>
+        <span>My Words</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Bottom Sheet for Word Details -->
+  <div class="bottom-sheet-overlay" id="bottomSheetOverlay"></div>
+  <div class="bottom-sheet" id="wordDetailSheet">
+    <div class="bottom-sheet-handle"></div>
+    <div class="bottom-sheet-content" id="wordDetailContent">
+      <!-- Word details will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <!-- Modal for Adding New Word -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal" id="addWordModal">
+    <div class="modal-header">
+      <h3>Add New Word</h3>
+      <button class="modal-close" id="closeModalBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-content">
+      <form id="addWordForm">
+        <div class="form-group">
+          <label for="wordEnglish">English Word *</label>
+          <input type="text" id="wordEnglish" required placeholder="e.g., beautiful">
+        </div>
+        
+        <div class="form-group">
+          <label for="wordType">Word Type *</label>
+          <select id="wordType" required>
+            <option value="">Select type</option>
+            <option value="verb">Verb</option>
+            <option value="noun">Noun</option>
+            <option value="adjective">Adjective</option>
+            <option value="adverb">Adverb</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="wordVietnamese">Vietnamese Meaning *</label>
+          <input type="text" id="wordVietnamese" required placeholder="e.g., đẹp">
+        </div>
+        
+        <div class="form-group">
+          <label for="wordDescription">Vietnamese Description</label>
+          <textarea id="wordDescription" rows="3" placeholder="Describe the word in Vietnamese..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="wordNote">Personal Note</label>
+          <textarea id="wordNote" rows="2" placeholder="Your personal note about this word..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="wordCategory">Category</label>
+          <select id="wordCategory">
+            <option value="all">General</option>
+            <option value="work">Work</option>
+            <option value="ielts">IELTS</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelAddBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Word</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

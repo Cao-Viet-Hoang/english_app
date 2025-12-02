@@ -1,0 +1,91 @@
+/* ============================================
+   COLOR PALETTE - Elegant Pastel Theme
+   ============================================ */
+
+:root {
+  /* Primary Pastel Colors */
+  --primary-soft-blue: #a8d8ea;
+  --primary-soft-pink: #ffd5e5;
+  --primary-soft-purple: #d4c5f9;
+  --primary-soft-green: #c8e6c9;
+  --primary-soft-yellow: #fff9c4;
+  --primary-soft-peach: #ffe4d6;
+  
+  /* Background Colors */
+  --bg-main: #fafafa;
+  --bg-card: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-hover: #f0f0f0;
+  
+  /* Accent Colors - Slightly deeper pastels for contrast */
+  --accent-blue: #7ec8e3;
+  --accent-pink: #ffb3d9;
+  --accent-purple: #b8a4f3;
+  --accent-green: #a5d6a7;
+  --accent-orange: #ffb74d;
+  
+  /* Text Colors */
+  --text-primary: #2d3436;
+  --text-secondary: #636e72;
+  --text-tertiary: #b2bec3;
+  --text-light: #dfe6e9;
+  
+  /* Status Colors */
+  --status-new: var(--primary-soft-yellow);
+  --status-learning: var(--primary-soft-blue);
+  --status-mastered: var(--primary-soft-green);
+  
+  /* Word Type Colors */
+  --type-verb: var(--primary-soft-purple);
+  --type-noun: var(--primary-soft-blue);
+  --type-adjective: var(--primary-soft-pink);
+  --type-adverb: var(--primary-soft-peach);
+  
+  /* Interactive Elements */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* Border & Divider */
+  --border-light: #e8e8e8;
+  --border-medium: #d4d4d4;
+  
+  /* Gradient Backgrounds */
+  --gradient-blue: linear-gradient(135deg, var(--primary-soft-blue), var(--primary-soft-purple));
+  --gradient-pink: linear-gradient(135deg, var(--primary-soft-pink), var(--primary-soft-peach));
+  --gradient-green: linear-gradient(135deg, var(--primary-soft-green), var(--primary-soft-blue));
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 50%;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* Dark Mode Support (optional for future) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-main: #1a1a1a;
+    --bg-card: #2d2d2d;
+    --bg-secondary: #242424;
+    --bg-hover: #363636;
+    --text-primary: #f5f5f5;
+    --text-secondary: #b8b8b8;
+    --text-tertiary: #808080;
+    --border-light: #404040;
+    --border-medium: #505050;
+  }
+}

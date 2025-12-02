@@ -1,0 +1,422 @@
+Tôi đang muốn phát triển 1 ứng dụng học tiếng Anh, hiện tại với giai đoạn đầu sẽ bắt đầu với tính năng học từ vựng, sau đó sẽ thêm học grammar và reading. Đối với học từ vựng thì có những yêu cầu sau: Danh sách từ theo chủ đề (hệ thống sẽ cập nhật) và danh sách từ của riêng người học (người học tự thêm vào) - Bên trong từng chủ đề sẽ có từ vựng liên quan đến chủ đề đó + Từ vựng tiếng Anh + Loại từng + Nếu là động từ: hiển thị luôn V-ing, V-ed, dạng bất quy tắc (go – went – gone). + Nếu là danh từ: hiển thị luôn dạng số nhiều (child – children), đếm được/không đếm được. + Nếu là tính từ/adverb: thêm thông tin adj + giới từ (afraid of, interested in…). + Ý nghĩa của từ được mô tả bằng tiếng Việt và nghĩa của từ bằng tiếng Việt (sẽ được che sao cho hướng đến người đọc tập trung và ý nghĩa của từ được mô tả bằng tiếng Việt, khi người học thật sự không hiểu được thì mới dùng đến từ bằng tiếng Việt) + Phát âm IPA, audio đọc (Anh Mỹ, Anh Anh) + Cách sử dụng trong câu (khoảng 3 câu mẫu) 1 câu rất đơn giản (cho beginner) 2 câu gần với đời sống/ngữ cảnh thật. + Lỗi thường gặp phải khi sử dụng từ này (kèm giải thích lí do) + Các từ đồng nghĩa + Các Collocations của từ này, các nhóm như Verb + noun (make a decision), Adjective + noun (heavy rain), Noun + noun (traffic jam)... Và mỗi collocations có 1 câu ví dụ Các chủ đề của hệ thống sẽ được sắp xếp có hộ trình Các thông tin cơ bản cần hiện thị bao gồm tiếng Anh, nghĩa tiếng Việt, từ tiếng Việt (được ẩn cho tới khi người dùng click vào), phiên âm IPA, audio. Các thông tin còn lại khi nào bấm vào phần mở rộng thì mới hiển thị toàn bộ
+
+1. Flow tổng thể cho học từ vựng
+
+Tab chính (ở bottom navigation):
+
+Hành trình (chủ đề do hệ thống sắp xếp theo lộ trình)
+
+Từ của tôi (từ người học tự thêm)
+
+(Sau này có thể thêm) Grammar, Reading…
+
+Trước mắt ta tập trung:
+
+Màn hình Hành trình → chọn Chủ đề → xem Danh sách từ → mở Chi tiết từ / thẻ mở rộng
+
+Màn hình Từ của tôi → tương tự, nhưng dữ liệu do user tự thêm.
+
+2. Màn hình “Hành trình” – Danh sách chủ đề
+Mục tiêu
+
+Cho thấy các chủ đề theo lộ trình: dễ → khó, hoặc level A1 → C1.
+
+Cho người dùng thấy tiến độ trong mỗi chủ đề.
+
+Layout gợi ý
+
+Header
+
+Tiêu đề: Hành trình từ vựng
+
+Sub-text nhỏ: “Học theo chủ đề từ cơ bản đến nâng cao”
+
+Thanh filter / chip
+
+Chips: Tất cả | Beginner | Intermediate | Advanced
+
+Có thể thêm toggle “Chủ đề đã học / chưa học”
+
+Danh sách chủ đề (card)
+Mỗi chủ đề là một card như:
+
+[Icon]  Chủ đề: Daily routine
+       20/50 từ · A1-A2
+       Thanh tiến độ (progress bar)
+
+
+Requirement:
+
+Mỗi chủ đề gồm:
+
+Tên chủ đề (EN + optional VN)
+
+Số từ đã học / tổng số
+
+Level gợi ý (A1, A2…)
+
+Progress bar
+
+Tap vào card → chuyển sang Màn hình danh sách từ của chủ đề.
+
+3. Màn hình danh sách từ trong 1 chủ đề
+Mục tiêu
+
+Cho người dùng thấy toàn bộ từ trong chủ đề, nhưng ở dạng card thu gọn, chỉ hiển thị thông tin cơ bản:
+
+Từ tiếng Anh
+
+Phiên âm IPA
+
+Icon audio
+
+Nghĩa tiếng Việt ngắn (có thể che 1 phần)
+
+Cho phép click vào từng từ để mở thẻ chi tiết.
+
+Layout gợi ý
+
+Header
+
+Tên chủ đề: Daily routine
+
+Số từ: 20/50 từ • A1-A2
+
+Nút hành động: Ôn tập tất cả
+
+Thanh tìm kiếm + filter
+
+Search: “Tìm từ trong chủ đề này”
+
+Filter theo: Đã học, Chưa học, Động từ, Danh từ, Tính từ, …
+
+Danh sách card từ (dạng list)
+
+Ví dụ một card thu gọn:
+
+[EN WORD]        [icon speaker US] [icon speaker UK]
+/ˈwɔː.tər/       (IPA)
+
+Nghĩa:  [Ẩn - bấm để hiện]    [icon mũi tên mở rộng]
+
+
+Requirement UI cho card thu gọn:
+
+Dòng 1:
+
+Từ tiếng Anh (font to, đậm)
+
+Icon audio US & UK (2 icon nhỏ, tap để phát audio)
+
+Dòng 2:
+
+IPA (nhỏ hơn, màu xám)
+
+Dòng 3:
+
+Label “Nghĩa tiếng Việt”:
+
+Hiển thị dạng: ••• hoặc “Bấm để xem”
+
+Khi tap → hiện nghĩa tiếng Việt ngắn (1–3 từ), nhưng phần mô tả chi tiết vẫn ở trong thẻ mở rộng.
+
+Góc phải card:
+
+Icon > hoặc mũi tên xuống để mở chi tiết từ (expand).
+
+4. Thẻ “Chi tiết từ” (Expand card / Bottom sheet)
+
+Khi người dùng bấm vào phần mở rộng, hiển thị một bottom sheet hoặc mở rộng card với toàn bộ thông tin nâng cao.
+
+Thông tin chi tiết cần có (theo nhóm)
+4.1. Thông tin cơ bản (nhắc lại)
+
+Từ tiếng Anh (to, rõ)
+
+IPA
+
+Audio US / UK
+
+Từ loại (verb / noun / adj / adv…)
+
+Nghĩa tiếng Việt chính (từ đơn giản, 1–3 nghĩa phổ biến)
+
+4.2. Hiển thị theo từng loại từ
+
+a. Nếu là động từ:
+
+Dòng thông tin nhỏ:
+
+Verb · V-ing: going · V-ed: went · Irregular: go – went – gone
+
+Requirement:
+
+Nếu là irregular verb: hiển thị luôn 3 cột: V1 – V2 – V3.
+
+Nếu regular: hiển thị V-ing, V-ed.
+
+b. Nếu là danh từ:
+
+Dòng thông tin:
+
+Noun · Plural: children · [C] / [U]
+
+Requirement:
+
+Có tag C (countable), U (uncountable) hoặc C/U nếu linh hoạt.
+
+Nếu số nhiều bất quy tắc, hiển thị luôn form đó.
+
+c. Nếu là tính từ / trạng từ (adj/adv):
+
+Dòng thông tin:
+
+Adjective · Thường đi với: afraid of, interested in
+
+Requirement:
+
+Có một khu vực riêng “Adj + preposition”:
+
+Dạng badge hoặc chips: afraid of, interested in, good at,…
+
+4.3. Nghĩa & mô tả bằng tiếng Việt (theo mô hình “ẩn nghĩa”)
+
+Bạn muốn:
+
+Ý nghĩa của từ được mô tả bằng tiếng Việt (mô tả), và nghĩa bằng tiếng Việt là “từ khóa” được ẩn đến khi cần.
+
+UI gợi ý:
+
+Block: “Giải thích tiếng Việt” (luôn hiển thị):
+
+Ví dụ:
+“Hành động rời khỏi một nơi để đến nơi khác, thường là trong một khoảng thời gian ngắn.”
+
+Dòng bên dưới: “Từ tiếng Việt tương đương: [Hiện]”
+
+Lúc đầu chỉ thấy: Từ tiếng Việt tương đương: [Hiện]
+
+Khi tap: hiện rời đi, đi khỏi, xuất phát…
+
+Requirement:
+
+Tách 2 trường rõ ràng trong data:
+
+MotaTiengViet (mô tả dài, luôn hiển thị)
+
+TuTiengViet (từ/ cụm từ dịch ngắn, mặc định ẩn)
+
+4.4. Câu ví dụ (3 câu)
+
+Block: “Ví dụ trong câu”
+
+Hiển thị dạng list:
+
+Câu rất đơn giản (level beginner rõ ràng):
+
+I go to school.
+
+Dưới có thể có dịch: Tôi đi học. (có nút “Hiện dịch/Ẩn dịch” như nghĩa từ)
+
+Câu gần với đời sống thật:
+
+I usually go to the gym after work.
+
+Câu trong bối cảnh tự nhiên hơn/đa nghĩa (nếu có):
+
+We decided to go for a walk in the park.
+
+Requirement:
+
+Mỗi câu:
+
+Câu tiếng Anh (bắt buộc)
+
+Dịch tiếng Việt (ẩn/hiện tùy người dùng để tránh lệ thuộc)
+
+4.5. Lỗi thường gặp & giải thích
+
+Block: “Lỗi thường gặp”
+
+Ví dụ:
+
+❌ I very like it.
+✔ I like it very much.
+Giải thích: “Very” không đứng trước động từ “like”…
+
+Requirement:
+
+Mỗi mục lỗi gồm:
+
+Câu sai
+
+Câu đúng
+
+Giải thích ngắn (VN/EN hoặc song ngữ)
+
+4.6. Từ đồng nghĩa
+
+Block: “Từ đồng nghĩa”
+
+Hiển thị dạng tag:
+
+leave, depart, set off
+
+Tap vào tag → mở popup nhỏ:
+
+Nghĩa Việt ngắn
+
+1 ví dụ câu
+
+Nút “Thêm vào danh sách học” (optional)
+
+Requirement:
+
+Cho phép phân loại: synonym (gần nghĩa), stronger/weaker meaning (nếu sau này nâng cao).
+
+4.7. Collocations
+
+Block: “Collocations thường gặp”
+
+Chia thành nhóm:
+
+Verb + noun
+
+Adjective + noun
+
+Noun + noun
+
+(sau này có thể thêm: adverb + adj…)
+
+UI gợi ý:
+
+Verb + noun
+- make a decision   [Xem ví dụ]
+- take a break      [Xem ví dụ]
+
+Adjective + noun
+- heavy rain        [Xem ví dụ]
+
+Noun + noun
+- traffic jam       [Xem ví dụ]
+
+
+Khi bấm [Xem ví dụ] hoặc tap vào collocation:
+
+Hiện 1 câu ví dụ:
+
+I need to make a decision soon.
+
+Tôi cần đưa ra quyết định sớm. (dịch ẩn/hiện)
+
+Requirement:
+
+Data collocation gồm:
+
+type (Verb+Noun, Adj+Noun,…)
+
+expression (make a decision)
+
+example_en
+
+example_vi (optional/ẩn)
+
+5. Màn hình “Từ của tôi”
+
+Đây là nơi người học tự thêm từ.
+
+Layout
+
+Tab top: Tất cả | Theo chủ đề tự tạo (ví dụ: “Work”, “IELTS Listening”)
+
+Nút FAB (floating action button): + Thêm từ mới
+
+Form thêm từ
+
+Các field tối thiểu:
+
+Từ tiếng Anh (bắt buộc)
+
+Từ loại (dropdown: verb, noun, adj, adv…)
+
+Nghĩa tiếng Việt (ngắn)
+
+Mô tả tiếng Việt (nếu người dùng muốn mô tả)
+
+Ghi chú riêng (VD: “Gặp từ này trong bài XYZ”)
+
+Optional: ví dụ câu người học tự thêm
+
+Requirement:
+
+Hạn chế field bắt buộc lúc đầu để user không ngại thêm.
+
+Sau khi tạo xong, user có thể mở thẻ từ → chỉnh sửa / bổ sung thêm IPA, collocations… (sau này hệ thống có thể gợi ý tự động).
+
+6. Yêu cầu về layout & UX chung
+
+Ưu tiên đọc tiếng Anh trước, tiếng Việt hỗ trợ
+
+Nghĩa tiếng Việt & dịch câu luôn ẩn/hiện bằng thao tác click → đúng mục tiêu “tập trung vào EN trước”.
+
+Nhóm thông tin theo block rõ ràng
+
+Block: Thông tin cơ bản
+
+Block: Giải thích tiếng Việt
+
+Block: Ví dụ
+
+Block: Lỗi thường gặp
+
+Block: Đồng nghĩa
+
+Block: Collocations
+
+Progressive Disclosure (mở dần)
+
+Ở danh sách chỉ hiển thị tối thiểu: EN, IPA, icon audio, trạng thái học.
+
+Chi tiết sâu (grammar, collocation, lỗi, mô tả) chỉ hiện khi user chủ động mở.
+
+Trạng thái học của từng từ
+
+Icon màu hoặc tag nhỏ:
+
+Mới (chưa học)
+
+Đang học
+
+Thuộc rồi
+
+Giúp sau này dễ tạo các chế độ review (flashcard, spaced repetition).
+
+Thiết kế mobile
+
+Chiều ngang hạn chế → nên dùng bottom sheet / full-screen “Chi tiết từ”.
+
+Nút audio luôn ở gần từ tiếng Anh (không bị giấu quá sâu).
+
+7. Tóm tắt nhanh các requirement chính
+
+2 luồng: Hành trình (chủ đề hệ thống) & Từ của tôi (user tự thêm).
+
+Mỗi chủ đề: card có tên, level, số từ, progress.
+
+Mỗi từ (card thu gọn): EN + IPA + audio + tag trạng thái + nghĩa Việt ẩn/hiện.
+
+Mở rộng (detail):
+
+Xử lý theo từng từ loại (verb: V1/V2/V3; noun: plural + C/U; adj/adv: adj + preposition).
+
+Mô tả tiếng Việt (luôn hiện) + từ Việt tương đương (ẩn đến khi cần).
+
+3 câu ví dụ (1 đơn giản, 2 gần đời sống) với dịch ẩn/hiện.
+
+Lỗi thường gặp + giải thích.
+
+Từ đồng nghĩa (tags).
+
+Collocations chia nhóm, mỗi collocation kèm câu ví dụ.
+
+Nghĩa tiếng Việt & dịch luôn opt-in (user phải click để xem).
