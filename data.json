@@ -1,0 +1,383 @@
+{
+  "topicsData": [
+    {
+      "id": 1,
+      "name": "Daily Routine",
+      "nameVi": "Thói quen hàng ngày",
+      "icon": "☀️",
+      "iconColor": "blue",
+      "level": "A1-A2",
+      "totalWords": 50,
+      "learnedWords": 20,
+      "category": "beginner"
+    },
+    {
+      "id": 2,
+      "name": "Food & Drinks",
+      "nameVi": "Đồ ăn & Thức uống",
+      "icon": "🍔",
+      "iconColor": "pink",
+      "level": "A1-A2",
+      "totalWords": 60,
+      "learnedWords": 35,
+      "category": "beginner"
+    },
+    {
+      "id": 3,
+      "name": "Travel & Transportation",
+      "nameVi": "Du lịch & Phương tiện",
+      "icon": "✈️",
+      "iconColor": "green",
+      "level": "A2-B1",
+      "totalWords": 45,
+      "learnedWords": 10,
+      "category": "intermediate"
+    },
+    {
+      "id": 4,
+      "name": "Work & Career",
+      "nameVi": "Công việc & Sự nghiệp",
+      "icon": "💼",
+      "iconColor": "blue",
+      "level": "B1-B2",
+      "totalWords": 70,
+      "learnedWords": 0,
+      "category": "intermediate"
+    },
+    {
+      "id": 5,
+      "name": "Technology",
+      "nameVi": "Công nghệ",
+      "icon": "💻",
+      "iconColor": "pink",
+      "level": "B2-C1",
+      "totalWords": 55,
+      "learnedWords": 5,
+      "category": "advanced"
+    }
+  ],
+  "vocabularyData": [
+    {
+      "id": 1,
+      "topicId": 1,
+      "english": "go",
+      "ipa": "/ɡoʊ/",
+      "type": "verb",
+      "vietnameseMeaning": "đi, rời đi",
+      "vietnameseDescription": "Hành động di chuyển từ nơi này sang nơi khác, thường là rời khỏi vị trí hiện tại để đến một địa điểm khác.",
+      "irregular": {
+        "v1": "go",
+        "v2": "went",
+        "v3": "gone",
+        "ving": "going"
+      },
+      "examples": [
+        {
+          "level": "beginner",
+          "en": "I go to school every day.",
+          "vi": "Tôi đi học mỗi ngày."
+        },
+        {
+          "level": "intermediate",
+          "en": "She usually goes to the gym after work.",
+          "vi": "Cô ấy thường đi tập gym sau giờ làm việc."
+        },
+        {
+          "level": "intermediate",
+          "en": "We decided to go for a walk in the park.",
+          "vi": "Chúng tôi quyết định đi dạo trong công viên."
+        }
+      ],
+      "commonMistakes": [
+        {
+          "wrong": "I go to home.",
+          "correct": "I go home.",
+          "explanation": "Không dùng 'to' trước 'home' khi nó là trạng từ chỉ nơi chốn."
+        },
+        {
+          "wrong": "He go to work.",
+          "correct": "He goes to work.",
+          "explanation": "Với ngôi thứ ba số ít (he, she, it), động từ phải thêm 's/es'."
+        }
+      ],
+      "synonyms": ["leave", "depart", "proceed", "travel", "move"],
+      "collocations": [
+        {
+          "type": "Verb + Noun",
+          "expression": "go home",
+          "example": "I need to go home early today.",
+          "exampleVi": "Tôi cần về nhà sớm hôm nay."
+        },
+        {
+          "type": "Verb + Adverb",
+          "expression": "go away",
+          "example": "Please go away and leave me alone.",
+          "exampleVi": "Xin hãy đi ra và để tôi yên."
+        },
+        {
+          "type": "Verb + Preposition",
+          "expression": "go for (a walk)",
+          "example": "Let's go for a coffee.",
+          "exampleVi": "Hãy đi uống cà phê nào."
+        }
+      ],
+      "status": "learning"
+    },
+    {
+      "id": 2,
+      "topicId": 1,
+      "english": "water",
+      "ipa": "/ˈwɔː.tər/",
+      "type": "noun",
+      "vietnameseMeaning": "nước",
+      "vietnameseDescription": "Chất lỏng trong suốt, không màu, không mùi, cần thiết cho sự sống của con người và sinh vật.",
+      "noun": {
+        "singular": "water",
+        "plural": "waters (chỉ các vùng nước)",
+        "countability": "U"
+      },
+      "examples": [
+        {
+          "level": "beginner",
+          "en": "I drink water every day.",
+          "vi": "Tôi uống nước mỗi ngày."
+        },
+        {
+          "level": "intermediate",
+          "en": "The water in this lake is very clean.",
+          "vi": "Nước trong hồ này rất trong sạch."
+        },
+        {
+          "level": "intermediate",
+          "en": "We need to conserve water during the drought.",
+          "vi": "Chúng ta cần tiết kiệm nước trong mùa hạn."
+        }
+      ],
+      "commonMistakes": [
+        {
+          "wrong": "I want a water.",
+          "correct": "I want some water / I want a glass of water.",
+          "explanation": "Water là danh từ không đếm được, không dùng 'a/an' trực tiếp."
+        }
+      ],
+      "synonyms": ["H2O", "liquid", "aqua"],
+      "collocations": [
+        {
+          "type": "Adjective + Noun",
+          "expression": "clean water",
+          "example": "Everyone deserves access to clean water.",
+          "exampleVi": "Mọi người đều xứng đáng có nước sạch."
+        },
+        {
+          "type": "Verb + Noun",
+          "expression": "drink water",
+          "example": "You should drink water regularly.",
+          "exampleVi": "Bạn nên uống nước thường xuyên."
+        },
+        {
+          "type": "Noun + Noun",
+          "expression": "water bottle",
+          "example": "Don't forget your water bottle.",
+          "exampleVi": "Đừng quên bình nước của bạn."
+        }
+      ],
+      "status": "mastered"
+    },
+    {
+      "id": 3,
+      "topicId": 1,
+      "english": "interested",
+      "ipa": "/ˈɪn.trə.stɪd/",
+      "type": "adjective",
+      "vietnameseMeaning": "quan tâm, thích thú",
+      "vietnameseDescription": "Cảm thấy tò mò hoặc muốn biết thêm về một điều gì đó, có sự chú ý đặc biệt.",
+      "adjective": {
+        "prepositions": ["interested in", "interested by"]
+      },
+      "examples": [
+        {
+          "level": "beginner",
+          "en": "I am interested in music.",
+          "vi": "Tôi quan tâm đến âm nhạc."
+        },
+        {
+          "level": "intermediate",
+          "en": "She's very interested in learning new languages.",
+          "vi": "Cô ấy rất thích thú với việc học ngôn ngữ mới."
+        },
+        {
+          "level": "intermediate",
+          "en": "Are you interested in joining our book club?",
+          "vi": "Bạn có quan tâm tham gia câu lạc bộ sách của chúng tôi không?"
+        }
+      ],
+      "commonMistakes": [
+        {
+          "wrong": "I am interesting in art.",
+          "correct": "I am interested in art.",
+          "explanation": "'Interesting' mô tả tính chất của sự vật (thú vị), còn 'interested' mô tả cảm giác của người (quan tâm)."
+        },
+        {
+          "wrong": "I am interested about sports.",
+          "correct": "I am interested in sports.",
+          "explanation": "Dùng giới từ 'in' sau 'interested', không phải 'about'."
+        }
+      ],
+      "synonyms": ["curious", "keen", "engaged", "fascinated"],
+      "collocations": [
+        {
+          "type": "Adjective + Preposition",
+          "expression": "interested in",
+          "example": "He's interested in photography.",
+          "exampleVi": "Anh ấy quan tâm đến nhiếp ảnh."
+        },
+        {
+          "type": "Adverb + Adjective",
+          "expression": "very interested",
+          "example": "I'm very interested in your proposal.",
+          "exampleVi": "Tôi rất quan tâm đến đề xuất của bạn."
+        },
+        {
+          "type": "Adverb + Adjective",
+          "expression": "genuinely interested",
+          "example": "She seems genuinely interested in helping.",
+          "exampleVi": "Cô ấy có vẻ thực sự quan tâm đến việc giúp đỡ."
+        }
+      ],
+      "status": "new"
+    },
+    {
+      "id": 4,
+      "topicId": 1,
+      "english": "breakfast",
+      "ipa": "/ˈbrek.fəst/",
+      "type": "noun",
+      "vietnameseMeaning": "bữa sáng",
+      "vietnameseDescription": "Bữa ăn đầu tiên trong ngày, thường được ăn vào buổi sáng sau khi thức dậy.",
+      "noun": {
+        "singular": "breakfast",
+        "plural": "breakfasts",
+        "countability": "C/U"
+      },
+      "examples": [
+        {
+          "level": "beginner",
+          "en": "I eat breakfast at 7 AM.",
+          "vi": "Tôi ăn sáng lúc 7 giờ sáng."
+        },
+        {
+          "level": "intermediate",
+          "en": "She usually skips breakfast on busy days.",
+          "vi": "Cô ấy thường bỏ bữa sáng vào những ngày bận rộn."
+        },
+        {
+          "level": "intermediate",
+          "en": "A healthy breakfast gives you energy for the day.",
+          "vi": "Một bữa sáng lành mạnh cho bạn năng lượng cho cả ngày."
+        }
+      ],
+      "commonMistakes": [
+        {
+          "wrong": "I eat the breakfast every day.",
+          "correct": "I eat breakfast every day.",
+          "explanation": "Không dùng 'the' trước breakfast khi nói chung chung về bữa ăn."
+        }
+      ],
+      "synonyms": ["morning meal"],
+      "collocations": [
+        {
+          "type": "Verb + Noun",
+          "expression": "have breakfast",
+          "example": "Let's have breakfast together.",
+          "exampleVi": "Hãy ăn sáng cùng nhau nào."
+        },
+        {
+          "type": "Verb + Noun",
+          "expression": "skip breakfast",
+          "example": "I often skip breakfast when I'm late.",
+          "exampleVi": "Tôi thường bỏ bữa sáng khi muộn."
+        },
+        {
+          "type": "Adjective + Noun",
+          "expression": "healthy breakfast",
+          "example": "A healthy breakfast is important.",
+          "exampleVi": "Một bữa sáng lành mạnh là quan trọng."
+        }
+      ],
+      "status": "learning"
+    },
+    {
+      "id": 5,
+      "topicId": 2,
+      "english": "delicious",
+      "ipa": "/dɪˈlɪʃ.əs/",
+      "type": "adjective",
+      "vietnameseMeaning": "ngon",
+      "vietnameseDescription": "Có hương vị rất tốt, làm cho người ăn cảm thấy thích thú và hài lòng.",
+      "examples": [
+        {
+          "level": "beginner",
+          "en": "This cake is delicious.",
+          "vi": "Bánh này ngon."
+        },
+        {
+          "level": "intermediate",
+          "en": "She cooked a delicious dinner for us.",
+          "vi": "Cô ấy nấu một bữa tối ngon cho chúng tôi."
+        },
+        {
+          "level": "intermediate",
+          "en": "The restaurant is famous for its delicious seafood.",
+          "vi": "Nhà hàng nổi tiếng với hải sản ngon."
+        }
+      ],
+      "commonMistakes": [
+        {
+          "wrong": "This food is very delicious much.",
+          "correct": "This food is very delicious.",
+          "explanation": "Không dùng 'much' sau 'delicious', chỉ dùng 'very'."
+        }
+      ],
+      "synonyms": ["tasty", "yummy", "scrumptious", "appetizing"],
+      "collocations": [
+        {
+          "type": "Adjective + Noun",
+          "expression": "delicious food",
+          "example": "They serve delicious food here.",
+          "exampleVi": "Họ phục vụ đồ ăn ngon ở đây."
+        },
+        {
+          "type": "Adjective + Noun",
+          "expression": "delicious meal",
+          "example": "Thank you for the delicious meal.",
+          "exampleVi": "Cảm ơn vì bữa ăn ngon."
+        }
+      ],
+      "status": "new"
+    }
+  ],
+  "myWordsData": [
+    {
+      "id": 101,
+      "english": "procrastinate",
+      "ipa": "/prəˈkræs.tɪ.neɪt/",
+      "type": "verb",
+      "vietnameseMeaning": "trì hoãn",
+      "vietnameseDescription": "Trì hoãn hoặc hoãn lại việc làm điều gì đó, đặc biệt là điều cần được làm.",
+      "category": "work",
+      "userNote": "Met this word in a productivity article",
+      "status": "learning"
+    },
+    {
+      "id": 102,
+      "english": "resilient",
+      "ipa": "/rɪˈzɪl.i.ənt/",
+      "type": "adjective",
+      "vietnameseMeaning": "kiên cường, có khả năng phục hồi",
+      "vietnameseDescription": "Có khả năng phục hồi nhanh chóng sau khó khăn hoặc thay đổi.",
+      "category": "ielts",
+      "userNote": "Common word in IELTS Writing Task 2",
+      "status": "new"
+    }
+  ]
+}

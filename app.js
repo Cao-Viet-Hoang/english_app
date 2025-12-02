@@ -11,7 +11,8 @@ let currentTab = 'all';
 // INITIALIZATION
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+  await loadData();
   initializeApp();
 });
 
