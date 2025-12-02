@@ -1,0 +1,104 @@
+/* ============================================
+   DESKTOP LAYOUT OVERRIDES & FIXES
+   ============================================ */
+
+/* Desktop navigation items - only apply on desktop */
+@media (min-width: 769px) {
+  .nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-tertiary);
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-md);
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav-item i {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+  }
+
+  .nav-item span {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .nav-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  .nav-item.active {
+    background: var(--gradient-blue);
+    color: white;
+  }
+
+  .nav-item.active i {
+    transform: scale(1.05);
+  }
+}
+
+/* Mobile responsive - handled in styles.css */
+
+/* Improve word card grid on larger screens */
+@media (min-width: 1200px) {
+  .word-cards-list {
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  }
+  
+  .topics-list {
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  }
+}
+
+/* Detail panel improvements for desktop */
+@media (min-width: 769px) {
+  .bottom-sheet-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+  }
+  
+  .detail-word-header {
+    grid-column: 1 / -1;
+  }
+  
+  .detail-section {
+    break-inside: avoid;
+  }
+}
+
+/* Ensure filter tabs don't duplicate */
+.filter-tabs.filter-tabs {
+  display: flex;
+  gap: var(--spacing-xs);
+  padding: 0;
+  margin-bottom: var(--spacing-xl);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+@media (max-width: 768px) {
+  .filter-tabs.filter-tabs {
+    padding: 0 var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve back button on desktop */
+@media (min-width: 769px) {
+  .back-btn {
+    display: none;
+  }
+}

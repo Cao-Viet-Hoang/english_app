@@ -326,6 +326,18 @@ function setupBottomSheetListeners() {
     if (handle) {
       handle.addEventListener('click', closeBottomSheet);
     }
+    
+    // Add click listener to the close button in header
+    sheet.addEventListener('click', function(e) {
+      const header = sheet.querySelector('.detail-word-header');
+      if (header && e.target === header) {
+        const rect = header.getBoundingClientRect();
+        // Check if click is in the top-right corner (close button area)
+        if (e.clientX > rect.right - 50 && e.clientY < rect.top + 50) {
+          closeBottomSheet();
+        }
+      }
+    });
   }
 }
 
@@ -354,6 +366,9 @@ function closeBottomSheet() {
 function generateWordDetailHTML(word) {
   return `
     <div class="detail-word-header">
+      <button class="detail-close-btn" onclick="closeBottomSheet()">
+        <i class="fas fa-times"></i>
+      </button>
       <h2 class="detail-word-english">${word.english}</h2>
       <div class="detail-word-ipa">${word.ipa}</div>
       <div class="detail-audio-controls">
