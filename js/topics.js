@@ -2,6 +2,32 @@
 // RENDER TOPICS
 // ============================================
 
+function updateJourneyStats() {
+  const topics = getTopicsData();
+  const totalTopics = topics.length;
+  
+  let totalWords = 0;
+  let learnedWords = 0;
+  
+  topics.forEach(topic => {
+    totalWords += topic.totalWords;
+    learnedWords += topic.learnedWords;
+  });
+  
+  const progressPercent = totalWords > 0 ? Math.round((learnedWords / totalWords) * 100) : 0;
+  
+  const topicCountEl = document.getElementById('topicCount');
+  const progressCountEl = document.getElementById('progressCount');
+  
+  if (topicCountEl) {
+    topicCountEl.textContent = `${totalTopics} ${totalTopics === 1 ? 'Topic' : 'Topics'}`;
+  }
+  
+  if (progressCountEl) {
+    progressCountEl.textContent = `${progressPercent}% Complete`;
+  }
+}
+
 function renderTopics(filter = 'all') {
   const topicsList = document.getElementById('topicsList');
   if (!topicsList) return;
@@ -10,6 +36,9 @@ function renderTopics(filter = 'all') {
   const filteredTopics = filter === 'all' 
     ? topics 
     : topics.filter(topic => topic.category === filter);
+
+  // Update journey stats
+  updateJourneyStats();
 
   topicsList.innerHTML = filteredTopics.map(topic => {
     const progress = Math.round((topic.learnedWords / topic.totalWords) * 100);
