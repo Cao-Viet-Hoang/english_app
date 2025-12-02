@@ -40,9 +40,8 @@ input, textarea, select {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 280px 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr;
   grid-template-areas: 
-    "sidebar header"
     "sidebar main";
   position: relative;
 }
@@ -63,19 +62,19 @@ input, textarea, select {
    ============================================ */
 
 .app-header {
-  grid-area: header;
-  background: var(--gradient-blue);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  box-shadow: var(--shadow-soft);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  display: none;
 }
 
 @media (max-width: 768px) {
   .app-header {
+    display: block;
+    background: var(--gradient-blue);
     padding: var(--spacing-md) var(--spacing-lg);
     padding-top: calc(var(--spacing-md) + env(safe-area-inset-top));
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 }
 
@@ -1359,14 +1358,42 @@ input, textarea, select {
 
 .sidebar-footer {
   margin-top: auto;
-  padding-top: var(--spacing-lg);
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: var(--spacing-md);
+}
+
+.sidebar-settings-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--text-tertiary);
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-md);
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.sidebar-settings-btn:hover {
+  background-color: rgba(168, 216, 234, 0.15);
+  color: #1a1a1a;
+}
+
+.sidebar-settings-btn i {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
 }
 
 .user-stats {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .stat-item {

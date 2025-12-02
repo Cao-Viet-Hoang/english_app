@@ -66,10 +66,18 @@ function setupUtilityListeners() {
     });
   }
 
-  // Settings button
+  // Settings button (header - mobile)
   const settingsBtn = document.getElementById('settingsBtn');
   if (settingsBtn) {
     settingsBtn.addEventListener('click', function() {
+      alert('Settings panel coming soon!');
+    });
+  }
+
+  // Settings button (sidebar - desktop)
+  const settingsBtnSidebar = document.getElementById('settingsBtnSidebar');
+  if (settingsBtnSidebar) {
+    settingsBtnSidebar.addEventListener('click', function() {
       alert('Settings panel coming soon!');
     });
   }
