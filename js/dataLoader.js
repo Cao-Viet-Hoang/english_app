@@ -1,5 +1,6 @@
-// Data Loader for English Learning App
-// This file loads data from data.json
+// ============================================
+// DATA LOADER
+// ============================================
 
 let topicsData = [];
 let vocabularyData = [];
@@ -31,14 +32,18 @@ async function loadData() {
   }
 }
 
-// Data will be loaded manually from app.js when needed
+function getTopicsData() {
+  return topicsData;
+}
 
-// Export for use in other modules (if using ES6 modules)
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    loadData,
-    getTopicsData: () => topicsData,
-    getVocabularyData: () => vocabularyData,
-    getMyWordsData: () => myWordsData
-  };
+function getVocabularyData() {
+  return vocabularyData;
+}
+
+function getMyWordsData() {
+  return myWordsData;
+}
+
+function addToMyWords(word) {
+  myWordsData.push(word);
 }
