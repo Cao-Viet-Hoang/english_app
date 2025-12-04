@@ -3,6 +3,10 @@
    ============================================ */
 
 :root {
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Poppins', 'Inter', sans-serif;
+  
   /* Primary Pastel Colors */
   --primary-soft-blue: #a8d8ea;
   --primary-soft-pink: #ffd5e5;

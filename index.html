@@ -24,6 +24,52 @@
       </div>
     </header>
 
+    <!-- Top Navigation / Header -->
+    <nav class="bottom-nav">
+      <div class="sidebar-logo">
+        <div class="logo-icon">📚</div>
+        <div class="logo-text">English Journey</div>
+      </div>
+      <div class="nav-items-container">
+        <button class="nav-item active" data-screen="journeyScreen">
+          <i class="fas fa-route"></i>
+          <span>Journey</span>
+        </button>
+        <button class="nav-item" data-screen="myWordsScreen">
+          <i class="fas fa-book"></i>
+          <span>My Words</span>
+        </button>
+        <!-- Coming Soon Features -->
+        <button class="nav-item nav-item-disabled" data-screen="readingScreen" disabled title="Coming Soon">
+          <i class="fas fa-book-open"></i>
+          <span>Reading</span>
+          <span class="coming-soon-badge">Soon</span>
+        </button>
+        <button class="nav-item nav-item-disabled" data-screen="writingScreen" disabled title="Coming Soon">
+          <i class="fas fa-pen"></i>
+          <span>Writing</span>
+          <span class="coming-soon-badge">Soon</span>
+        </button>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-stats">
+          <div class="stat-item streak">
+            <i class="fas fa-fire"></i>
+            <span class="streak-number">7</span>
+            <span class="streak-label">Day Streak</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" id="settingsBtnSidebar" title="Settings">
+            <i class="fas fa-cog"></i>
+          </button>
+          <button class="icon-btn user-btn" id="userProfileBtn" title="Profile">
+            <i class="fas fa-user-circle"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
     <!-- Main Content Area -->
     <main class="main-content" id="mainContent">
       
@@ -119,40 +165,6 @@
       </div>
 
     </main>
-
-    <!-- Bottom Navigation / Sidebar -->
-    <nav class="bottom-nav">
-      <div class="sidebar-logo">
-        <div class="logo-icon">📚</div>
-        <div class="logo-text">English Journey</div>
-      </div>
-      <div class="nav-items-container">
-        <button class="nav-item active" data-screen="journeyScreen">
-          <i class="fas fa-route"></i>
-          <span>Journey</span>
-        </button>
-        <button class="nav-item" data-screen="myWordsScreen">
-          <i class="fas fa-book"></i>
-          <span>My Words</span>
-        </button>
-      </div>
-      <div class="sidebar-footer">
-        <button class="sidebar-settings-btn" id="settingsBtnSidebar">
-          <i class="fas fa-cog"></i>
-          <span>Settings</span>
-        </button>
-        <div class="user-stats">
-          <div class="stat-item">
-            <i class="fas fa-fire"></i>
-            <span>7 day streak</span>
-          </div>
-          <div class="stat-item">
-            <i class="fas fa-check-circle"></i>
-            <span>125 words learned</span>
-          </div>
-        </div>
-      </div>
-    </nav>
 
   </div>
 
