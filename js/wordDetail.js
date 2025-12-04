@@ -32,10 +32,13 @@ function setupBottomSheetListeners() {
 }
 
 function openWordDetail(wordId) {
-  const vocabulary = getVocabularyData();
-  const myWords = getMyWordsData();
-  const word = vocabulary.find(w => w.id === wordId) || 
-                myWords.find(w => w.id === wordId);
+  const topic = getCurrentTopic();
+  const isUserTopic = isCurrentTopicUserTopic();
+  
+  if (!topic) return;
+  
+  const topicWords = getTopicWords(topic.id, isUserTopic);
+  const word = topicWords.find(w => w.id === wordId);
   
   if (!word) return;
 

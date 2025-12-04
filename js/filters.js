@@ -16,16 +16,15 @@ function setupFilterListeners() {
     });
   });
 
-  // My Words tabs
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  tabBtns.forEach(tab => {
-    tab.addEventListener('click', function() {
-      tabBtns.forEach(t => t.classList.remove('active'));
+  // My Words filter chips (same as Journey)
+  const myWordsChips = document.querySelectorAll('#myWordsScreen .filter-chips .chip');
+  myWordsChips.forEach(chip => {
+    chip.addEventListener('click', function() {
+      myWordsChips.forEach(c => c.classList.remove('active'));
       this.classList.add('active');
       
-      const tabValue = this.dataset.tab;
-      setCurrentTab(tabValue);
-      renderMyWords(tabValue);
+      const filter = this.dataset.filter;
+      renderMyWords(filter);
     });
   });
 

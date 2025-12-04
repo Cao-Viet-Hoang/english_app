@@ -3,18 +3,25 @@
 // ============================================
 
 function updateJourneyStats() {
-  const topics = getTopicsData();
-  const totalTopics = topics.length;
+  const userProfile = getCurrentUserProfile();
+  if (!userProfile) return;
   
-  let totalWords = 0;
-  let learnedWords = 0;
+  // Only count shared topics for Journey screen
+  const sharedTopics = getSharedTopics();
+  const totalTopics = sharedTopics.length;
   
-  topics.forEach(topic => {
-    totalWords += topic.totalWords;
-    learnedWords += topic.learnedWords;
+  // Calculate progress for shared vocabulary only
+  let totalSharedWords = 0;
+  let learnedSharedWords = 0;
+  
+  sharedTopics.forEach(topic => {
+    totalSharedWords += topic.totalWords;
+    learnedSharedWords += getLearnedWordsCount(topic.id, false);
   });
   
-  const progressPercent = totalWords > 0 ? Math.round((learnedWords / totalWords) * 100) : 0;
+  const sharedProgress = totalSharedWords > 0 
+    ? Math.round((learnedSharedWords / totalSharedWords) * 100) 
+    : 0;
   
   const topicCountEl = document.getElementById('topicCount');
   const progressCountEl = document.getElementById('progressCount');
@@ -24,7 +31,7 @@ function updateJourneyStats() {
   }
   
   if (progressCountEl) {
-    progressCountEl.textContent = `${progressPercent}% Complete`;
+    progressCountEl.textContent = `${sharedProgress}% Complete`;
   }
 }
 
@@ -32,19 +39,24 @@ function renderTopics(filter = 'all') {
   const topicsList = document.getElementById('topicsList');
   if (!topicsList) return;
 
-  const topics = getTopicsData();
+  // Only show shared vocabulary topics in Journey screen
+  const sharedTopics = getSharedTopics();
+  
   const filteredTopics = filter === 'all' 
-    ? topics 
-    : topics.filter(topic => topic.category === filter);
+    ? sharedTopics 
+    : sharedTopics.filter(topic => topic.category === filter);
 
   // Update journey stats
   updateJourneyStats();
 
   topicsList.innerHTML = filteredTopics.map(topic => {
-    const progress = Math.round((topic.learnedWords / topic.totalWords) * 100);
+    const learnedWords = getLearnedWordsCount(topic.id, false);
+    const progress = topic.totalWords > 0 
+      ? Math.round((learnedWords / topic.totalWords) * 100) 
+      : 0;
     
     return `
-      <div class="topic-card" data-topic-id="${topic.id}">
+      <div class="topic-card" data-topic-id="${topic.id}" data-is-user="false">
         <div class="topic-card-header">
           <div class="topic-icon ${topic.iconColor}">
             ${topic.icon}
@@ -53,7 +65,7 @@ function renderTopics(filter = 'all') {
             <div class="topic-name">${topic.name}</div>
             <div class="topic-meta">
               <span class="topic-level">${topic.level}</span>
-              <span>${topic.learnedWords}/${topic.totalWords} words</span>
+              <span>${learnedWords}/${topic.totalWords} words</span>
             </div>
           </div>
         </div>
@@ -75,27 +87,36 @@ function renderTopics(filter = 'all') {
   topicCards.forEach(card => {
     card.addEventListener('click', function() {
       const topicId = parseInt(this.dataset.topicId);
-      openTopicWords(topicId);
+      const isUserTopic = this.dataset.isUser === 'true';
+      openTopicWords(topicId, isUserTopic);
     });
   });
 }
 
-function openTopicWords(topicId) {
-  const topics = getTopicsData();
+function openTopicWords(topicId, isUserTopic = false) {
+  const topics = isUserTopic ? getUserTopics() : getSharedTopics();
   const topic = topics.find(t => t.id === topicId);
   if (!topic) return;
 
-  setCurrentTopic(topic);
+  setCurrentTopic(topic, isUserTopic);
 
+  const learnedWords = getLearnedWordsCount(topicId, isUserTopic);
+  
   // Update header
   document.getElementById('topicTitle').textContent = topic.name;
   document.getElementById('topicStats').textContent = 
-    `${topic.learnedWords}/${topic.totalWords} words • ${topic.level}`;
+    `${learnedWords}/${topic.totalWords} words • ${topic.level}`;
 
-  // Filter words for this topic
-  const vocabulary = getVocabularyData();
-  const topicWords = vocabulary.filter(word => word.topicId === topicId);
-  renderWordCards(topicWords, 'wordCardsList');
+  // Get words from topic's vocabulary array
+  const topicWords = getTopicWords(topicId, isUserTopic);
+  
+  // Add learned status to each word
+  const wordsWithStatus = topicWords.map(word => ({
+    ...word,
+    status: isWordLearned(topicId, word.id, isUserTopic) ? 'learned' : 'new'
+  }));
+  
+  renderWordCards(wordsWithStatus, 'wordCardsList');
 
   // Switch to word list screen
   switchScreen('wordListScreen');

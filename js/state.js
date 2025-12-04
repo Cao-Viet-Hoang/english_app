@@ -4,6 +4,7 @@
 
 let currentScreen = 'journeyScreen';
 let currentTopic = null;
+let currentTopicIsUser = false; // Track if viewing user topic or shared topic
 let currentFilter = 'all';
 let currentTab = 'all';
 
@@ -19,8 +20,13 @@ function getCurrentTopic() {
   return currentTopic;
 }
 
-function setCurrentTopic(topic) {
+function setCurrentTopic(topic, isUserTopic = false) {
   currentTopic = topic;
+  currentTopicIsUser = isUserTopic;
+}
+
+function isCurrentTopicUserTopic() {
+  return currentTopicIsUser;
 }
 
 function getCurrentFilter() {

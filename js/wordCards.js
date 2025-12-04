@@ -86,4 +86,30 @@ function setupWordCardListeners() {
       openWordDetail(wordId);
     });
   });
+  
+  // Word status toggle (mark as learned)
+  const statusBtns = document.querySelectorAll('.word-status');
+  statusBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const card = this.closest('.word-card');
+      const wordId = parseInt(card.dataset.wordId);
+      const topic = getCurrentTopic();
+      const isUserTopic = isCurrentTopicUserTopic();
+      
+      if (this.classList.contains('learned')) {
+        // Already learned, do nothing or allow unmark
+        return;
+      } else {
+        // Mark as learned
+        markWordAsLearned(topic.id, wordId, isUserTopic);
+        this.classList.add('learned');
+        
+        // Update topic stats
+        const learnedWords = getLearnedWordsCount(topic.id, isUserTopic);
+        document.getElementById('topicStats').textContent = 
+          `${learnedWords}/${topic.totalWords} words • ${topic.level}`;
+      }
+    });
+  });
 }
