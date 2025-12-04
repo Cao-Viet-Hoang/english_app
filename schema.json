@@ -174,7 +174,8 @@
         },
         "iconColor": {
           "type": "string",
-          "description": "Icon color"
+          "description": "Icon color pastel in hex format (e.g., #4A90E2), it should fit with the color of emoji icon",
+          "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
         },
         "level": {
           "type": "string",

@@ -55,7 +55,7 @@
                 "name": "Daily Routine",
                 "nameVi": "Thói quen hàng ngày",
                 "icon": "☀️",
-                "iconColor": "blue",
+                "iconColor": "#4A90E2",
                 "level": "A1-A2",
                 "totalWords": 50,
                 "category": "beginner",
@@ -200,7 +200,7 @@
                 "name": "Food & Drinks",
                 "nameVi": "Đồ ăn & Thức uống",
                 "icon": "🍔",
-                "iconColor": "pink",
+                "iconColor": "#FF69B4",
                 "level": "A1-A2",
                 "totalWords": 60,
                 "category": "beginner",
@@ -259,9 +259,9 @@
                         ]
                     }
                 ]
-            }
-        ]
-    },
+            ]
+        }
+    ],
     "user_vocabulary": {
         "1": {
             "topics": [
@@ -270,7 +270,7 @@
                     "name": "Daily Routine",
                     "nameVi": "Thói quen hàng ngày",
                     "icon": "☀️",
-                    "iconColor": "blue",
+                    "iconColor": "#4A90E2",
                     "level": "A1-A2",
                     "totalWords": 50,
                     "category": "beginner",
@@ -415,7 +415,7 @@
                     "name": "Food & Drinks",
                     "nameVi": "Đồ ăn & Thức uống",
                     "icon": "🍔",
-                    "iconColor": "pink",
+                    "iconColor": "#FF69B4",
                     "level": "A1-A2",
                     "totalWords": 60,
                     "category": "beginner",
@@ -484,7 +484,7 @@
                     "name": "Daily Routine",
                     "nameVi": "Thói quen hàng ngày",
                     "icon": "☀️",
-                    "iconColor": "blue",
+                    "iconColor": "#4A90E2",
                     "level": "A1-A2",
                     "totalWords": 50,
                     "category": "beginner",
@@ -633,7 +633,7 @@
                     "name": "Food & Drinks",
                     "nameVi": "Đồ ăn & Thức uống",
                     "icon": "🍔",
-                    "iconColor": "pink",
+                    "iconColor": "#FF69B4",
                     "level": "A1-A2",
                     "totalWords": 60,
                     "category": "beginner",

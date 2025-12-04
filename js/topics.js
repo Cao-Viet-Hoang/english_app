@@ -58,7 +58,7 @@ function renderTopics(filter = 'all') {
     return `
       <div class="topic-card" data-topic-id="${topic.id}" data-is-user="false">
         <div class="topic-card-header">
-          <div class="topic-icon ${topic.iconColor}">
+          <div class="topic-icon" style="background: ${topic.iconColor};">
             ${topic.icon}
           </div>
           <div class="topic-info">
