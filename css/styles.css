@@ -1727,6 +1727,11 @@ input, textarea, select {
     position: relative;
   }
   
+  .nav-item i {
+    color: white;
+    font-size: 18px;
+  }
+  
   .coming-soon-badge {
     top: -4px;
     right: -4px;
