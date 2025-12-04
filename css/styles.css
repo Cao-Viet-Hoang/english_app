@@ -207,7 +207,7 @@ input, textarea, select {
   letter-spacing: -0.3px;
 }
 
-.screen-title::before {
+#journeyScreen .screen-title::before {
   content: '🚀';
   font-size: 26px;
   display: inline-block;
@@ -233,7 +233,7 @@ input, textarea, select {
   margin-bottom: var(--spacing-sm);
 }
 
-.screen-subtitle::before {
+#journeyScreen .screen-subtitle::before {
   content: '✨';
   font-size: 14px;
 }

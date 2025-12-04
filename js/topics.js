@@ -103,6 +103,12 @@ function openTopicWords(topicId, isUserTopic = false) {
   const learnedWords = getLearnedWordsCount(topicId, isUserTopic);
   
   // Update header
+  const topicIconEl = document.getElementById('topicIcon');
+  if (topicIconEl) {
+    topicIconEl.textContent = topic.icon;
+    topicIconEl.style.background = topic.iconColor;
+  }
+  
   document.getElementById('topicTitle').textContent = topic.name;
   document.getElementById('topicStats').textContent = 
     `${learnedWords}/${topic.totalWords} words • ${topic.level}`;
