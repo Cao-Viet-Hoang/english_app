@@ -43,13 +43,6 @@ function getUserTopics() {
   return userVocab?.topics || [];
 }
 
-// Get all topics (shared + user's personal topics)
-function getAllTopics() {
-  const sharedTopics = getSharedTopics();
-  const userTopics = getUserTopics();
-  return [...sharedTopics, ...userTopics];
-}
-
 // Get words from a specific topic (shared or user)
 function getTopicWords(topicId, isUserTopic = false) {
   const topics = isUserTopic ? getUserTopics() : getSharedTopics();
@@ -145,30 +138,4 @@ function addWordToUserTopic(topicId, word) {
   }
 }
 
-// Legacy compatibility functions (deprecated but kept for now)
-function getTopicsData() {
-  console.warn('getTopicsData() is deprecated. Use getSharedTopics() or getAllTopics() instead.');
-  return getAllTopics();
-}
 
-function getVocabularyData() {
-  console.warn('getVocabularyData() is deprecated. Use getTopicWords() instead.');
-  const allWords = [];
-  getAllTopics().forEach(topic => {
-    topic.vocabulary?.forEach(word => allWords.push(word));
-  });
-  return allWords;
-}
-
-function getMyWordsData() {
-  console.warn('getMyWordsData() is deprecated. Use getUserTopics() instead.');
-  const allWords = [];
-  getUserTopics().forEach(topic => {
-    topic.vocabulary?.forEach(word => allWords.push(word));
-  });
-  return allWords;
-}
-
-function addToMyWords(word) {
-  console.warn('addToMyWords() is deprecated. Use addWordToUserTopic() instead.');
-}

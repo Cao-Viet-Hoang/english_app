@@ -54,14 +54,16 @@ function handleAddWord(e) {
     category: document.getElementById('wordCategory').value,
     userNote: document.getElementById('wordNote').value || '',
     ipa: '/', // User can add later or fetch from API
-    status: 'new'
+    status: 'new',
+    examples: []
   };
 
-  // Add to myWordsData
-  addToMyWords(newWord);
+  // TODO: Implement adding word to user topic
+  // For now, just show notification
+  console.log('Word to add:', newWord);
 
-  // Re-render
-  renderMyWords(getCurrentTab());
+  // Re-render My Words screen
+  renderMyWords('all');
 
   // Close modal
   closeAddWordModal();

@@ -4,14 +4,13 @@
 
 function setupFilterListeners() {
   // Journey screen filters
-  const filterChips = document.querySelectorAll('.filter-chips .chip');
+  const filterChips = document.querySelectorAll('#journeyScreen .filter-chips .chip');
   filterChips.forEach(chip => {
     chip.addEventListener('click', function() {
       filterChips.forEach(c => c.classList.remove('active'));
       this.classList.add('active');
       
       const filter = this.dataset.filter;
-      setCurrentFilter(filter);
       renderTopics(filter);
     });
   });

@@ -7,14 +7,15 @@ Cấu trúc code đã được tổ chức lại để dễ bảo trì và mở 
 ### `state.js`
 
 - Quản lý trạng thái toàn cục của ứng dụng
-- Các biến: currentScreen, currentTopic, currentFilter, currentTab
+- Các biến: currentScreen, currentTopic, currentTopicIsUser
 - Các hàm getter/setter để truy cập và cập nhật state
 
 ### `dataLoader.js`
 
 - Load dữ liệu từ file `data.json`
-- Quản lý: topicsData, vocabularyData, myWordsData
-- Cung cấp API để truy xuất dữ liệu
+- Quản lý cấu trúc mới: user_profiles, shared_vocabulary, user_vocabulary
+- Cung cấp API để truy xuất dữ liệu theo user và vocabulary type
+- Hỗ trợ multi-user và tracking learning progress
 
 ### `navigation.js`
 
@@ -61,8 +62,9 @@ Cấu trúc code đã được tổ chức lại để dễ bảo trì và mở 
 
 ### `myWords.js`
 
-- Render "My Words" screen
-- Filter theo category (All, Work, IELTS, Custom)
+- Render "My Words" screen với topic cards (giống Journey)
+- Hiển thị user's personal vocabulary topics
+- Filter theo category (All, Beginner, Intermediate, Advanced)
 
 ### `modal.js`
 
