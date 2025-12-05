@@ -391,6 +391,12 @@ input, textarea, select {
   justify-content: center;
   font-size: 24px;
   flex-shrink: 0;
+  transition: all var(--transition-medium);
+}
+
+.topic-card:hover .topic-icon {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: var(--shadow-medium);
 }
 
 .topic-icon.blue { background: var(--gradient-blue); }
