@@ -3,15 +3,24 @@
 // ============================================
 
 let appData = null;
-let currentUserId = 1; // Default user ID
+let currentUserId = null; // Will be set from authenticated user
 let dataListeners = []; // Store active Firebase listeners
 
 // Function to load data from Firebase Realtime Database
 async function loadData() {
   try {
-    // Initialize Firebase if not already initialized
-    if (!getDatabase()) {
-      initializeFirebase();
+    // Get current authenticated user
+    const user = getCurrentUser();
+    if (!user) {
+      throw new Error('No authenticated user found');
+    }
+    
+    // Set current user ID
+    currentUserId = user.id;
+    
+    // Check if Firebase is initialized
+    if (!isFirebaseReady()) {
+      throw new Error('Firebase is not initialized');
     }
     
     const db = getDatabase();
@@ -35,7 +44,7 @@ async function loadData() {
     console.log('Data loaded successfully from Firebase!');
     console.log(`User Profiles: ${appData.user_profiles?.length || 0}`);
     console.log(`Shared Topics: ${appData.shared_vocabulary?.topic?.length || 0}`);
-    console.log(`Current User ID: ${currentUserId}`);
+    console.log(`Current User: ${user.name} (ID: ${currentUserId})`);
     
     // Set up real-time listeners
     setupRealtimeListeners();
