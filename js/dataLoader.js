@@ -1,12 +1,21 @@
 // ============================================
-// DATA LOADER - FIREBASE VERSION
+// DATA LOADER - FIREBASE VERSION (LAZY LOADING)
 // ============================================
+
+// 🔧 DEBUG CONFIGURATION - Set to false to disable detailed logging
+let DEBUG_LAZY_LOADING = false; // Change to false to disable logs
 
 let appData = null;
 let currentUserId = null; // Will be set from authenticated user
-let dataListeners = []; // Store active Firebase listeners
+let dataListeners = new Map(); // Store active Firebase listeners by path
+let topicWordsCache = new Map(); // Cache loaded topic words
+let userWordsCache = null; // Cache user vocabulary
 
-// Function to load data from Firebase Realtime Database
+// ============================================
+// INITIAL DATA LOADING
+// ============================================
+
+// Load only essential data at startup
 async function loadData() {
   try {
     // Get current authenticated user
@@ -23,31 +32,10 @@ async function loadData() {
       throw new Error('Firebase is not initialized');
     }
     
-    const db = getDatabase();
+    await loadInitialData();
     
-    // Create promises for all data fetches
-    const userProfilesPromise = getDatabaseRef('user_profiles').once('value');
-    const sharedVocabularyPromise = getDatabaseRef('shared_vocabulary').once('value');
-    const userVocabularyPromise = getDatabaseRef('user_vocabulary').once('value');
-    
-    // Wait for all data to be fetched
-    const [userProfilesSnapshot, sharedVocabularySnapshot, userVocabularySnapshot] = 
-      await Promise.all([userProfilesPromise, sharedVocabularyPromise, userVocabularyPromise]);
-    
-    // Convert Firebase snapshots to data objects
-    appData = {
-      user_profiles: snapshotToArray(userProfilesSnapshot),
-      shared_vocabulary: sharedVocabularySnapshot.val() || { topic: [] },
-      user_vocabulary: userVocabularySnapshot.val() || {}
-    };
-    
-    console.log('Data loaded successfully from Firebase!');
-    console.log(`User Profiles: ${appData.user_profiles?.length || 0}`);
-    console.log(`Shared Topics: ${appData.shared_vocabulary?.topic?.length || 0}`);
+    console.log('Initial data loaded successfully!');
     console.log(`Current User: ${user.name} (ID: ${currentUserId})`);
-    
-    // Set up real-time listeners
-    setupRealtimeListeners();
     
     return appData;
   } catch (error) {
@@ -56,7 +44,245 @@ async function loadData() {
   }
 }
 
-// Convert Firebase snapshot to array (for user_profiles)
+// Load only user profile and topics metadata
+async function loadInitialData() {
+  const db = getDatabase();
+  
+  if (DEBUG_LAZY_LOADING) console.log('🔄 [LAZY LOADING] Starting initial data load...');
+  const startTime = DEBUG_LAZY_LOADING ? performance.now() : 0;
+  
+  // Load current user profile only
+  const userProfileSnapshot = await getDatabaseRef(`user_profiles`).once('value');
+  const allProfiles = snapshotToArray(userProfileSnapshot);
+  const currentUserProfile = allProfiles.find(p => p.id === currentUserId);
+  
+  // Load topics metadata (without words)
+  const topicsSnapshot = await getDatabaseRef('shared_vocabulary/topic').once('value');
+  const topics = snapshotToArray(topicsSnapshot);
+  
+  // Initialize appData with minimal structure
+  appData = {
+    user_profiles: [currentUserProfile], // Only current user
+    shared_vocabulary: {
+      topic: topics.map(topic => ({
+        id: topic.id,
+        name: topic.name,
+        description: topic.description,
+        category: topic.category,
+        level: topic.level,
+        icon: topic.icon,
+        iconColor: topic.iconColor,
+        totalWords: topic.totalWords || 0,
+        vocabulary: [] // Empty initially, loaded on demand
+      }))
+    },
+    user_vocabulary: {} // Will be loaded on demand
+  };
+  
+  if (DEBUG_LAZY_LOADING) {
+    const endTime = performance.now();
+    const dataSize = JSON.stringify(appData).length;
+    
+    console.log('✅ [LAZY LOADING] Initial data loaded!');
+    console.log(`   📊 Topics: ${appData.shared_vocabulary.topic.length}`);
+    console.log(`   📦 Data size: ${(dataSize / 1024).toFixed(2)} KB`);
+    console.log(`   ⏱️  Time: ${(endTime - startTime).toFixed(2)} ms`);
+    console.log(`   🚫 Words loaded: 0 (will load on-demand)`);
+  }
+  
+  // Setup listener for current user profile only
+  setupUserProfileListener();
+}
+
+// ============================================
+// LAZY LOADING FUNCTIONS
+// ============================================
+
+// Load words for a specific topic
+async function loadTopicWords(topicId) {
+  const cacheKey = `shared_${topicId}`;
+  
+  // Return from cache if already loaded
+  if (topicWordsCache.has(cacheKey)) {
+    if (DEBUG_LAZY_LOADING) console.log(`♻️  [CACHE HIT] Topic ${topicId} words loaded from cache (${topicWordsCache.get(cacheKey).length} words)`);
+    return topicWordsCache.get(cacheKey);
+  }
+  
+  try {
+    if (DEBUG_LAZY_LOADING) console.log(`🔄 [LAZY LOADING] Loading words for topic ${topicId}...`);
+    const startTime = DEBUG_LAZY_LOADING ? performance.now() : 0;
+    
+    // Find topic in appData
+    const topic = appData.shared_vocabulary.topic.find(t => t.id === topicId);
+    if (!topic) {
+      throw new Error(`Topic ${topicId} not found`);
+    }
+    
+    // Load words from Firebase
+    const wordsSnapshot = await getDatabaseRef(`shared_vocabulary/topic/${topicId}/vocabulary`).once('value');
+    const words = snapshotToArray(wordsSnapshot) || [];
+    
+    // Update topic's vocabulary in appData
+    topic.vocabulary = words;
+    
+    // Cache the words
+    topicWordsCache.set(cacheKey, words);
+    
+    if (DEBUG_LAZY_LOADING) {
+      const endTime = performance.now();
+      const dataSize = JSON.stringify(words).length;
+      
+      console.log(`✅ [LAZY LOADING] Words loaded for topic ${topicId}:`);
+      console.log(`   📚 Words count: ${words.length}`);
+      console.log(`   📦 Data size: ${(dataSize / 1024).toFixed(2)} KB`);
+      console.log(`   ⏱️  Time: ${(endTime - startTime).toFixed(2)} ms`);
+      console.log(`   💾 Cached topics: ${topicWordsCache.size}`);
+    }
+    
+    // Setup listener for this topic's words
+    setupTopicWordsListener(topicId);
+    
+    return words;
+  } catch (error) {
+    console.error(`❌ [ERROR] Loading words for topic ${topicId}:`, error);
+    throw error;
+  }
+}
+
+// Load user vocabulary
+async function loadUserWords(userId) {
+  // Return from cache if already loaded
+  if (userWordsCache) {
+    if (DEBUG_LAZY_LOADING) console.log(`♻️  [CACHE HIT] User vocabulary loaded from cache (${userWordsCache.topics?.length || 0} topics)`);
+    return userWordsCache;
+  }
+  
+  try {
+    if (DEBUG_LAZY_LOADING) console.log(`🔄 [LAZY LOADING] Loading user vocabulary...`);
+    const startTime = DEBUG_LAZY_LOADING ? performance.now() : 0;
+    
+    const userVocabSnapshot = await getDatabaseRef(`user_vocabulary/${userId}`).once('value');
+    const userVocab = userVocabSnapshot.val() || { topics: [] };
+    
+    // Store in appData
+    appData.user_vocabulary[userId] = userVocab;
+    
+    // Cache it
+    userWordsCache = userVocab;
+    
+    if (DEBUG_LAZY_LOADING) {
+      const endTime = performance.now();
+      const dataSize = JSON.stringify(userVocab).length;
+      
+      console.log(`✅ [LAZY LOADING] User vocabulary loaded:`);
+      console.log(`   📚 Topics count: ${userVocab.topics?.length || 0}`);
+      console.log(`   📦 Data size: ${(dataSize / 1024).toFixed(2)} KB`);
+      console.log(`   ⏱️  Time: ${(endTime - startTime).toFixed(2)} ms`);
+    }
+    
+    // Setup listener for user vocabulary
+    setupUserVocabularyListener(userId);
+    
+    return userVocab;
+  } catch (error) {
+    console.error(`❌ [ERROR] Loading user vocabulary:`, error);
+    throw error;
+  }
+}
+
+// ============================================
+// REAL-TIME LISTENERS
+// ============================================
+
+// Setup listener for current user profile
+function setupUserProfileListener() {
+  const path = 'user_profiles';
+  
+  // Remove old listener if exists
+  if (dataListeners.has(path)) {
+    getDatabaseRef(path).off();
+  }
+  
+  const ref = getDatabaseRef(path);
+  ref.on('value', (snapshot) => {
+    if (appData) {
+      const allProfiles = snapshotToArray(snapshot);
+      const currentUserProfile = allProfiles.find(p => p.id === currentUserId);
+      appData.user_profiles = [currentUserProfile];
+      window.dispatchEvent(new CustomEvent('dataUpdated', { detail: { type: 'user_profile' } }));
+    }
+  });
+  
+  dataListeners.set(path, ref);
+}
+
+// Setup listener for a specific topic's words
+function setupTopicWordsListener(topicId) {
+  const path = `shared_vocabulary/topic/${topicId}/vocabulary`;
+  
+  // Don't setup if already exists
+  if (dataListeners.has(path)) return;
+  
+  const ref = getDatabaseRef(path);
+  ref.on('value', (snapshot) => {
+    if (appData) {
+      const words = snapshotToArray(snapshot) || [];
+      const topic = appData.shared_vocabulary.topic.find(t => t.id === topicId);
+      if (topic) {
+        topic.vocabulary = words;
+        // Update cache
+        topicWordsCache.set(`shared_${topicId}`, words);
+        window.dispatchEvent(new CustomEvent('dataUpdated', { 
+          detail: { type: 'topic_words', topicId } 
+        }));
+      }
+    }
+  });
+  
+  dataListeners.set(path, ref);
+}
+
+// Setup listener for user vocabulary
+function setupUserVocabularyListener(userId) {
+  const path = `user_vocabulary/${userId}`;
+  
+  // Remove old listener if exists
+  if (dataListeners.has(path)) {
+    getDatabaseRef(path).off();
+  }
+  
+  const ref = getDatabaseRef(path);
+  ref.on('value', (snapshot) => {
+    if (appData) {
+      const userVocab = snapshot.val() || { topics: [] };
+      appData.user_vocabulary[userId] = userVocab;
+      userWordsCache = userVocab;
+      window.dispatchEvent(new CustomEvent('dataUpdated', { detail: { type: 'user_vocabulary' } }));
+    }
+  });
+  
+  dataListeners.set(path, ref);
+}
+
+// Remove listener for a specific path
+function removeListener(path) {
+  if (dataListeners.has(path)) {
+    getDatabaseRef(path).off();
+    dataListeners.delete(path);
+    console.log(`Listener removed: ${path}`);
+  }
+}
+
+// Clean up all Firebase listeners
+function cleanupListeners() {
+  dataListeners.forEach((ref, path) => {
+    getDatabaseRef(path).off();
+  });
+  dataListeners.clear();
+  console.log('All listeners cleaned up');
+}
+
+// Convert Firebase snapshot to array
 function snapshotToArray(snapshot) {
   const result = [];
   snapshot.forEach((childSnapshot) => {
@@ -64,46 +290,6 @@ function snapshotToArray(snapshot) {
     result.push(item);
   });
   return result;
-}
-
-// Set up real-time listeners for data changes
-function setupRealtimeListeners() {
-  const db = getDatabase();
-  
-  // Listen for user profiles changes
-  const userProfilesRef = getDatabaseRef('user_profiles');
-  userProfilesRef.on('value', (snapshot) => {
-    if (appData) {
-      appData.user_profiles = snapshotToArray(snapshot);
-      // Trigger update event if needed
-      window.dispatchEvent(new CustomEvent('dataUpdated', { detail: { type: 'user_profiles' } }));
-    }
-  });
-  
-  // Listen for shared vocabulary changes
-  const sharedVocabRef = getDatabaseRef('shared_vocabulary');
-  sharedVocabRef.on('value', (snapshot) => {
-    if (appData) {
-      appData.shared_vocabulary = snapshot.val() || { topic: [] };
-      window.dispatchEvent(new CustomEvent('dataUpdated', { detail: { type: 'shared_vocabulary' } }));
-    }
-  });
-  
-  // Listen for user vocabulary changes
-  const userVocabRef = getDatabaseRef('user_vocabulary');
-  userVocabRef.on('value', (snapshot) => {
-    if (appData) {
-      appData.user_vocabulary = snapshot.val() || {};
-      window.dispatchEvent(new CustomEvent('dataUpdated', { detail: { type: 'user_vocabulary' } }));
-    }
-  });
-}
-
-// Clean up Firebase listeners
-function cleanupListeners() {
-  getDatabaseRef('user_profiles').off();
-  getDatabaseRef('shared_vocabulary').off();
-  getDatabaseRef('user_vocabulary').off();
 }
 
 // Get current user profile
@@ -124,10 +310,20 @@ function getUserTopics() {
 }
 
 // Get words from a specific topic (shared or user)
+// NOTE: This assumes words are already loaded. Use loadTopicWords() first if needed.
 function getTopicWords(topicId, isUserTopic = false) {
   const topics = isUserTopic ? getUserTopics() : getSharedTopics();
   const topic = topics.find(t => t.id === topicId);
   return topic?.vocabulary || [];
+}
+
+// Check if topic words are already loaded
+function areTopicWordsLoaded(topicId, isUserTopic = false) {
+  if (isUserTopic) {
+    return userWordsCache !== null;
+  } else {
+    return topicWordsCache.has(`shared_${topicId}`);
+  }
 }
 
 // Check if a word is learned by current user
@@ -237,6 +433,76 @@ async function addWordToUserTopic(topicId, word) {
     await getDatabaseRef(`user_vocabulary/${userId}`).set(appData.user_vocabulary[userId]);
   }
 }
+
+// ============================================
+// DEBUG & MONITORING FUNCTIONS
+// ============================================
+
+// Get loading statistics
+function getLoadingStats() {
+  const totalTopics = appData?.shared_vocabulary?.topic?.length || 0;
+  const loadedTopics = topicWordsCache.size;
+  const userVocabLoaded = userWordsCache !== null;
+  
+  let totalWordsLoaded = 0;
+  topicWordsCache.forEach(words => {
+    totalWordsLoaded += words.length;
+  });
+  
+  if (userWordsCache && userWordsCache.topics) {
+    userWordsCache.topics.forEach(topic => {
+      totalWordsLoaded += topic.vocabulary?.length || 0;
+    });
+  }
+  
+  const totalDataSize = JSON.stringify(appData).length;
+  const cacheDataSize = JSON.stringify({
+    topicWords: Array.from(topicWordsCache.values()),
+    userWords: userWordsCache
+  }).length;
+  
+  return {
+    totalTopics,
+    loadedTopics,
+    userVocabLoaded,
+    totalWordsLoaded,
+    totalDataSize,
+    cacheDataSize,
+    activeListeners: dataListeners.size
+  };
+}
+
+// Print loading statistics to console
+function printLoadingStats() {
+  const stats = getLoadingStats();
+  
+  console.log('\n📊 ============================================');
+  console.log('📊 LAZY LOADING STATISTICS');
+  console.log('📊 ============================================');
+  console.log(`📚 Total Topics: ${stats.totalTopics}`);
+  console.log(`✅ Loaded Topics: ${stats.loadedTopics} (${((stats.loadedTopics / stats.totalTopics) * 100).toFixed(1)}%)`);
+  console.log(`👤 User Vocabulary: ${stats.userVocabLoaded ? '✅ Loaded' : '❌ Not loaded'}`);
+  console.log(`📝 Total Words Loaded: ${stats.totalWordsLoaded}`);
+  console.log(`📦 Total Data Size: ${(stats.totalDataSize / 1024).toFixed(2)} KB`);
+  console.log(`💾 Cache Size: ${(stats.cacheDataSize / 1024).toFixed(2)} KB`);
+  console.log(`👂 Active Listeners: ${stats.activeListeners}`);
+  console.log('📊 ============================================\n');
+}
+
+// Toggle debug mode
+function toggleDebugMode(enable) {
+  if (typeof enable === 'boolean') {
+    window.DEBUG_LAZY_LOADING = enable;
+    console.log(`🔧 Debug mode ${enable ? 'ENABLED ✅' : 'DISABLED ❌'}`);
+  } else {
+    console.log(`🔧 Current debug mode: ${DEBUG_LAZY_LOADING ? 'ENABLED ✅' : 'DISABLED ❌'}`);
+  }
+}
+
+// Add to window for easy console access
+window.getLoadingStats = getLoadingStats;
+window.printLoadingStats = printLoadingStats;
+window.toggleDebugMode = toggleDebugMode;
 
 // ============================================
 // FIREBASE UPDATE FUNCTIONS

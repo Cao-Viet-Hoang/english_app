@@ -35,10 +35,34 @@ function switchScreen(screenId) {
     targetScreen.classList.add('active');
     setCurrentScreen(screenId);
     
+    // Clean up previous screen listeners
+    cleanupScreenListeners(screenId);
+    
     // Load data for specific screens
     if (screenId === 'myWordsScreen') {
       renderMyWords();
     }
+  }
+}
+
+// Clean up listeners when leaving a screen
+function cleanupScreenListeners(newScreenId) {
+  const previousScreen = getCurrentScreen();
+  
+  // Remove topic words listener when leaving word list screen
+  if (previousScreen === 'wordListScreen' && newScreenId !== 'wordListScreen') {
+    const topic = getCurrentTopic();
+    if (topic && !isCurrentTopicUserTopic()) {
+      const topicId = topic.id;
+      removeListener(`shared_vocabulary/topic/${topicId}/vocabulary`);
+      console.log(`Cleaned up listener for topic ${topicId}`);
+    }
+  }
+  
+  // Remove user vocabulary listener when leaving My Words screen
+  if (previousScreen === 'myWordsScreen' && newScreenId !== 'myWordsScreen') {
+    // Keep user vocabulary listener active since it's lightweight
+    // removeListener(`user_vocabulary/${currentUserId}`);
   }
 }
 

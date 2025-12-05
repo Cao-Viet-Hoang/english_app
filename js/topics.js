@@ -93,7 +93,7 @@ function renderTopics(filter = 'all') {
   });
 }
 
-function openTopicWords(topicId, isUserTopic = false) {
+async function openTopicWords(topicId, isUserTopic = false) {
   const topics = isUserTopic ? getUserTopics() : getSharedTopics();
   const topic = topics.find(t => t.id === topicId);
   if (!topic) return;
@@ -113,17 +113,49 @@ function openTopicWords(topicId, isUserTopic = false) {
   document.getElementById('topicStats').textContent = 
     `${learnedWords}/${topic.totalWords} words • ${topic.level}`;
 
-  // Get words from topic's vocabulary array
-  const topicWords = getTopicWords(topicId, isUserTopic);
-  
-  // Add learned status to each word
-  const wordsWithStatus = topicWords.map(word => ({
-    ...word,
-    status: isWordLearned(topicId, word.id, isUserTopic) ? 'learned' : 'new'
-  }));
-  
-  renderWordCards(wordsWithStatus, 'wordCardsList');
-
-  // Switch to word list screen
+  // Switch to word list screen first
   switchScreen('wordListScreen');
+  
+  // Show loading state
+  const container = document.getElementById('wordCardsList');
+  if (container) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+        <i class="fas fa-spinner fa-spin" style="font-size: 48px; margin-bottom: 16px;"></i>
+        <p>Loading words...</p>
+      </div>
+    `;
+  }
+
+  try {
+    // Load words if not already loaded
+    if (!areTopicWordsLoaded(topicId, isUserTopic)) {
+      if (isUserTopic) {
+        await loadUserWords(currentUserId.toString());
+      } else {
+        await loadTopicWords(topicId);
+      }
+    }
+
+    // Get words from topic's vocabulary array
+    const topicWords = getTopicWords(topicId, isUserTopic);
+    
+    // Add learned status to each word
+    const wordsWithStatus = topicWords.map(word => ({
+      ...word,
+      status: isWordLearned(topicId, word.id, isUserTopic) ? 'learned' : 'new'
+    }));
+    
+    renderWordCards(wordsWithStatus, 'wordCardsList');
+  } catch (error) {
+    console.error('Error loading topic words:', error);
+    if (container) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: var(--error);">
+          <i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 16px;"></i>
+          <p>Error loading words. Please try again.</p>
+        </div>
+      `;
+    }
+  }
 }
