@@ -1990,6 +1990,12 @@ input, textarea, select {
   backdrop-filter: blur(10px);
 }
 
+.icon-btn.user-btn {
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+}
+
 .icon-btn:hover {
   background-color: rgba(255, 255, 255, 0.25);
   transform: scale(1.1) rotate(90deg);
