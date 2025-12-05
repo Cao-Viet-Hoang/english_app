@@ -66,6 +66,13 @@ function generateWordDetailHTML(word) {
       </button>
       <h2 class="detail-word-english">${word.english}</h2>
       <div class="detail-word-ipa">${word.ipa}</div>
+      ${word.cefrLevel || word.frequency ? `
+      <div class="detail-word-meta">
+        ${word.cefrLevel ? `<span class="meta-badge cefr-badge cefr-${word.cefrLevel.toLowerCase()}">${word.cefrLevel}</span>` : ''}
+        ${word.frequency ? `<span class="meta-badge frequency-badge frequency-${word.frequency}">
+          <i class="fas fa-chart-line"></i> ${word.frequency.charAt(0).toUpperCase() + word.frequency.slice(1)}
+        </span>` : ''}
+      </div>` : ''}
       <div class="detail-audio-controls">
         <button class="detail-audio-btn us" onclick="playDetailAudio('${word.english}', 'us')">
           <i class="fas fa-volume-up"></i> US
