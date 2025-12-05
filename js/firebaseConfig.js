@@ -4,13 +4,13 @@
 
 // Default Firebase configuration object (can be overridden at login)
 const defaultFirebaseConfig = {
-  apiKey: "AIzaSyBmqDdJzk6vvi4wZs5iDiIEgrHYEBzNE8s",
-  authDomain: "english-app-51007.firebaseapp.com",
-  databaseURL: "https://english-app-51007-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "english-app-51007",
-  storageBucket: "english-app-51007.firebasestorage.app",
-  messagingSenderId: "41784019566",
-  appId: "1:41784019566:web:a793e28ffe43f9070eb47f"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 // Firebase app and database instances
