@@ -35,9 +35,9 @@
   --text-light: #dfe6e9;
   
   /* Status Colors */
-  --status-new: var(--primary-soft-yellow);
-  --status-learning: var(--primary-soft-blue);
-  --status-mastered: var(--primary-soft-green);
+  --status-new: #ffd700;
+  --status-learning: #4a90e2;
+  --status-mastered: #4caf50;
   
   /* Word Type Colors */
   --type-verb: var(--primary-soft-purple);

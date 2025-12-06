@@ -2,6 +2,15 @@
 // WORD CARDS RENDERING & INTERACTION
 // ============================================
 
+function getStatusTitle(status) {
+  const statusTitles = {
+    'new': 'New - Not learned yet',
+    'learning': 'Learning',
+    'mastered': 'Mastered'
+  };
+  return statusTitles[status] || status;
+}
+
 function renderWordCards(words, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -20,7 +29,7 @@ function renderWordCards(words, containerId) {
             </button>
           </div>
         </div>
-        <div class="word-status ${word.status}"></div>
+        <div class="word-status ${word.status}" title="${getStatusTitle(word.status)}"></div>
       </div>
       
       <div class="word-ipa">${word.ipa}</div>
