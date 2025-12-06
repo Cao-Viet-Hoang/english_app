@@ -8,7 +8,9 @@
   box-sizing: border-box;
 }
 
-
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: var(--font-primary);
@@ -17,6 +19,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 button {
@@ -110,10 +113,14 @@ input, textarea, select {
 .main-content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: var(--spacing-xl);
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
+  will-change: scroll-position;
 }
 
 @media (max-width: 768px) {
@@ -298,6 +305,8 @@ input, textarea, select {
   margin-bottom: var(--spacing-xl);
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 768px) {
@@ -361,11 +370,12 @@ input, textarea, select {
   border-radius: var(--radius-xl);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-soft);
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-  /* transition: all var(--transition-medium); */
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
+              box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              border-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
   border: 2px solid var(--border-light);
-  will-change: transform;
+  transform: translateZ(0);
 }
 
 .topic-card:hover {
@@ -551,9 +561,12 @@ input, textarea, select {
   border-radius: var(--radius-xl);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-soft);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), 
+              box-shadow 0.2s cubic-bezier(0.23, 1, 0.32, 1), 
+              border-color 0.2s cubic-bezier(0.23, 1, 0.32, 1);
   border: 2px solid var(--border-light);
   cursor: pointer;
+  transform: translateZ(0);
 }
 
 .word-card:hover {
@@ -701,6 +714,8 @@ input, textarea, select {
   margin-bottom: var(--spacing-xl);
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 768px) {
@@ -823,8 +838,11 @@ input, textarea, select {
 
 .bottom-sheet-content {
   overflow-y: auto;
+  overflow-x: hidden;
   padding: var(--spacing-xl);
   flex: 1;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
 }
 
 @media (max-width: 768px) {
@@ -1399,7 +1417,10 @@ input, textarea, select {
 .modal-content {
   padding: var(--spacing-lg);
   overflow-y: auto;
+  overflow-x: hidden;
   flex: 1;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
 }
 
 .form-group {
@@ -1976,10 +1997,17 @@ input, textarea, select {
 ::-webkit-scrollbar-thumb {
   background: var(--gradient-primary);
   border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gradient-secondary);
+}
+
+/* Smooth scrolling for all scrollable elements */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--bg-secondary);
 }
 
 /* ============================================
