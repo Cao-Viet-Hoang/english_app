@@ -550,4 +550,31 @@ async function updateUserVocabularyInFirebase(userId) {
   }
 }
 
+// Reload user profile from Firebase (to get latest learned words)
+async function reloadUserProfile() {
+  try {
+    if (DEBUG_LAZY_LOADING) console.log('🔄 [RELOAD] Reloading user profile from Firebase...');
+    const startTime = DEBUG_LAZY_LOADING ? performance.now() : 0;
+    
+    const userProfileSnapshot = await getDatabaseRef('user_profiles').once('value');
+    const allProfiles = snapshotToArray(userProfileSnapshot);
+    const currentUserProfile = allProfiles.find(p => p.id === currentUserId);
+    
+    if (currentUserProfile && appData) {
+      appData.user_profiles = [currentUserProfile];
+      
+      if (DEBUG_LAZY_LOADING) {
+        const endTime = performance.now();
+        console.log(`✅ [RELOAD] User profile reloaded in ${(endTime - startTime).toFixed(2)} ms`);
+        console.log(`   📝 Learned words count: ${Object.keys(currentUserProfile.learnedWords || {}).length}`);
+      }
+    }
+    
+    return currentUserProfile;
+  } catch (error) {
+    console.error('❌ [ERROR] Reloading user profile:', error);
+    throw error;
+  }
+}
+
 

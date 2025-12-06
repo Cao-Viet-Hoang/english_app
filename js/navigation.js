@@ -6,9 +6,9 @@ function setupNavigationListeners() {
   // Bottom navigation
   const navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(item => {
-    item.addEventListener('click', function() {
+    item.addEventListener('click', async function() {
       const screenId = this.dataset.screen;
-      switchScreen(screenId);
+      await switchScreen(screenId);
       
       // Update active nav item
       navItems.forEach(nav => nav.classList.remove('active'));
@@ -19,14 +19,14 @@ function setupNavigationListeners() {
   // Back button
   const backBtn = document.getElementById('backToJourneyBtn');
   if (backBtn) {
-    backBtn.addEventListener('click', function() {
-      switchScreen('journeyScreen');
+    backBtn.addEventListener('click', async function() {
+      await switchScreen('journeyScreen');
       updateBottomNav('journeyScreen');
     });
   }
 }
 
-function switchScreen(screenId) {
+async function switchScreen(screenId) {
   const screens = document.querySelectorAll('.screen');
   screens.forEach(screen => screen.classList.remove('active'));
   
@@ -38,8 +38,13 @@ function switchScreen(screenId) {
     // Clean up previous screen listeners
     cleanupScreenListeners(screenId);
     
-    // Load data for specific screens
-    if (screenId === 'myWordsScreen') {
+    // Reload data from Firebase when switching to specific screens
+    if (screenId === 'journeyScreen') {
+      // Reload user profile to get latest learned words
+      await reloadUserProfile();
+      // Re-render topics with updated progress
+      renderTopics();
+    } else if (screenId === 'myWordsScreen') {
       renderMyWords();
     }
   }
