@@ -344,6 +344,18 @@ async function markWordAsLearned(topicId, wordId, isUserTopic = false) {
   
   const vocabularyType = isUserTopic ? 'user_vocabulary' : 'shared_vocabulary';
   
+  // Initialize topic_progress structure if not exists
+  if (!userProfile.topic_progress) {
+    userProfile.topic_progress = {
+      shared_vocabulary: {},
+      user_vocabulary: {}
+    };
+  }
+  
+  if (!userProfile.topic_progress[vocabularyType]) {
+    userProfile.topic_progress[vocabularyType] = {};
+  }
+  
   if (!userProfile.topic_progress[vocabularyType][topicId]) {
     userProfile.topic_progress[vocabularyType][topicId] = { learnedWordsIdList: [] };
   }

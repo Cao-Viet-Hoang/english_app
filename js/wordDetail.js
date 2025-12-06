@@ -43,7 +43,7 @@ function openWordDetail(wordId) {
   if (!word) return;
 
   const detailContent = document.getElementById('wordDetailContent');
-  detailContent.innerHTML = generateWordDetailHTML(word);
+  detailContent.innerHTML = generateWordDetailHTML(word, topic.id, isUserTopic);
 
   // Show bottom sheet
   document.getElementById('bottomSheetOverlay').classList.add('active');
@@ -58,11 +58,20 @@ function closeBottomSheet() {
   document.getElementById('wordDetailSheet').classList.remove('active');
 }
 
-function generateWordDetailHTML(word) {
+function generateWordDetailHTML(word, topicId, isUserTopic) {
+  const isLearned = isWordLearned(topicId, word.id, isUserTopic);
+  
   return `
     <div class="detail-word-header">
       <button class="detail-close-btn" onclick="closeBottomSheet()">
         <i class="fas fa-times"></i>
+      </button>
+      <button 
+        class="mark-done-btn ${isLearned ? 'learned' : ''}" 
+        onclick="toggleWordLearned(${word.id}, ${topicId}, ${isUserTopic})"
+        id="markDoneBtn"
+        title="${isLearned ? 'Mark as not learned' : 'Mark as learned'}">
+        <i class="fas ${isLearned ? 'fa-check-circle' : 'fa-circle'}"></i>
       </button>
       <h2 class="detail-word-english">${word.english}</h2>
       <div class="detail-word-ipa">${word.ipa}</div>
@@ -302,5 +311,120 @@ function toggleCollocation(element) {
   } else {
     example.classList.add('visible');
     icon.style.transform = 'rotate(180deg)';
+  }
+}
+
+// ============================================
+// MARK WORD AS LEARNED
+// ============================================
+
+async function toggleWordLearned(wordId, topicId, isUserTopic) {
+  const btn = document.getElementById('markDoneBtn');
+  if (!btn) return;
+  
+  const isCurrentlyLearned = isWordLearned(topicId, wordId, isUserTopic);
+  
+  // Disable button during processing
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+  
+  try {
+    if (isCurrentlyLearned) {
+      // Unmark as learned
+      await unmarkWordAsLearned(topicId, wordId, isUserTopic);
+      btn.classList.remove('learned');
+      btn.querySelector('i').className = 'fas fa-circle';
+      btn.title = 'Mark as learned';
+    } else {
+      // Mark as learned
+      await markWordAsLearned(topicId, wordId, isUserTopic);
+      btn.classList.add('learned');
+      btn.querySelector('i').className = 'fas fa-check-circle';
+      btn.title = 'Mark as not learned';
+      
+      // Show success feedback
+      showSuccessFeedback(btn);
+    }
+    
+    // Update topic stats in the word screen if visible
+    updateTopicStatsDisplay(topicId, isUserTopic);
+    
+    // Update word card status if visible
+    updateWordCardStatus(wordId, !isCurrentlyLearned);
+    
+  } catch (error) {
+    console.error('Error toggling word learned status:', error);
+    alert('Failed to update word status. Please try again.');
+  } finally {
+    // Re-enable button
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+
+function unmarkWordAsLearned(topicId, wordId, isUserTopic = false) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const userProfile = getCurrentUserProfile();
+      if (!userProfile) {
+        reject(new Error('No user profile found'));
+        return;
+      }
+      
+      const vocabularyType = isUserTopic ? 'user_vocabulary' : 'shared_vocabulary';
+      const topicProgress = userProfile.topic_progress?.[vocabularyType]?.[topicId];
+      
+      if (topicProgress && topicProgress.learnedWordsIdList) {
+        const index = topicProgress.learnedWordsIdList.indexOf(wordId);
+        if (index > -1) {
+          topicProgress.learnedWordsIdList.splice(index, 1);
+          
+          // Update Firebase
+          const userIndex = appData.user_profiles.findIndex(u => u.id === currentUserId);
+          if (userIndex !== -1) {
+            await updateUserProfileInFirebase(userIndex, userProfile);
+          }
+          
+          await updateUserStatistics();
+        }
+      }
+      
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function showSuccessFeedback(btn) {
+  // Add success animation
+  btn.style.transform = 'scale(1.1)';
+  setTimeout(() => {
+    btn.style.transform = 'scale(1)';
+  }, 200);
+}
+
+function updateTopicStatsDisplay(topicId, isUserTopic) {
+  const topic = getCurrentTopic();
+  if (topic && topic.id === topicId) {
+    const learnedWords = getLearnedWordsCount(topicId, isUserTopic);
+    const statsElement = document.getElementById('topicStats');
+    if (statsElement) {
+      statsElement.textContent = `${learnedWords}/${topic.totalWords} words • ${topic.level}`;
+    }
+  }
+}
+
+function updateWordCardStatus(wordId, isLearned) {
+  const wordCard = document.querySelector(`.word-card[data-word-id="${wordId}"]`);
+  if (wordCard) {
+    const statusBtn = wordCard.querySelector('.word-status');
+    if (statusBtn) {
+      if (isLearned) {
+        statusBtn.classList.add('learned');
+      } else {
+        statusBtn.classList.remove('learned');
+      }
+    }
   }
 }

@@ -971,6 +971,57 @@ input, textarea, select {
   background-color: var(--accent-pink);
 }
 
+/* Mark as Done Button */
+.mark-done-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: 2px solid transparent;
+  z-index: 10;
+}
+
+.mark-done-btn:hover:not(:disabled) {
+  background: var(--primary-soft-purple);
+  color: white;
+  transform: scale(1.1);
+  border-color: var(--accent-purple);
+}
+
+.mark-done-btn:active:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.mark-done-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.mark-done-btn.learned {
+  background: var(--primary-soft-green);
+  color: white;
+  border-color: var(--accent-green);
+}
+
+.mark-done-btn.learned:hover:not(:disabled) {
+  background: var(--accent-green);
+  transform: scale(1.1);
+}
+
+.mark-done-btn i {
+  font-size: 20px;
+}
+
 .detail-section {
   margin-bottom: calc(var(--spacing-xl) * 1.5);
 }
