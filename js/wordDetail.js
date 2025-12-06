@@ -102,26 +102,30 @@ function generateWordDetailHTML(word, topicId, isUserTopic) {
 }
 
 function generateWordTypeSection(word) {
-  let typeInfo = `<span class="word-type-badge">${word.type}</span>`;
+  let typeContent = `<span class="word-type-badge">${word.type.charAt(0).toUpperCase() + word.type.slice(1)}</span>`;
   
+  // For verbs - show irregular forms
   if (word.type === 'verb' && word.irregular) {
-    typeInfo += `<br><strong>Forms:</strong> ${word.irregular.v1} - ${word.irregular.v2} - ${word.irregular.v3} | V-ing: ${word.irregular.ving}`;
-  } else if (word.type === 'noun' && word.noun) {
-    typeInfo += `<br><strong>Plural:</strong> ${word.noun.plural} | <strong>Type:</strong> [${word.noun.countability}]`;
-  } else if (word.type === 'adjective' && word.adjective) {
+    typeContent += `
+      <div class="word-forms">
+        <strong>Forms:</strong> ${word.irregular.v1} → ${word.irregular.v2} → ${word.irregular.v3} | V-ing: ${word.irregular.ving}
+      </div>
+    `;
+  } 
+  // For nouns - show plural and countability
+  else if (word.type === 'noun' && word.noun) {
+    typeContent += `
+      <div class="word-forms">
+        <strong>Plural:</strong> ${word.noun.plural} | <strong>Type:</strong> [${word.noun.countability}]
+      </div>
+    `;
+  } 
+  // For adjectives - show prepositions if available
+  else if (word.type === 'adjective' && word.adjective) {
     if (word.adjective.prepositions && word.adjective.prepositions.length > 0) {
-      typeInfo += `<br><strong>Common prepositions:</strong>`;
-      return `
-        <div class="detail-section">
-          <h3 class="detail-section-title">
-            <i class="fas fa-tag"></i> Word Type
-          </h3>
-          <div class="word-type-info">${typeInfo}</div>
-          <div class="adj-preposition-tags">
-            ${word.adjective.prepositions.map(prep => 
-              `<span class="adj-prep-tag">${prep}</span>`
-            ).join('')}
-          </div>
+      typeContent += `
+        <div class="word-forms">
+          <strong>Common with:</strong> ${word.adjective.prepositions.join(', ')}
         </div>
       `;
     }
@@ -132,7 +136,7 @@ function generateWordTypeSection(word) {
       <h3 class="detail-section-title">
         <i class="fas fa-tag"></i> Word Type
       </h3>
-      <div class="word-type-info">${typeInfo}</div>
+      <div class="word-type-info">${typeContent}</div>
     </div>
   `;
 }
