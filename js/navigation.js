@@ -20,8 +20,11 @@ function setupNavigationListeners() {
   const backBtn = document.getElementById('backToJourneyBtn');
   if (backBtn) {
     backBtn.addEventListener('click', async function() {
-      await switchScreen('journeyScreen');
-      updateBottomNav('journeyScreen');
+      // Go back to previous screen if available, otherwise default to journeyScreen
+      const prevScreen = getPreviousScreen();
+      const targetScreen = (prevScreen && prevScreen !== 'wordListScreen') ? prevScreen : 'journeyScreen';
+      await switchScreen(targetScreen);
+      updateBottomNav(targetScreen);
     });
   }
 }

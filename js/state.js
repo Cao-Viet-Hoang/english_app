@@ -3,6 +3,7 @@
 // ============================================
 
 let currentScreen = 'journeyScreen';
+let previousScreen = null; // Track previous screen for back navigation
 let currentTopic = null;
 let currentTopicIsUser = false; // Track if viewing user topic or shared topic
 
@@ -11,7 +12,12 @@ function getCurrentScreen() {
 }
 
 function setCurrentScreen(screen) {
+  previousScreen = currentScreen;
   currentScreen = screen;
+}
+
+function getPreviousScreen() {
+  return previousScreen;
 }
 
 function getCurrentTopic() {
