@@ -27,6 +27,26 @@ function setupNavigationListeners() {
       updateBottomNav(targetScreen);
     });
   }
+
+  // Create Topic button (Floating Action Button in My Words)
+  const createTopicBtn = document.getElementById('createTopicBtn');
+  if (createTopicBtn) {
+    createTopicBtn.addEventListener('click', function() {
+      openCreateTopicModal();
+    });
+  }
+
+  // Add Word button (Floating Action Button in Word List - User Topics only)
+  const addWordToCurrentTopicBtn = document.getElementById('addWordToCurrentTopicBtn');
+  if (addWordToCurrentTopicBtn) {
+    addWordToCurrentTopicBtn.addEventListener('click', function() {
+      const topicId = parseInt(this.dataset.topicId);
+      const topicName = this.dataset.topicName;
+      if (topicId && topicName) {
+        openAddWordModal(topicId, topicName);
+      }
+    });
+  }
 }
 
 async function switchScreen(screenId) {

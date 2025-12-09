@@ -180,6 +180,11 @@
         <div class="word-cards-list" id="wordCardsList">
           <!-- Word cards will be dynamically inserted here -->
         </div>
+
+        <!-- Floating Action Button - Add Word (only for user topics) -->
+        <button class="fab" id="addWordToCurrentTopicBtn" style="display: none;" title="Add New Word">
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
 
       <!-- My Words Screen -->
@@ -202,9 +207,9 @@
           <!-- User's topics will be dynamically inserted here -->
         </div>
 
-        <!-- Floating Action Button -->
-        <button class="fab" id="addWordBtn">
-          <i class="fas fa-plus"></i>
+        <!-- Floating Action Button - Create Topic -->
+        <button class="fab" id="createTopicBtn" title="Create New Topic">
+          <i class="fas fa-folder-plus"></i>
         </button>
       </div>
 
@@ -221,63 +226,161 @@
     </div>
   </div>
 
-  <!-- Modal for Adding New Word -->
+  <!-- Modal Overlay -->
   <div class="modal-overlay" id="modalOverlay"></div>
-  <div class="modal" id="addWordModal">
+
+  <!-- Create Topic Modal -->
+  <div class="modal" id="createTopicModal">
     <div class="modal-header">
-      <h3>Add New Word</h3>
-      <button class="modal-close" id="closeModalBtn">
+      <h3><i class="fas fa-folder-plus"></i> Create New Topic</h3>
+      <button class="modal-close" id="closeCreateTopicBtn">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div class="modal-content">
-      <form id="addWordForm">
+      <form id="createTopicForm">
         <div class="form-group">
-          <label for="wordEnglish">English Word *</label>
-          <input type="text" id="wordEnglish" required placeholder="e.g., beautiful">
+          <label for="topicName">Topic Name (English) *</label>
+          <input type="text" id="topicName" required placeholder="e.g., Business English">
         </div>
         
         <div class="form-group">
-          <label for="wordType">Word Type *</label>
-          <select id="wordType" required>
-            <option value="">Select type</option>
-            <option value="verb">Verb</option>
-            <option value="noun">Noun</option>
-            <option value="adjective">Adjective</option>
-            <option value="adverb">Adverb</option>
+          <label for="topicNameVi">Topic Name (Vietnamese) *</label>
+          <input type="text" id="topicNameVi" required placeholder="e.g., Tiếng Anh Thương Mại">
+        </div>
+        
+        <div class="form-group">
+          <label for="topicIcon">Icon (Emoji) *</label>
+          <input type="text" id="topicIcon" required placeholder="e.g., 💼" maxlength="2">
+          <small class="form-hint">Choose an emoji that represents your topic</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="topicIconColor">Icon Background Color *</label>
+          <input type="color" id="topicIconColor" required value="#FFB3BA">
+          <small class="form-hint">Pick a pastel color that matches your emoji</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="topicLevel">Level *</label>
+          <select id="topicLevel" required>
+            <option value="">Select level</option>
+            <option value="A1-A2">A1-A2 (Beginner)</option>
+            <option value="B1-B2">B1-B2 (Intermediate)</option>
+            <option value="C1-C2">C1-C2 (Advanced)</option>
           </select>
         </div>
         
         <div class="form-group">
-          <label for="wordVietnamese">Vietnamese Meaning *</label>
-          <input type="text" id="wordVietnamese" required placeholder="e.g., đẹp">
-        </div>
-        
-        <div class="form-group">
-          <label for="wordDescription">Vietnamese Description</label>
-          <textarea id="wordDescription" rows="3" placeholder="Describe the word in Vietnamese..."></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label for="wordNote">Personal Note</label>
-          <textarea id="wordNote" rows="2" placeholder="Your personal note about this word..."></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label for="wordCategory">Category</label>
-          <select id="wordCategory">
-            <option value="all">General</option>
-            <option value="work">Work</option>
-            <option value="ielts">IELTS</option>
-            <option value="custom">Custom</option>
+          <label for="topicCategory">Category *</label>
+          <select id="topicCategory" required>
+            <option value="">Select category</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
           </select>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="btn btn-secondary" id="cancelAddBtn">Cancel</button>
-          <button type="submit" class="btn btn-primary">Add Word</button>
+          <button type="button" class="btn btn-secondary" id="cancelCreateTopicBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Create Topic
+          </button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Add Word to Topic Modal -->
+  <div class="modal modal-large" id="addWordModal">
+    <div class="modal-header">
+      <h3><i class="fas fa-plus-circle"></i> Add Word to <span id="addWordTopicName"></span></h3>
+      <button class="modal-close" id="closeAddWordBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-content">
+      <!-- Step 1: Enter English Word -->
+      <div id="addWordStep1" class="modal-step active">
+        <div class="step-indicator">
+          <div class="step-number active">1</div>
+          <div class="step-title">Enter English Word</div>
+        </div>
+        <form id="enterWordForm">
+          <div class="form-group">
+            <label for="englishWord">English Word *</label>
+            <input type="text" id="englishWord" required placeholder="e.g., beautiful" autofocus>
+            <small class="form-hint">Enter the English word you want to add</small>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="cancelAddWordStep1Btn">Cancel</button>
+            <button type="submit" class="btn btn-primary">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 2: Generate AI Prompt -->
+      <div id="addWordStep2" class="modal-step">
+        <div class="step-indicator">
+          <div class="step-number active">2</div>
+          <div class="step-title">AI Prompt Generation</div>
+        </div>
+        <div class="ai-prompt-section">
+          <div class="info-box">
+            <i class="fas fa-robot"></i>
+            <div>
+              <strong>AI Assistance</strong>
+              <p>Copy the prompt below and use it with your AI assistant (ChatGPT, Claude, etc.) to generate complete word data.</p>
+            </div>
+          </div>
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <label>AI Prompt</label>
+              <button type="button" class="btn-icon btn-copy-icon" id="copyPromptBtn" title="Copy to clipboard">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <textarea id="aiPrompt" readonly rows="12"></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="backToStep1Btn">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button type="button" class="btn btn-primary" id="continueToStep3Btn">
+              I've Got the Data <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Paste JSON Data -->
+      <div id="addWordStep3" class="modal-step">
+        <div class="step-indicator">
+          <div class="step-number active">3</div>
+          <div class="step-title">Paste Word Data</div>
+        </div>
+        <form id="pasteWordDataForm">
+          <div class="form-group">
+            <label for="wordJsonData">Word Data (JSON Format) *</label>
+            <textarea id="wordJsonData" required rows="15" placeholder='Paste the JSON data from AI here...'></textarea>
+            <small class="form-hint">Paste the complete JSON object generated by AI</small>
+          </div>
+          <div id="validationMessage" class="validation-message"></div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="backToStep2Btn">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button type="button" class="btn btn-secondary" id="validateJsonBtn">
+              <i class="fas fa-check-circle"></i> Validate
+            </button>
+            <button type="submit" class="btn btn-primary" id="submitWordBtn" disabled>
+              <i class="fas fa-plus"></i> Add Word
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 

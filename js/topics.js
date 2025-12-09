@@ -116,6 +116,18 @@ async function openTopicWords(topicId, isUserTopic = false) {
   // Switch to word list screen first
   switchScreen('wordListScreen');
   
+  // Show/hide Add Word FAB button (only for user topics)
+  const addWordBtn = document.getElementById('addWordToCurrentTopicBtn');
+  if (addWordBtn) {
+    if (isUserTopic) {
+      addWordBtn.style.display = 'flex';
+      addWordBtn.dataset.topicId = topicId;
+      addWordBtn.dataset.topicName = topic.name;
+    } else {
+      addWordBtn.style.display = 'none';
+    }
+  }
+  
   // Show loading state
   const container = document.getElementById('wordCardsList');
   if (container) {
