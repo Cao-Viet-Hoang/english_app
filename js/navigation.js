@@ -2,7 +2,14 @@
 // NAVIGATION
 // ============================================
 
+let navigationListenersInitialized = false;
+
 function setupNavigationListeners() {
+  // Prevent duplicate listener setup
+  if (navigationListenersInitialized) {
+    return;
+  }
+  
   // Bottom navigation
   const navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(item => {
@@ -47,6 +54,8 @@ function setupNavigationListeners() {
       }
     });
   }
+  
+  navigationListenersInitialized = true;
 }
 
 async function switchScreen(screenId) {

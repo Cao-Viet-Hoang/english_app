@@ -28,10 +28,27 @@ function generateTopicId() {
  */
 async function createNewTopic(topicData) {
   try {
-    // Validate required fields
-    if (!topicData.name || !topicData.nameVi || !topicData.icon || 
-        !topicData.iconColor || !topicData.level || !topicData.category) {
-      throw new Error('All fields are required');
+    // Trim all string fields
+    const trimmedData = {
+      name: topicData.name?.trim(),
+      nameVi: topicData.nameVi?.trim(),
+      icon: topicData.icon?.trim(),
+      iconColor: topicData.iconColor?.trim(),
+      level: topicData.level?.trim(),
+      category: topicData.category?.trim()
+    };
+
+    // Validate required fields with specific error messages
+    const missingFields = [];
+    if (!trimmedData.name) missingFields.push('Topic Name (English)');
+    if (!trimmedData.nameVi) missingFields.push('Topic Name (Vietnamese)');
+    if (!trimmedData.icon) missingFields.push('Icon');
+    if (!trimmedData.iconColor) missingFields.push('Icon Color');
+    if (!trimmedData.level) missingFields.push('Level');
+    if (!trimmedData.category) missingFields.push('Category');
+
+    if (missingFields.length > 0) {
+      throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
     }
 
     // Generate unique ID
@@ -40,17 +57,17 @@ async function createNewTopic(topicData) {
     // Create topic object following schema
     const newTopic = {
       id: newTopicId,
-      name: topicData.name.trim(),
-      nameVi: topicData.nameVi.trim(),
-      icon: topicData.icon.trim(),
-      iconColor: topicData.iconColor,
-      level: topicData.level,
+      name: trimmedData.name,
+      nameVi: trimmedData.nameVi,
+      icon: trimmedData.icon,
+      iconColor: trimmedData.iconColor,
+      level: trimmedData.level,
       totalWords: 0,
-      category: topicData.category,
+      category: trimmedData.category,
       vocabulary: []
     };
 
-    // Add to local cache
+    // Ensure user vocabulary structure exists
     if (!appData.user_vocabulary) {
       appData.user_vocabulary = {};
     }
@@ -61,20 +78,15 @@ async function createNewTopic(topicData) {
       appData.user_vocabulary[currentUserId].topics = [];
     }
     
-    appData.user_vocabulary[currentUserId].topics.push(newTopic);
-
-    // Update userWordsCache
-    if (!userWordsCache) {
-      userWordsCache = { topics: [] };
-    }
-    if (!userWordsCache.topics) {
-      userWordsCache.topics = [];
-    }
+    // Update userWordsCache to point to the same object
+    userWordsCache = appData.user_vocabulary[currentUserId];
+    
+    // Add topic to cache (only once, since appData and userWordsCache reference the same object)
     userWordsCache.topics.push(newTopic);
 
     // Sync to Firebase
     const userVocabRef = database.ref(`user_vocabulary/${currentUserId}/topics`);
-    await userVocabRef.set(appData.user_vocabulary[currentUserId].topics);
+    await userVocabRef.set(userWordsCache.topics);
 
     console.log('✅ Topic created successfully:', newTopic.name);
     return newTopic;
@@ -182,6 +194,9 @@ async function addWordToTopic(topicId, wordData) {
       ...wordData
     };
 
+    // Ensure userWordsCache is synchronized with appData
+    userWordsCache = appData.user_vocabulary[currentUserId];
+    
     // Find the topic in user vocabulary
     const userTopics = getUserTopics();
     const topicIndex = userTopics.findIndex(t => t.id === topicId);
@@ -190,7 +205,7 @@ async function addWordToTopic(topicId, wordData) {
       throw new Error('Topic not found');
     }
 
-    // Add word to topic
+    // Add word to topic (this updates both appData and cache since they reference the same object)
     if (!userTopics[topicIndex].vocabulary) {
       userTopics[topicIndex].vocabulary = [];
     }
@@ -198,14 +213,6 @@ async function addWordToTopic(topicId, wordData) {
     
     // Update totalWords count
     userTopics[topicIndex].totalWords = userTopics[topicIndex].vocabulary.length;
-
-    // Update cache
-    if (userWordsCache && userWordsCache.topics) {
-      const cacheTopicIndex = userWordsCache.topics.findIndex(t => t.id === topicId);
-      if (cacheTopicIndex !== -1) {
-        userWordsCache.topics[cacheTopicIndex] = userTopics[topicIndex];
-      }
-    }
 
     // Sync to Firebase
     const topicRef = database.ref(`user_vocabulary/${currentUserId}/topics/${topicIndex}`);

@@ -2,15 +2,25 @@
 // MODAL MANAGEMENT
 // ============================================
 
+let modalListenersInitialized = false;
+
 function setupModalListeners() {
+  // Prevent duplicate listener setup
+  if (modalListenersInitialized) {
+    return;
+  }
+  
   setupCreateTopicModal();
   setupAddWordModal();
   
   // Modal overlay close on click
   const modalOverlay = document.getElementById('modalOverlay');
   if (modalOverlay) {
+    modalOverlay.removeEventListener('click', closeAllModals);
     modalOverlay.addEventListener('click', closeAllModals);
   }
+  
+  modalListenersInitialized = true;
 }
 
 function closeAllModals() {
@@ -29,14 +39,17 @@ function setupCreateTopicModal() {
   const form = document.getElementById('createTopicForm');
 
   if (closeBtn) {
+    closeBtn.removeEventListener('click', closeCreateTopicModal);
     closeBtn.addEventListener('click', closeCreateTopicModal);
   }
 
   if (cancelBtn) {
+    cancelBtn.removeEventListener('click', closeCreateTopicModal);
     cancelBtn.addEventListener('click', closeCreateTopicModal);
   }
 
   if (form) {
+    form.removeEventListener('submit', handleCreateTopic);
     form.addEventListener('submit', handleCreateTopic);
   }
 }
@@ -59,7 +72,7 @@ async function handleCreateTopic(e) {
   const topicData = {
     name: document.getElementById('topicName').value,
     nameVi: document.getElementById('topicNameVi').value,
-    icon: document.getElementById('topicIcon').value,
+    icon: document.getElementById('newTopicIcon').value,
     iconColor: document.getElementById('topicIconColor').value,
     level: document.getElementById('topicLevel').value,
     category: document.getElementById('topicCategory').value
@@ -106,10 +119,16 @@ async function handleCreateTopic(e) {
 let currentAddWordStep = 1;
 let currentEnglishWord = '';
 
+// Handler functions for step navigation (defined outside to allow proper removal)
+function handleBackToStep1() { showAddWordStep(1); }
+function handleContinueToStep3() { showAddWordStep(3); }
+function handleBackToStep2() { showAddWordStep(2); }
+
 function setupAddWordModal() {
   // Close button
   const closeBtn = document.getElementById('closeAddWordBtn');
   if (closeBtn) {
+    closeBtn.removeEventListener('click', closeAddWordModal);
     closeBtn.addEventListener('click', closeAddWordModal);
   }
 
@@ -118,9 +137,11 @@ function setupAddWordModal() {
   const cancelStep1Btn = document.getElementById('cancelAddWordStep1Btn');
   
   if (enterWordForm) {
+    enterWordForm.removeEventListener('submit', handleEnterWordSubmit);
     enterWordForm.addEventListener('submit', handleEnterWordSubmit);
   }
   if (cancelStep1Btn) {
+    cancelStep1Btn.removeEventListener('click', closeAddWordModal);
     cancelStep1Btn.addEventListener('click', closeAddWordModal);
   }
 
@@ -130,13 +151,16 @@ function setupAddWordModal() {
   const continueToStep3Btn = document.getElementById('continueToStep3Btn');
   
   if (copyPromptBtn) {
+    copyPromptBtn.removeEventListener('click', handleCopyPrompt);
     copyPromptBtn.addEventListener('click', handleCopyPrompt);
   }
   if (backToStep1Btn) {
-    backToStep1Btn.addEventListener('click', () => showAddWordStep(1));
+    backToStep1Btn.removeEventListener('click', handleBackToStep1);
+    backToStep1Btn.addEventListener('click', handleBackToStep1);
   }
   if (continueToStep3Btn) {
-    continueToStep3Btn.addEventListener('click', () => showAddWordStep(3));
+    continueToStep3Btn.removeEventListener('click', handleContinueToStep3);
+    continueToStep3Btn.addEventListener('click', handleContinueToStep3);
   }
 
   // Step 3: Paste JSON
@@ -145,12 +169,15 @@ function setupAddWordModal() {
   const validateJsonBtn = document.getElementById('validateJsonBtn');
   
   if (backToStep2Btn) {
-    backToStep2Btn.addEventListener('click', () => showAddWordStep(2));
+    backToStep2Btn.removeEventListener('click', handleBackToStep2);
+    backToStep2Btn.addEventListener('click', handleBackToStep2);
   }
   if (validateJsonBtn) {
+    validateJsonBtn.removeEventListener('click', handleValidateJson);
     validateJsonBtn.addEventListener('click', handleValidateJson);
   }
   if (pasteWordDataForm) {
+    pasteWordDataForm.removeEventListener('submit', handleSubmitWord);
     pasteWordDataForm.addEventListener('submit', handleSubmitWord);
   }
 }
@@ -284,14 +311,27 @@ async function handleSubmitWord(e) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
     
+    // Save topic ID before closing modal (because closeAddWordModal will reset it to null)
+    const addedToTopicId = currentTopicForAddingWord;
+    
     // Add word to topic
-    await addWordToTopic(currentTopicForAddingWord, wordData);
+    const newWord = await addWordToTopic(addedToTopicId, wordData);
     
     // Close modal
     closeAddWordModal();
     
-    // Re-render My Words screen
-    await renderMyWords('all');
+    // Check current screen and refresh accordingly
+    const currentScreenId = getCurrentScreen();
+    const currentTopic = getCurrentTopic();
+    const isUserTopic = isCurrentTopicUserTopic();
+    
+    if (currentScreenId === 'myWordsScreen') {
+      // If on My Words screen, re-render it
+      await renderMyWords('all');
+    } else if (currentScreenId === 'wordListScreen' && currentTopic && isUserTopic && currentTopic.id === addedToTopicId) {
+      // If viewing the specific topic in word list screen, refresh the word list
+      await refreshCurrentTopicWordList();
+    }
     
     // Show success message
     showNotification(`Word "${wordData.english}" added successfully!`, 'success');

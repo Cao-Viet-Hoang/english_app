@@ -57,7 +57,14 @@ function initNotificationStyles() {
 }
 
 // Setup utility button listeners
+let utilityListenersInitialized = false;
+
 function setupUtilityListeners() {
+  // Prevent duplicate listener setup
+  if (utilityListenersInitialized) {
+    return;
+  }
+  
   // Review All functionality
   const reviewAllBtn = document.getElementById('reviewAllBtn');
   if (reviewAllBtn) {
@@ -89,4 +96,6 @@ function setupUtilityListeners() {
       alert('Advanced filters coming soon!');
     });
   }
+  
+  utilityListenersInitialized = true;
 }

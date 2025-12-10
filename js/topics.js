@@ -171,3 +171,49 @@ async function openTopicWords(topicId, isUserTopic = false) {
     }
   }
 }
+
+/**
+ * Refresh word list for current topic (used after adding new word)
+ */
+async function refreshCurrentTopicWordList() {
+  const currentTopic = getCurrentTopic();
+  const isUserTopic = isCurrentTopicUserTopic();
+  
+  if (!currentTopic) return;
+
+  try {
+    // Force reload user words to get the latest data from appData
+    if (isUserTopic) {
+      // No need to reload from Firebase, just get fresh reference from appData
+      const userTopics = getUserTopics();
+      const updatedTopic = userTopics.find(t => t.id === currentTopic.id);
+      
+      if (updatedTopic) {
+        // Update the topic in state
+        setCurrentTopic(updatedTopic, isUserTopic);
+        
+        const learnedWords = getLearnedWordsCount(updatedTopic.id, isUserTopic);
+        const topicStatsEl = document.getElementById('topicStats');
+        if (topicStatsEl) {
+          topicStatsEl.textContent = 
+            `${learnedWords}/${updatedTopic.totalWords} words • ${updatedTopic.level}`;
+        }
+        
+        // Get words from topic's vocabulary array
+        const topicWords = updatedTopic.vocabulary || [];
+        
+        // Add learned status to each word
+        const wordsWithStatus = topicWords.map(word => ({
+          ...word,
+          status: isWordLearned(updatedTopic.id, word.id, isUserTopic) ? 'learned' : 'new'
+        }));
+        
+        // Re-render the word cards
+        renderWordCards(wordsWithStatus, 'wordCardsList');
+      }
+    }
+    
+  } catch (error) {
+    console.error('Error refreshing word list:', error);
+  }
+}

@@ -2,7 +2,14 @@
 // WORD DETAIL BOTTOM SHEET
 // ============================================
 
+let bottomSheetListenersInitialized = false;
+
 function setupBottomSheetListeners() {
+  // Prevent duplicate listener setup
+  if (bottomSheetListenersInitialized) {
+    return;
+  }
+  
   const overlay = document.getElementById('bottomSheetOverlay');
   const sheet = document.getElementById('wordDetailSheet');
   
@@ -29,6 +36,8 @@ function setupBottomSheetListeners() {
       }
     });
   }
+  
+  bottomSheetListenersInitialized = true;
 }
 
 function openWordDetail(wordId) {

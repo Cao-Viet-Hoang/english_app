@@ -2,7 +2,14 @@
 // FILTER & TAB LISTENERS
 // ============================================
 
+let filterListenersInitialized = false;
+
 function setupFilterListeners() {
+  // Prevent duplicate listener setup
+  if (filterListenersInitialized) {
+    return;
+  }
+  
   // Journey screen filters
   const filterChips = document.querySelectorAll('#journeyScreen .filter-chips .chip');
   filterChips.forEach(chip => {
@@ -26,6 +33,8 @@ function setupFilterListeners() {
       renderMyWords(filter);
     });
   });
+  
+  filterListenersInitialized = true;
 
   // Search functionality
   const searchInput = document.getElementById('wordSearch');
