@@ -249,6 +249,8 @@ async function startGame(topicId, source) {
     startDictationGame(topicWithWords);
   } else if (currentGame === 'typing') {
     startTypingGame(topicWithWords, source);
+  } else if (currentGame === 'hangman') {
+    startHangmanGameFromTopic(topicWithWords, source);
   }
 }
 
@@ -556,4 +558,25 @@ function getLevelBadge(level) {
   
   const levelInfo = levelMap[level] || { label: level || 'Basic', color: '#6366f1' };
   return `<span class="level-badge" style="background: ${levelInfo.color}">${levelInfo.label}</span>`;
+}
+
+// ============================================
+// HANGMAN GAME
+// ============================================
+
+function startHangmanGameFromTopic(topic, source) {
+  // Switch to hangman game screen
+  switchScreen('hangmanGameScreen');
+  updateBottomNav('gamesScreen');
+
+  // Initialize hangman game with topic object
+  initHangmanGame(topic);
+
+  // Setup quit button
+  const quitBtn = document.getElementById('quitHangmanBtn');
+  if (quitBtn) {
+    quitBtn.onclick = function() {
+      backToGameTopicSelection();
+    };
+  }
 }

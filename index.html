@@ -257,6 +257,16 @@
               <i class="fas fa-play-circle"></i>
             </div>
           </div>
+          <div class="game-card" data-game="hangman">
+            <div class="game-icon">🔤</div>
+            <div class="game-info">
+              <h3 class="game-title">Hangman</h3>
+              <p class="game-description">Guess the word letter by letter - max 6 mistakes</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
           <!-- More games can be added here -->
         </div>
       </div>
@@ -545,6 +555,24 @@
         </div>
       </div>
 
+      <!-- Hangman Game Screen -->
+      <div class="screen" id="hangmanGameScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">🔤 Hangman</h2>
+            <p class="screen-subtitle">Guess the word letter by letter!</p>
+          </div>
+          <button class="btn-secondary" id="quitHangmanBtn">
+            <i class="fas fa-times"></i> Quit
+          </button>
+        </div>
+
+        <!-- Hangman Game Container -->
+        <div id="hangmanGameContent">
+          <!-- Game will be rendered here by hangmanGame.js -->
+        </div>
+      </div>
+
       <!-- Listening Dictation Game Screen -->
       <div class="screen" id="dictationGameScreen">
         <div class="screen-header">
@@ -817,6 +845,15 @@
     </div>
   </div>
 
+  <!-- Hangman Result Modal -->
+  <div class="modal-overlay" id="hangmanResultModalOverlay">
+    <div class="modal hangman-result-modal" id="hangmanResultModal">
+      <div class="modal-content" id="hangmanResultContent">
+        <!-- Content will be injected by JavaScript -->
+      </div>
+    </div>
+  </div>
+
   <!-- Login Modal -->
   <div class="modal-overlay" id="loginModalOverlay">
     <div class="modal login-modal" id="loginModal">
@@ -873,6 +910,7 @@
   <script src="js/quizGame.js"></script>
   <script src="js/dictationGame.js"></script>
   <script src="js/typingGame.js"></script>
+  <script src="js/hangmanGame.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
 </body>
