@@ -24,12 +24,15 @@
   --accent-orange: #F97316;
   --accent-green: #10B981;
   --accent-purple: #8B5CF6;
+  --accent-blue: #3B82F6;
+  --accent-blue-dark: #2563EB;
   
   /* Background Colors */
   --bg-main: #F0FDFA;
   --bg-card: #ffffff;
   --bg-secondary: #ECFDF5;
-  --bg-hover: #E5E7EB;
+  --bg-hover: #F3F4F6;
+  --bg-pressed: #E5E7EB;
   
   /* Text Colors - Improved Contrast */
   --text-primary: #134E4A;
@@ -80,9 +83,25 @@
   --radius-full: 50%;
   
   /* Transitions - Optimized for UX */
-  --transition-fast: 0.3s ease-out;
-  --transition-medium: 0.4s ease-out;
-  --transition-slow: 0.5s ease-out;
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.2s ease-out;
+  --transition-medium: 0.3s ease-out;
+  --transition-slow: 0.4s ease-out;
+  
+  /* Interactive Colors - Better Contrast */
+  --color-primary: #0D9488;
+  --color-primary-hover: #0F766E;
+  --color-secondary: #4F46E5;
+  --color-accent: #3B82F6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  
+  /* Shadow System */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 /* Accessibility - Reduced Motion Support */

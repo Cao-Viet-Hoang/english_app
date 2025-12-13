@@ -237,6 +237,16 @@
               <i class="fas fa-play-circle"></i>
             </div>
           </div>
+          <div class="game-card" data-game="dictation">
+            <div class="game-icon">🎧</div>
+            <div class="game-info">
+              <h3 class="game-title">Listening Dictation</h3>
+              <p class="game-description">Listen and type the word you hear</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
           <!-- More games can be added here -->
         </div>
       </div>
@@ -400,6 +410,107 @@
                 <i class="fas fa-redo"></i> Play Again
               </button>
               <button class="btn-secondary" id="backToGamesFromQuizCompleteBtn">
+                <i class="fas fa-gamepad"></i> Back to Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listening Dictation Game Screen -->
+      <div class="screen" id="dictationGameScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToTopicSelectionFromDictationBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="dictationGameTitle">Listening Dictation</h2>
+            <p class="screen-subtitle" id="dictationGameSubtitle">Listen and type the word</p>
+          </div>
+          <div class="game-stats">
+            <div class="stat-item">
+              <i class="fas fa-star"></i>
+              <span id="dictationGameScore">0/0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Progress -->
+        <div class="quiz-progress-container">
+          <div class="quiz-progress-info">
+            <span class="progress-text" id="dictationGameStatus">Word 1 of 10</span>
+            <span class="progress-percentage" id="dictationProgressPercent">10%</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="dictationProgressFill" style="width: 10%"></div>
+          </div>
+        </div>
+
+        <!-- Dictation Game Container -->
+        <div class="dictation-game-container">
+          <!-- Audio Play Section -->
+          <div class="dictation-audio-section">
+            <button class="play-audio-btn" id="playDictationAudioBtn" type="button">
+              <i class="fas fa-volume-up"></i>
+              <span>Play Audio</span>
+            </button>
+            <p class="audio-instruction">Click to hear the word</p>
+          </div>
+
+          <!-- Word Display (Hint) -->
+          <div class="dictation-word-display" id="dictationWordDisplay">
+            <!-- Hint will be displayed here -->
+          </div>
+
+          <!-- Input Section -->
+          <div class="dictation-input-section">
+            <input 
+              type="text" 
+              class="dictation-input" 
+              id="dictationInput" 
+              placeholder="Type what you hear..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+          </div>
+
+          <!-- Feedback Section -->
+          <div class="dictation-feedback" id="dictationFeedback" style="display: none;">
+            <!-- Feedback will be displayed here -->
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="dictation-actions">
+            <button class="btn-primary" id="checkDictationBtn">
+              <i class="fas fa-check"></i> Check Answer
+            </button>
+            <button class="btn-primary" id="nextDictationBtn" style="display: none;">
+              <i class="fas fa-arrow-right"></i> Next Word
+            </button>
+          </div>
+        </div>
+
+        <!-- Game Complete Overlay -->
+        <div class="game-complete-overlay" id="dictationCompleteOverlay" style="display: none;">
+          <div class="game-complete-content">
+            <div class="game-complete-icon">🎉</div>
+            <h2>Dictation Complete!</h2>
+            <div class="quiz-final-stats">
+              <div class="final-stat">
+                <span class="stat-label">Score</span>
+                <span class="stat-value"><span id="dictationFinalScore">0</span>/<span id="dictationTotalQuestions">0</span></span>
+              </div>
+              <div class="final-stat">
+                <span class="stat-label">Accuracy</span>
+                <span class="stat-value" id="dictationPercentage">0%</span>
+              </div>
+            </div>
+            <p class="quiz-message" id="dictationCompleteMessage">Great job!</p>
+            <div class="game-complete-actions">
+              <button class="btn-primary" id="playDictationAgainBtn">
+                <i class="fas fa-redo"></i> Play Again
+              </button>
+              <button class="btn-secondary" id="backToGamesFromDictationBtn">
                 <i class="fas fa-gamepad"></i> Back to Games
               </button>
             </div>
@@ -632,6 +743,7 @@
   <script src="js/modal.js"></script>
   <script src="js/games.js"></script>
   <script src="js/quizGame.js"></script>
+  <script src="js/dictationGame.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
 </body>
