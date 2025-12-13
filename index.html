@@ -247,6 +247,16 @@
               <i class="fas fa-play-circle"></i>
             </div>
           </div>
+          <div class="game-card" data-game="typing">
+            <div class="game-icon">⚡</div>
+            <div class="game-info">
+              <h3 class="game-title">Typing Challenge</h3>
+              <p class="game-description">Type words fast - choose 15s to 60s duration</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
           <!-- More games can be added here -->
         </div>
       </div>
@@ -412,6 +422,124 @@
               <button class="btn-secondary" id="backToGamesFromQuizCompleteBtn">
                 <i class="fas fa-gamepad"></i> Back to Games
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Game Settings Screen -->
+      <div class="screen" id="typingGameSettingsScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToTopicFromTypingSettingsBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title">⚡ Typing Challenge Settings</h2>
+            <p class="screen-subtitle" id="typingSettingsTopicName">Configure your game</p>
+          </div>
+          <button class="btn-primary" id="startTypingGameBtn">
+            <i class="fas fa-play"></i> Start Game
+          </button>
+        </div>
+
+        <!-- Settings Container -->
+        <div class="typing-settings-container">
+          <div class="settings-section">
+            <h3 class="settings-section-title">
+              <i class="fas fa-clock"></i>
+              Select Time Limit
+            </h3>
+            <p class="settings-section-desc">Choose how much time you want for the challenge</p>
+            
+            <div class="time-options">
+              <button class="time-option-card" data-time="15">
+                <div class="time-option-icon">🔥</div>
+                <div class="time-option-time">15 seconds</div>
+                <div class="time-option-difficulty extreme">Extreme</div>
+                <div class="time-option-desc">Lightning fast!</div>
+              </button>
+              
+              <button class="time-option-card active" data-time="30">
+                <div class="time-option-icon">⚡</div>
+                <div class="time-option-time">30 seconds</div>
+                <div class="time-option-difficulty hard">Hard</div>
+                <div class="time-option-desc">Recommended</div>
+              </button>
+              
+              <button class="time-option-card" data-time="45">
+                <div class="time-option-icon">⭐</div>
+                <div class="time-option-time">45 seconds</div>
+                <div class="time-option-difficulty medium">Medium</div>
+                <div class="time-option-desc">Balanced challenge</div>
+              </button>
+              
+              <button class="time-option-card" data-time="60">
+                <div class="time-option-icon">🎯</div>
+                <div class="time-option-time">60 seconds</div>
+                <div class="time-option-difficulty easy">Easy</div>
+                <div class="time-option-desc">Relaxed pace</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Challenge Game Screen -->
+      <div class="screen" id="typingGameScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">⚡ Typing Challenge</h2>
+            <p class="screen-subtitle">Type words as fast as you can!</p>
+          </div>
+          <button class="btn-secondary" id="quitTypingBtn">
+            <i class="fas fa-times"></i> Quit
+          </button>
+        </div>
+
+        <!-- Typing Game Container -->
+        <div class="typing-game-container">
+          <!-- Timer and Score -->
+          <div class="typing-stats">
+            <div class="typing-stat-item timer-display">
+              <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Time Left</div>
+                <div class="stat-value" id="typingTimer">30</div>
+              </div>
+            </div>
+            <div class="typing-stat-item score-display">
+              <div class="stat-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Score</div>
+                <div class="stat-value" id="typingScore">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Word Display -->
+          <div class="typing-word-section">
+            <div class="typing-word-label">Type this word:</div>
+            <div class="typing-word-display" id="typingWordDisplay">-</div>
+          </div>
+
+          <!-- Input Section -->
+          <div class="typing-input-section">
+            <input 
+              type="text" 
+              class="typing-input" 
+              id="typingInput" 
+              placeholder="Start typing here..."
+              autocomplete="off"
+              spellcheck="false"
+              autofocus
+            >
+            <div class="typing-hint">
+              <i class="fas fa-info-circle"></i>
+              Press Enter or type the complete word to submit
             </div>
           </div>
         </div>
@@ -744,6 +872,7 @@
   <script src="js/games.js"></script>
   <script src="js/quizGame.js"></script>
   <script src="js/dictationGame.js"></script>
+  <script src="js/typingGame.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
 </body>

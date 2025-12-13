@@ -247,6 +247,8 @@ async function startGame(topicId, source) {
     startQuizGame(topicWithWords);
   } else if (currentGame === 'dictation') {
     startDictationGame(topicWithWords);
+  } else if (currentGame === 'typing') {
+    startTypingGame(topicWithWords, source);
   }
 }
 

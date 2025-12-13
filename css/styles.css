@@ -4047,3 +4047,521 @@ input, textarea, select {
     gap: var(--spacing-xs);
   }
 }
+
+/* ============================================
+   TYPING CHALLENGE GAME STYLES
+   ============================================ */
+
+/* Typing Game Settings */
+.typing-settings-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+.settings-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.settings-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.settings-section-title i {
+  color: var(--color-primary);
+  font-size: 22px;
+}
+
+.settings-section-desc {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  font-size: 15px;
+}
+
+/* Time selection container gets more bottom padding since button moved to header */
+.typing-settings-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  padding-bottom: var(--spacing-2xl);
+}
+
+.time-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.time-option-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(249, 250, 251, 0.95) 100%);
+  border: 3px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.time-option-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.time-option-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+  border-color: var(--color-primary);
+}
+
+.time-option-card:hover::before {
+  opacity: 1;
+}
+
+.time-option-card.active {
+  border-color: var(--color-primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.08) 100%);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+  transform: translateY(-2px);
+}
+
+.time-option-card.active::after {
+  content: '✓';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.time-option-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-md);
+}
+
+.time-option-time {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.time-option-difficulty {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.time-option-difficulty.extreme {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  color: white;
+}
+
+.time-option-difficulty.hard {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: white;
+}
+
+.time-option-difficulty.medium {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: white;
+}
+
+.time-option-difficulty.easy {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: white;
+}
+
+.time-option-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.settings-actions {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+.btn-large {
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+/* Typing Game Container */
+.typing-game-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+/* Stats Display */
+.typing-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.typing-stat-item {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.06) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.12);
+  border: 2px solid rgba(99, 102, 241, 0.15);
+  transition: all 0.3s ease;
+}
+
+.typing-stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.2);
+}
+
+.typing-stat-item.timer-display {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 146, 60, 0.08) 100%);
+  border-color: rgba(245, 158, 11, 0.2);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);
+}
+
+.typing-stat-item.score-display {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.08) 100%);
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.timer-display .stat-icon {
+  background: linear-gradient(135deg, #F59E0B 0%, #FB923C 100%);
+  color: white;
+}
+
+.score-display .stat-icon {
+  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  color: white;
+}
+
+.stat-icon i {
+  font-size: 24px;
+}
+
+.stat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-value.warning {
+  color: #EF4444;
+  animation: pulse-warning 1s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Word Display Section */
+.typing-word-section {
+  text-align: center;
+  padding: var(--spacing-3xl);
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.95) 0%, rgba(254, 243, 199, 0.9) 100%);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15),
+              0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 3px solid rgba(99, 102, 241, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.typing-word-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+  animation: rotate-gradient 20s linear infinite;
+}
+
+.typing-word-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  z-index: 1;
+}
+
+.typing-word-display {
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  padding: var(--spacing-lg) 0;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.typing-word-display.correct-flash {
+  animation: flash-correct 0.3s ease;
+}
+
+@keyframes flash-correct {
+  0%, 100% {
+    transform: scale(1);
+    color: var(--color-primary);
+  }
+  50% {
+    transform: scale(1.15);
+    color: var(--color-success);
+  }
+}
+
+/* Input Section */
+.typing-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.typing-input {
+  width: 100%;
+  max-width: 600px;
+  padding: var(--spacing-xl);
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  border: 3px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.typing-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.15),
+              0 6px 20px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
+.typing-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--bg-secondary);
+}
+
+.typing-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.typing-hint i {
+  color: var(--color-primary);
+  font-size: 16px;
+}
+
+/* Responsive Design for Typing Game */
+@media (max-width: 1024px) {
+  .typing-settings-container {
+    max-width: 900px;
+  }
+
+  .time-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .typing-settings-container {
+    padding: var(--spacing-md);
+  }
+
+  .settings-section {
+    padding: var(--spacing-lg);
+  }
+
+  .time-options {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .time-option-card {
+    padding: var(--spacing-lg);
+  }
+
+  .time-option-icon {
+    font-size: 40px;
+  }
+
+  .time-option-time {
+    font-size: 20px;
+  }
+
+  .btn-large {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .typing-game-container {
+    padding: var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+
+  .typing-stats {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .typing-stat-item {
+    padding: var(--spacing-lg);
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .stat-icon i {
+    font-size: 20px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .typing-word-section {
+    padding: var(--spacing-xl);
+  }
+
+  .typing-word-display {
+    font-size: 40px;
+    letter-spacing: 1px;
+  }
+
+  .typing-input {
+    font-size: 22px;
+    padding: var(--spacing-lg);
+  }
+
+  .typing-hint {
+    font-size: 12px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .time-option-icon {
+    font-size: 36px;
+  }
+
+  .time-option-time {
+    font-size: 18px;
+  }
+
+  .time-option-difficulty {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .typing-word-display {
+    font-size: 32px;
+  }
+
+  .typing-input {
+    font-size: 18px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+}
