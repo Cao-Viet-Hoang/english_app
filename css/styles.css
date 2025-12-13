@@ -2758,9 +2758,24 @@ input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
   border-radius: var(--radius-lg);
   flex-shrink: 0;
+}
+
+/* Specific game icon colors */
+.game-card[data-game="matching"] .game-icon {
+  background: linear-gradient(135deg, #FED7AA 0%, #FDE68A 100%);
+  box-shadow: 0 4px 12px rgba(251, 146, 60, 0.15);
+}
+
+.game-card[data-game="quiz"] .game-icon {
+  background: linear-gradient(135deg, #BFDBFE 0%, #DBEAFE 100%);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.game-card[data-game="dictation"] .game-icon {
+  background: linear-gradient(135deg, #DDD6FE 0%, #EDE9FE 100%);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
 }
 
 .game-info {
@@ -3315,7 +3330,7 @@ input, textarea, select {
 .progress-percentage {
   font-size: 14px;
   font-weight: 700;
-  color: #4F46E5;
+  color: #0D9488;
 }
 
 .quiz-progress-bar {
@@ -3328,7 +3343,7 @@ input, textarea, select {
 
 .quiz-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%);
+  background: linear-gradient(90deg, #0D9488 0%, #14B8A6 100%);
   border-radius: 999px;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -3356,11 +3371,11 @@ input, textarea, select {
 }
 
 .quiz-word-card {
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
   padding: var(--spacing-2xl) var(--spacing-xl);
   border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 8px 32px rgba(13, 148, 136, 0.4);
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3553,7 +3568,7 @@ input, textarea, select {
   display: block;
   font-size: 32px;
   font-weight: 700;
-  color: var(--accent-blue);
+  color: var(--primary);
 }
 
 .quiz-message {
@@ -3637,11 +3652,11 @@ input, textarea, select {
 .dictation-audio-section {
   text-align: center;
   padding: var(--spacing-2xl);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 253, 250, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.95) 0%, rgba(204, 251, 241, 0.9) 100%);
   border-radius: var(--radius-xl);
-  box-shadow: 0 8px 32px rgba(13, 148, 136, 0.12),
+  box-shadow: 0 8px 32px rgba(13, 148, 136, 0.15),
               0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(13, 148, 136, 0.1);
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
