@@ -34,6 +34,7 @@ function initializeApp() {
   setupBottomSheetListeners();
   setupUtilityListeners();
   setupGamesListeners();
+  setupQuizGameListeners();
   
   console.log('App initialized successfully!');
 }

@@ -243,6 +243,8 @@ async function startGame(topicId, source) {
   // Start the appropriate game
   if (currentGame === 'matching') {
     startMatchingGame(topicWithWords);
+  } else if (currentGame === 'quiz') {
+    startQuizGame(topicWithWords);
   }
 }
 

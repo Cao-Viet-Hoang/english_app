@@ -227,6 +227,16 @@
               <i class="fas fa-play-circle"></i>
             </div>
           </div>
+          <div class="game-card" data-game="quiz">
+            <div class="game-icon">📝</div>
+            <div class="game-info">
+              <h3 class="game-title">Multiple Choice Quiz</h3>
+              <p class="game-description">Choose the correct meaning from 4 options</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
           <!-- More games can be added here -->
         </div>
       </div>
@@ -320,6 +330,76 @@
                 <i class="fas fa-redo"></i> Play Again
               </button>
               <button class="btn-secondary" id="backToGamesFromCompleteBtn">
+                <i class="fas fa-gamepad"></i> Back to Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multiple Choice Quiz Game Screen -->
+      <div class="screen" id="quizGameScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToTopicSelectionFromQuizBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="quizGameTitle">Multiple Choice Quiz</h2>
+            <p class="screen-subtitle" id="quizGameSubtitle">Choose the correct meaning</p>
+          </div>
+          <div class="game-stats">
+            <div class="stat-item">
+              <i class="fas fa-star"></i>
+              <span id="quizGameScore">0/0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Progress -->
+        <div class="quiz-progress-container">
+          <div class="quiz-progress-info">
+            <span class="progress-text" id="quizGameStatus">Question 1 of 10</span>
+            <span class="progress-percentage" id="quizProgressPercent">10%</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quizProgressFill" style="width: 10%"></div>
+          </div>
+        </div>
+
+        <!-- Quiz Game Container -->
+        <div class="quiz-game-container">
+          <!-- Question Section -->
+          <div class="quiz-question-section" id="quizQuestion">
+            <!-- Question will be dynamically inserted here -->
+          </div>
+
+          <!-- Answers Section -->
+          <div class="quiz-answers-section" id="quizAnswers">
+            <!-- Answer buttons will be dynamically inserted here -->
+          </div>
+        </div>
+
+        <!-- Game Complete Overlay -->
+        <div class="game-complete-overlay" id="quizCompleteOverlay" style="display: none;">
+          <div class="game-complete-content">
+            <div class="game-complete-icon">🎉</div>
+            <h2>Quiz Complete!</h2>
+            <div class="quiz-final-stats">
+              <div class="final-stat">
+                <span class="stat-label">Score</span>
+                <span class="stat-value"><span id="quizFinalScore">0</span>/<span id="quizTotalQuestions">0</span></span>
+              </div>
+              <div class="final-stat">
+                <span class="stat-label">Accuracy</span>
+                <span class="stat-value" id="quizPercentage">0%</span>
+              </div>
+            </div>
+            <p class="quiz-message" id="quizCompleteMessage">Great job!</p>
+            <div class="game-complete-actions">
+              <button class="btn-primary" id="playQuizAgainBtn">
+                <i class="fas fa-redo"></i> Play Again
+              </button>
+              <button class="btn-secondary" id="backToGamesFromQuizCompleteBtn">
                 <i class="fas fa-gamepad"></i> Back to Games
               </button>
             </div>
@@ -551,6 +631,7 @@
   <script src="js/myWords.js"></script>
   <script src="js/modal.js"></script>
   <script src="js/games.js"></script>
+  <script src="js/quizGame.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
 </body>
