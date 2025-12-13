@@ -75,15 +75,66 @@ function setupGamesListeners() {
       updateBottomNav('gamesScreen');
     });
   }
+
+  // Search filter for game topics
+  const gameTopicSearchInput = document.getElementById('gameTopicSearchInput');
+  const clearGameTopicSearch = document.getElementById('clearGameTopicSearch');
+  
+  if (gameTopicSearchInput) {
+    gameTopicSearchInput.addEventListener('input', function() {
+      const searchTerm = this.value.trim();
+      filterGameTopics(searchTerm);
+      
+      // Show/hide clear button
+      if (clearGameTopicSearch) {
+        clearGameTopicSearch.style.display = searchTerm ? 'flex' : 'none';
+      }
+    });
+  }
+
+  if (clearGameTopicSearch) {
+    clearGameTopicSearch.addEventListener('click', function() {
+      if (gameTopicSearchInput) {
+        gameTopicSearchInput.value = '';
+        filterGameTopics('');
+        this.style.display = 'none';
+        gameTopicSearchInput.focus();
+      }
+    });
+  }
 }
 
 // ============================================
 // RENDER GAME TOPICS LIST
 // ============================================
 
-function renderGameTopicsList() {
+async function renderGameTopicsList() {
   const gameTopicsList = document.getElementById('gameTopicsList');
   if (!gameTopicsList) return;
+
+  // Load user vocabulary if accessing "My Words" and not yet loaded
+  if (currentGameSource === 'user' && !userWordsCache) {
+    gameTopicsList.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading your topics...</p>
+      </div>
+    `;
+    
+    try {
+      await loadUserWords(currentUserId);
+    } catch (error) {
+      console.error('Error loading user vocabulary:', error);
+      gameTopicsList.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>Failed to load your topics</p>
+          <p class="empty-hint">Please try again</p>
+        </div>
+      `;
+      return;
+    }
+  }
 
   const topics = currentGameSource === 'shared' ? getSharedTopics() : getUserTopics();
   
@@ -204,20 +255,26 @@ function startMatchingGame(topic) {
   switchScreen('matchingGameScreen');
   updateBottomNav('gamesScreen');
 
-  // Update header
+  // Update header with icon
   const titleEl = document.getElementById('matchingGameTitle');
   const subtitleEl = document.getElementById('matchingGameSubtitle');
-  if (titleEl) titleEl.textContent = `${topic.nameVi || topic.name}`;
+  if (titleEl) {
+    const topicIcon = topic.icon || '📚';
+    const topicColor = topic.iconColor || topic.color || '#4A90E2';
+    titleEl.innerHTML = `
+      <span class="game-topic-icon" style="background: ${topicColor}">${topicIcon}</span>
+      <span>${topic.nameVi || topic.name}</span>
+    `;
+  }
   if (subtitleEl) subtitleEl.textContent = 'Match words with their meanings';
 
   // Hide complete overlay
   const completeOverlay = document.getElementById('gameCompleteOverlay');
   if (completeOverlay) completeOverlay.style.display = 'none';
 
-  // Get words and select random subset (max 8 pairs)
+  // Get all words from topic
   const allWords = [...(topic.vocabulary || [])];
-  const maxPairs = Math.min(8, allWords.length);
-  const selectedWords = shuffleArray(allWords).slice(0, maxPairs);
+  const selectedWords = shuffleArray(allWords);
 
   // Initialize game state
   matchingGameState = {
@@ -241,17 +298,17 @@ function renderMatchingGameBoard() {
   
   if (!wordsContainer || !meaningsContainer) return;
 
-  // Create word items
+  // Create word items - support both data structures
   const wordItems = matchingGameState.words.map(word => ({
     id: word.id,
-    text: word.word,
+    text: word.word || word.english,
     type: 'word'
   }));
 
-  // Create meaning items
+  // Create meaning items - support both data structures
   const meaningItems = matchingGameState.words.map(word => ({
     id: word.id,
-    text: word.meaningVi || word.meaning,
+    text: word.meaningVi || word.meaning || word.vietnameseMeaning,
     type: 'meaning'
   }));
 
@@ -417,6 +474,51 @@ function showGameComplete() {
   const completeOverlay = document.getElementById('gameCompleteOverlay');
   if (completeOverlay) {
     completeOverlay.style.display = 'flex';
+  }
+}
+
+// ============================================
+// FILTER GAME TOPICS
+// ============================================
+
+function filterGameTopics(searchTerm) {
+  const gameTopicsList = document.getElementById('gameTopicsList');
+  if (!gameTopicsList) return;
+
+  const topicCards = gameTopicsList.querySelectorAll('.game-topic-card');
+  const searchLower = searchTerm.toLowerCase().trim();
+
+  let visibleCount = 0;
+
+  topicCards.forEach(card => {
+    const topicName = card.querySelector('.topic-name');
+    if (!topicName) return;
+
+    const topicText = topicName.textContent.toLowerCase();
+    
+    if (!searchLower || topicText.includes(searchLower)) {
+      card.style.display = 'flex';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Show empty state if no results
+  const existingEmptyState = gameTopicsList.querySelector('.search-empty-state');
+  if (existingEmptyState) {
+    existingEmptyState.remove();
+  }
+
+  if (visibleCount === 0 && topicCards.length > 0) {
+    const emptyState = document.createElement('div');
+    emptyState.className = 'empty-state search-empty-state';
+    emptyState.innerHTML = `
+      <i class="fas fa-search"></i>
+      <p>No topics found</p>
+      <p class="empty-hint">Try a different search term</p>
+    `;
+    gameTopicsList.appendChild(emptyState);
   }
 }
 

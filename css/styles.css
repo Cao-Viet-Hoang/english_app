@@ -214,6 +214,18 @@ input, textarea, select {
   letter-spacing: -0.3px;
 }
 
+.game-topic-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 #journeyScreen .screen-title {
   position: relative;
 }
@@ -2817,6 +2829,68 @@ input, textarea, select {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
+/* Game Topic Search Container */
+.game-topic-search-container {
+  padding: 0 var(--spacing-lg) var(--spacing-md) var(--spacing-lg);
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-wrapper i.fa-search {
+  position: absolute;
+  left: var(--spacing-md);
+  color: var(--text-tertiary);
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: var(--spacing-sm);
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--text-tertiary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.clear-search-btn:hover {
+  background: var(--text-secondary);
+  transform: scale(1.1);
+}
+
 /* Game Topics List */
 .game-topics-list {
   padding: var(--spacing-lg);
@@ -2957,49 +3031,91 @@ input, textarea, select {
 .matching-items {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
 
 .matching-item {
-  background: var(--bg-card);
-  border: 2px solid transparent;
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%);
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
   cursor: pointer;
-  transition: all var(--transition-base);
-  min-height: 60px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04),
+              0 1px 2px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.matching-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent-blue));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .matching-item:hover:not(.matched) {
-  background: var(--bg-hover);
-  transform: translateX(4px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(243, 244, 246, 1) 100%);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12),
+              0 4px 8px rgba(0, 0, 0, 0.06);
+  border-color: var(--primary);
+}
+
+.matching-item:hover:not(.matched)::before {
+  opacity: 1;
 }
 
 .matching-item.selected {
   border-color: var(--accent-blue);
-  background: rgba(99, 102, 241, 0.1);
-  transform: scale(1.02);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.05) 100%);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15),
+              0 2px 4px rgba(99, 102, 241, 0.1);
+}
+
+.matching-item.selected::before {
+  opacity: 1;
+  background: linear-gradient(90deg, var(--accent-blue), #8b5cf6);
 }
 
 .matching-item.matched {
-  background: rgba(16, 185, 129, 0.1);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
   border-color: var(--success-color);
-  opacity: 0.6;
+  opacity: 0.7;
   pointer-events: none;
+  transform: scale(0.95);
+}
+
+.matching-item.matched::before {
+  opacity: 1;
+  background: var(--success-color);
 }
 
 .matching-item.matched .matching-item-content {
   text-decoration: line-through;
   color: var(--success-color);
+  opacity: 0.8;
 }
 
 .matching-item.wrong {
   border-color: var(--error-color);
-  background: rgba(239, 68, 68, 0.1);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
   animation: shake 0.4s ease-in-out;
+}
+
+.matching-item.wrong::before {
+  opacity: 1;
+  background: var(--error-color);
 }
 
 @keyframes shake {
@@ -3009,11 +3125,13 @@ input, textarea, select {
 }
 
 .matching-item-content {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   word-break: break-word;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
 }
 
 /* Game Complete Overlay */
