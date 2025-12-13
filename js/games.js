@@ -251,6 +251,8 @@ async function startGame(topicId, source) {
     startTypingGame(topicWithWords, source);
   } else if (currentGame === 'hangman') {
     startHangmanGameFromTopic(topicWithWords, source);
+  } else if (currentGame === 'scramble') {
+    startScrambleGame(topicWithWords);
   }
 }
 
@@ -574,6 +576,29 @@ function startHangmanGameFromTopic(topic, source) {
 
   // Setup quit button
   const quitBtn = document.getElementById('quitHangmanBtn');
+  if (quitBtn) {
+    quitBtn.onclick = function() {
+      backToGameTopicSelection();
+    };
+  }
+}
+
+// ============================================
+// START SCRAMBLE GAME FROM TOPIC (called from startGame)
+// ============================================
+
+function startScrambleGameFromTopic(topic) {
+  console.log('Starting Scramble Game from topic selection:', topic);
+  
+  // Switch to scramble game screen
+  switchScreen('scrambleGameScreen');
+  updateBottomNav('gamesScreen');
+
+  // Initialize scramble game with topic object
+  startScrambleGame(topic);
+
+  // Setup quit button
+  const quitBtn = document.getElementById('quitScrambleBtn');
   if (quitBtn) {
     quitBtn.onclick = function() {
       backToGameTopicSelection();

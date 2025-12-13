@@ -267,6 +267,16 @@
               <i class="fas fa-play-circle"></i>
             </div>
           </div>
+          <div class="game-card" data-game="scramble">
+            <div class="game-icon">🔀</div>
+            <div class="game-info">
+              <h3 class="game-title">Scramble</h3>
+              <p class="game-description">Unscramble letters to form the correct word</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
           <!-- More games can be added here -->
         </div>
       </div>
@@ -674,6 +684,24 @@
         </div>
       </div>
 
+      <!-- Scramble Game Screen -->
+      <div class="screen" id="scrambleGameScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">🔤 Scramble Game</h2>
+            <p class="screen-subtitle">Unscramble the letters to form the word!</p>
+          </div>
+          <button class="btn-secondary" id="quitScrambleBtn">
+            <i class="fas fa-times"></i> Quit
+          </button>
+        </div>
+
+        <!-- Scramble Game Container -->
+        <div id="scrambleGameContent">
+          <!-- Game will be rendered here by scrambleGame.js -->
+        </div>
+      </div>
+
     </main>
 
   </div>
@@ -911,6 +939,7 @@
   <script src="js/dictationGame.js"></script>
   <script src="js/typingGame.js"></script>
   <script src="js/hangmanGame.js"></script>
+  <script src="js/scrambleGame.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
 </body>
