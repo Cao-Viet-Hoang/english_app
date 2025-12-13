@@ -33,6 +33,7 @@ function initializeApp() {
   setupModalListeners();
   setupBottomSheetListeners();
   setupUtilityListeners();
+  setupGamesListeners();
   
   console.log('App initialized successfully!');
 }
