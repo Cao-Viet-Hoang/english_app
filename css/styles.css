@@ -1866,7 +1866,8 @@ input, textarea, select {
   align-items: center;
   gap: var(--spacing-md);
   padding: var(--spacing-lg);
-  background: var(--gradient-blue);
+  background: white;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .profile-avatar {
@@ -1890,7 +1891,7 @@ input, textarea, select {
 .profile-name {
   font-size: 16px;
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -1899,7 +1900,7 @@ input, textarea, select {
 
 .profile-username {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
