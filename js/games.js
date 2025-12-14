@@ -253,6 +253,8 @@ async function startGame(topicId, source) {
     startHangmanGameFromTopic(topicWithWords, source);
   } else if (currentGame === 'scramble') {
     startScrambleGame(topicWithWords);
+  } else if (currentGame === 'mixed') {
+    startMixedQuestionGame(topicWithWords);
   }
 }
 

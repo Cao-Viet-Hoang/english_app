@@ -277,6 +277,16 @@
               <i class="fas fa-play-circle"></i>
             </div>
           </div>
+          <div class="game-card" data-game="mixed">
+            <div class="game-icon">🧩</div>
+            <div class="game-info">
+              <h3 class="game-title">Mixed Questions</h3>
+              <p class="game-description">Various question types based on word data</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
           <!-- More games can be added here -->
         </div>
       </div>
@@ -440,6 +450,74 @@
                 <i class="fas fa-redo"></i> Play Again
               </button>
               <button class="btn-secondary" id="backToGamesFromQuizCompleteBtn">
+                <i class="fas fa-gamepad"></i> Back to Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mixed Question Game Screen -->
+      <div class="screen" id="mixedQuestionGameScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToGameTopicSelectionFromMixed">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="mixedQuestionGameTitle">Mixed Questions</h2>
+            <p class="screen-subtitle" id="mixedQuestionGameSubtitle">Various question types</p>
+          </div>
+          <div class="game-stats">
+            <div class="stat-item">
+              <i class="fas fa-star"></i>
+              <span id="mixedQuestionScore">Score: 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Progress -->
+        <div class="quiz-progress-container">
+          <div class="quiz-progress-info">
+            <span class="progress-text" id="mixedQuestionProgress">Question 1/10</span>
+            <span class="progress-percentage" id="mixedQuestionProgressPercent">10%</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="mixedQuestionProgressFill" style="width: 10%"></div>
+          </div>
+        </div>
+
+        <!-- Mixed Question Container -->
+        <div class="quiz-game-container">
+          <div id="mixedQuestionContainer">
+            <!-- Questions will be dynamically inserted here -->
+          </div>
+          
+          <!-- Next Button -->
+          <div class="mixed-question-actions">
+            <button class="btn-primary" id="mixedQuestionNextBtn">
+              <i class="fas fa-arrow-right"></i> Next
+            </button>
+          </div>
+        </div>
+
+        <!-- Game Complete Overlay -->
+        <div class="game-complete-overlay" id="mixedQuestionCompleteOverlay" style="display: none;">
+          <div class="game-complete-content">
+            <div class="game-complete-icon">🎉</div>
+            <h2>Game Complete!</h2>
+            <div class="complete-stars" style="font-size: 48px; margin: 20px 0;">⭐⭐⭐</div>
+            <div class="quiz-final-stats">
+              <div class="final-stat">
+                <span class="stat-label">Score</span>
+                <span class="stat-value complete-score">0/0</span>
+              </div>
+            </div>
+            <p class="quiz-message complete-message">Great job!</p>
+            <div class="game-complete-actions">
+              <button class="btn-primary" id="mixedQuestionPlayAgainBtn">
+                <i class="fas fa-redo"></i> Play Again
+              </button>
+              <button class="btn-secondary" id="mixedQuestionBackToGamesBtn">
                 <i class="fas fa-gamepad"></i> Back to Games
               </button>
             </div>
@@ -940,6 +1018,8 @@
   <script src="js/typingGame.js"></script>
   <script src="js/hangmanGame.js"></script>
   <script src="js/scrambleGame.js"></script>
+  <script src="js/mixedQuestionGenerator.js"></script>
+  <script src="js/mixedQuestionGame.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
 </body>
