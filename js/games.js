@@ -320,7 +320,7 @@ function renderMatchingGameBoard() {
   // Create meaning items - support both data structures
   const meaningItems = matchingGameState.words.map(word => ({
     id: word.id,
-    text: word.meaningVi || word.meaning || word.vietnameseMeaning,
+    text: word.vietnameseDescription || word.meaningVi || word.meaning || word.vietnameseMeaning,
     type: 'meaning'
   }));
 

@@ -86,7 +86,7 @@ function renderQuizQuestion() {
   `;
 
   // Generate answers
-  const correctAnswer = currentWord.meaningVi || currentWord.meaning || currentWord.vietnameseMeaning;
+  const correctAnswer = currentWord.vietnameseDescription || currentWord.meaningVi || currentWord.meaning || currentWord.vietnameseMeaning;
   const wrongAnswers = generateWrongAnswers(currentWord, quizGameState.words);
   
   // Combine and shuffle answers
@@ -134,11 +134,11 @@ function renderQuizQuestion() {
 // ============================================
 
 function generateWrongAnswers(currentWord, allWords) {
-  const correctAnswer = currentWord.meaningVi || currentWord.meaning || currentWord.vietnameseMeaning;
+  const correctAnswer = currentWord.vietnameseDescription || currentWord.meaningVi || currentWord.meaning || currentWord.vietnameseMeaning;
   
   // Get other words' meanings as wrong answers
   const otherWords = allWords.filter(w => {
-    const meaning = w.meaningVi || w.meaning || w.vietnameseMeaning;
+    const meaning = w.vietnameseDescription || w.meaningVi || w.meaning || w.vietnameseMeaning;
     return meaning !== correctAnswer;
   });
   
@@ -147,7 +147,7 @@ function generateWrongAnswers(currentWord, allWords) {
   const wrongAnswers = [];
   
   for (let i = 0; i < Math.min(3, shuffled.length); i++) {
-    wrongAnswers.push(shuffled[i].meaningVi || shuffled[i].meaning || shuffled[i].vietnameseMeaning);
+    wrongAnswers.push(shuffled[i].vietnameseDescription || shuffled[i].meaningVi || shuffled[i].meaning || shuffled[i].vietnameseMeaning);
   }
   
   // If we don't have enough wrong answers (less than 3 words in topic), generate some generic ones
