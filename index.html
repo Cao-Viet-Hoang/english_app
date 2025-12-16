@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Learning App</title>
+  <link rel="icon" href="data:,">
+  
+  <!-- Google Fonts - Modern Professional Pairing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/colors.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  
+  <!-- Main App Container -->
+  <div id="app" class="app-container">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <h1 class="app-title">English Journey</h1>
+        <div class="header-actions">
+          <span class="user-name" id="headerUserName"></span>
+          <button class="header-btn" id="logoutBtn" title="Logout">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Top Navigation / Header -->
+    <nav class="bottom-nav">
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="logo-text">English Journey</div>
+      </div>
+      <div class="nav-items-container">
+        <button class="nav-item active" data-screen="journeyScreen">
+          <i class="fas fa-route"></i>
+          <span>Journey</span>
+        </button>
+        <button class="nav-item" data-screen="myWordsScreen">
+          <i class="fas fa-book"></i>
+          <span>My Words</span>
+        </button>
+        <button class="nav-item" data-screen="gamesScreen">
+          <i class="fas fa-gamepad"></i>
+          <span>Games</span>
+        </button>
+      </div>
+      <div class="sidebar-footer">
+        <div class="user-stats">
+          <div class="stat-item streak">
+            <i class="fas fa-fire"></i>
+            <span class="streak-number">7</span>
+            <span class="streak-label">Day Streak</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn user-btn" id="userProfileBtn" title="Profile">
+            <i class="fas fa-user-circle"></i>
+          </button>
+        </div>
+        
+        <!-- User Profile Menu -->
+        <div class="profile-menu" id="profileMenu">
+          <div class="profile-menu-header">
+            <div class="profile-avatar">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="profile-info">
+              <div class="profile-name" id="profileMenuName">User Name</div>
+              <div class="profile-username" id="profileMenuUsername">@username</div>
+            </div>
+          </div>
+          <div class="profile-menu-divider"></div>
+          <div class="profile-menu-items">
+            <button class="profile-menu-item" id="profileStatsBtn">
+              <i class="fas fa-chart-bar"></i>
+              <span>Statistics</span>
+            </button>
+            <button class="profile-menu-item" id="profileSettingsBtn">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </button>
+            <button class="profile-menu-item logout-item" id="profileLogoutBtn">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="mainContent">
+      
+      <!-- Journey Screen (Topics List) -->
+      <div class="screen active" id="journeyScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">Vocabulary Journey</h2>
+            <p class="screen-subtitle">Learn topics from basic to advanced</p>
+            <div class="journey-stats">
+              <div class="stat-badge topics">
+                <i class="fas fa-book"></i>
+                <span id="topicCount">12 Topics</span>
+              </div>
+              <div class="stat-badge progress">
+                <i class="fas fa-chart-line"></i>
+                <span id="progressCount">45% Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search topics..." id="topicsSearch">
+          </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="beginner">Beginner</button>
+          <button class="chip" data-filter="intermediate">Intermediate</button>
+          <button class="chip" data-filter="advanced">Advanced</button>
+        </div>
+
+        <!-- Topics List -->
+        <div class="topics-list" id="topicsList">
+          <!-- Topics will be dynamically inserted here -->
+        </div>
+      </div>
+
+      <!-- Word List Screen -->
+      <div class="screen" id="wordListScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToJourneyBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="topic-icon" id="topicIcon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 16px;">📚</div>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="topicTitle">Daily Routine</h2>
+            <p class="screen-subtitle" id="topicStats">20/50 words • A1-A2</p>
+          </div>
+          <button class="header-btn primary" id="reviewAllBtn">
+            <i class="fas fa-play"></i> Review
+          </button>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search words in this topic..." id="wordSearch">
+          </div>
+          <button class="filter-btn" id="wordFilterBtn">
+            <i class="fas fa-filter"></i>
+          </button>
+        </div>
+
+        <!-- Word Cards List -->
+        <div class="word-cards-list" id="wordCardsList">
+          <!-- Word cards will be dynamically inserted here -->
+        </div>
+
+        <!-- Floating Action Button - Add Word (only for user topics) -->
+        <button class="fab" id="addWordToCurrentTopicBtn" style="display: none;" title="Add New Word">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      <!-- My Words Screen -->
+      <div class="screen" id="myWordsScreen">
+        <div class="screen-header">
+          <h2 class="screen-title">My Words</h2>
+          <p class="screen-subtitle">Your personal vocabulary collection</p>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search topics..." id="myTopicsSearch">
+          </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="beginner">Beginner</button>
+          <button class="chip" data-filter="intermediate">Intermediate</button>
+          <button class="chip" data-filter="advanced">Advanced</button>
+        </div>
+
+        <!-- My Topics List -->
+        <div class="topics-list" id="myTopicsList">
+          <!-- User's topics will be dynamically inserted here -->
+        </div>
+
+        <!-- Floating Action Button - Create Topic -->
+        <button class="fab" id="createTopicBtn" title="Create New Topic">
+          <i class="fas fa-folder-plus"></i>
+        </button>
+      </div>
+
+      <!-- Games Screen -->
+      <div class="screen" id="gamesScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">🎮 Vocabulary Games</h2>
+            <p class="screen-subtitle">Practice vocabulary through interactive games</p>
+          </div>
+        </div>
+
+        <!-- Games List -->
+        <div class="games-list" id="gamesList">
+          <div class="game-card" data-game="matching">
+            <div class="game-icon">🎯</div>
+            <div class="game-info">
+              <h3 class="game-title">Matching Game</h3>
+              <p class="game-description">Match words with their meanings</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <div class="game-card" data-game="quiz">
+            <div class="game-icon">📝</div>
+            <div class="game-info">
+              <h3 class="game-title">Multiple Choice Quiz</h3>
+              <p class="game-description">Choose the correct meaning from 4 options</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <div class="game-card" data-game="dictation">
+            <div class="game-icon">🎧</div>
+            <div class="game-info">
+              <h3 class="game-title">Listening Dictation</h3>
+              <p class="game-description">Listen and type the word you hear</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <div class="game-card" data-game="typing">
+            <div class="game-icon">⚡</div>
+            <div class="game-info">
+              <h3 class="game-title">Typing Challenge</h3>
+              <p class="game-description">Type words fast - choose 15s to 60s duration</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <div class="game-card" data-game="hangman">
+            <div class="game-icon">🔤</div>
+            <div class="game-info">
+              <h3 class="game-title">Hangman</h3>
+              <p class="game-description">Guess the word letter by letter - max 6 mistakes</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <div class="game-card" data-game="scramble">
+            <div class="game-icon">🔀</div>
+            <div class="game-info">
+              <h3 class="game-title">Scramble</h3>
+              <p class="game-description">Unscramble letters to form the correct word</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <div class="game-card" data-game="mixed">
+            <div class="game-icon">🧩</div>
+            <div class="game-info">
+              <h3 class="game-title">Mixed Questions</h3>
+              <p class="game-description">Various question types based on word data</p>
+            </div>
+            <div class="game-badge">
+              <i class="fas fa-play-circle"></i>
+            </div>
+          </div>
+          <!-- More games can be added here -->
+        </div>
+      </div>
+
+      <!-- Game Topic Selection Screen -->
+      <div class="screen" id="gameTopicSelectionScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToGamesBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="gameTopicSelectionTitle">Select Topic</h2>
+            <p class="screen-subtitle" id="gameTopicSelectionSubtitle">Choose a topic to practice</p>
+          </div>
+        </div>
+
+        <!-- Topic Source Tabs -->
+        <div class="topic-source-tabs">
+          <button class="topic-source-tab active" data-source="shared">
+            <i class="fas fa-globe"></i> Shared Vocabulary
+          </button>
+          <button class="topic-source-tab" data-source="user">
+            <i class="fas fa-user"></i> My Vocabulary
+          </button>
+        </div>
+
+        <!-- Search Filter -->
+        <div class="game-topic-search-container">
+          <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="gameTopicSearchInput" class="search-input" placeholder="Search topics...">
+            <button class="clear-search-btn" id="clearGameTopicSearch" style="display: none;">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Topics List for Game Selection -->
+        <div class="game-topics-list" id="gameTopicsList">
+          <!-- Topics will be dynamically inserted here -->
+        </div>
+      </div>
+
+      <!-- Matching Game Screen -->
+      <div class="screen" id="matchingGameScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToGameTopicSelectionBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="matchingGameTitle">Matching Game</h2>
+            <p class="screen-subtitle" id="matchingGameSubtitle">Match words with their meanings</p>
+          </div>
+          <div class="game-stats">
+            <div class="stat-item">
+              <i class="fas fa-check-circle"></i>
+              <span id="matchingGameScore">0/0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Status -->
+        <div class="game-status" id="matchingGameStatus">
+          <p>Click a word, then click its matching meaning</p>
+        </div>
+
+        <!-- Matching Game Board -->
+        <div class="matching-game-board">
+          <div class="matching-column words-column">
+            <h3 class="column-title">Words</h3>
+            <div class="matching-items" id="matchingWords">
+              <!-- Word items will be dynamically inserted here -->
+            </div>
+          </div>
+          <div class="matching-column meanings-column">
+            <h3 class="column-title">Meanings</h3>
+            <div class="matching-items" id="matchingMeanings">
+              <!-- Meaning items will be dynamically inserted here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Complete Overlay -->
+        <div class="game-complete-overlay" id="gameCompleteOverlay" style="display: none;">
+          <div class="game-complete-content">
+            <div class="game-complete-icon">🎉</div>
+            <h2>Congratulations!</h2>
+            <p>You matched all words correctly!</p>
+            <div class="game-complete-actions">
+              <button class="btn-primary" id="playAgainBtn">
+                <i class="fas fa-redo"></i> Play Again
+              </button>
+              <button class="btn-secondary" id="backToGamesFromCompleteBtn">
+                <i class="fas fa-gamepad"></i> Back to Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multiple Choice Quiz Game Screen -->
+      <div class="screen" id="quizGameScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToTopicSelectionFromQuizBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="quizGameTitle">Multiple Choice Quiz</h2>
+            <p class="screen-subtitle" id="quizGameSubtitle">Choose the correct meaning</p>
+          </div>
+          <div class="game-stats">
+            <div class="stat-item">
+              <i class="fas fa-star"></i>
+              <span id="quizGameScore">0/0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Progress -->
+        <div class="quiz-progress-container">
+          <div class="quiz-progress-info">
+            <span class="progress-text" id="quizGameStatus">Question 1 of 10</span>
+            <span class="progress-percentage" id="quizProgressPercent">10%</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quizProgressFill" style="width: 10%"></div>
+          </div>
+        </div>
+
+        <!-- Quiz Game Container -->
+        <div class="quiz-game-container">
+          <!-- Question Section -->
+          <div class="quiz-question-section" id="quizQuestion">
+            <!-- Question will be dynamically inserted here -->
+          </div>
+
+          <!-- Answers Section -->
+          <div class="quiz-answers-section" id="quizAnswers">
+            <!-- Answer buttons will be dynamically inserted here -->
+          </div>
+        </div>
+
+        <!-- Game Complete Overlay -->
+        <div class="game-complete-overlay" id="quizCompleteOverlay" style="display: none;">
+          <div class="game-complete-content">
+            <div class="game-complete-icon">🎉</div>
+            <h2>Quiz Complete!</h2>
+            <div class="quiz-final-stats">
+              <div class="final-stat">
+                <span class="stat-label">Score</span>
+                <span class="stat-value"><span id="quizFinalScore">0</span>/<span id="quizTotalQuestions">0</span></span>
+              </div>
+              <div class="final-stat">
+                <span class="stat-label">Accuracy</span>
+                <span class="stat-value" id="quizPercentage">0%</span>
+              </div>
+            </div>
+            <p class="quiz-message" id="quizCompleteMessage">Great job!</p>
+            <div class="game-complete-actions">
+              <button class="btn-primary" id="playQuizAgainBtn">
+                <i class="fas fa-redo"></i> Play Again
+              </button>
+              <button class="btn-secondary" id="backToGamesFromQuizCompleteBtn">
+                <i class="fas fa-gamepad"></i> Back to Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mixed Question Game Screen -->
+      <div class="screen" id="mixedQuestionGameScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToGameTopicSelectionFromMixed">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="mixedQuestionGameTitle">Mixed Questions</h2>
+            <p class="screen-subtitle" id="mixedQuestionGameSubtitle">Various question types</p>
+          </div>
+          <div class="game-stats">
+            <div class="stat-item">
+              <i class="fas fa-star"></i>
+              <span id="mixedQuestionScore">Score: 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Progress -->
+        <div class="quiz-progress-container">
+          <div class="quiz-progress-info">
+            <span class="progress-text" id="mixedQuestionProgress">Question 1/10</span>
+            <span class="progress-percentage" id="mixedQuestionProgressPercent">10%</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="mixedQuestionProgressFill" style="width: 10%"></div>
+          </div>
+        </div>
+
+        <!-- Mixed Question Container -->
+        <div class="quiz-game-container">
+          <div id="mixedQuestionContainer">
+            <!-- Questions will be dynamically inserted here -->
+          </div>
+          
+          <!-- Next Button -->
+          <div class="mixed-question-actions">
+            <button class="btn-primary" id="mixedQuestionNextBtn">
+              <i class="fas fa-arrow-right"></i> Next
+            </button>
+          </div>
+        </div>
+
+        <!-- Game Complete Overlay -->
+        <div class="game-complete-overlay" id="mixedQuestionCompleteOverlay" style="display: none;">
+          <div class="game-complete-content">
+            <div class="game-complete-icon">🎉</div>
+            <h2>Game Complete!</h2>
+            <div class="complete-stars" style="font-size: 48px; margin: 20px 0;">⭐⭐⭐</div>
+            <div class="quiz-final-stats">
+              <div class="final-stat">
+                <span class="stat-label">Score</span>
+                <span class="stat-value complete-score">0/0</span>
+              </div>
+            </div>
+            <p class="quiz-message complete-message">Great job!</p>
+            <div class="game-complete-actions">
+              <button class="btn-primary" id="mixedQuestionPlayAgainBtn">
+                <i class="fas fa-redo"></i> Play Again
+              </button>
+              <button class="btn-secondary" id="mixedQuestionBackToGamesBtn">
+                <i class="fas fa-gamepad"></i> Back to Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Game Settings Screen -->
+      <div class="screen" id="typingGameSettingsScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToTopicFromTypingSettingsBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title">⚡ Typing Challenge Settings</h2>
+            <p class="screen-subtitle" id="typingSettingsTopicName">Configure your game</p>
+          </div>
+          <button class="btn-primary" id="startTypingGameBtn">
+            <i class="fas fa-play"></i> Start Game
+          </button>
+        </div>
+
+        <!-- Settings Container -->
+        <div class="typing-settings-container">
+          <div class="settings-section">
+            <h3 class="settings-section-title">
+              <i class="fas fa-clock"></i>
+              Select Time Limit
+            </h3>
+            <p class="settings-section-desc">Choose how much time you want for the challenge</p>
+            
+            <div class="time-options">
+              <button class="time-option-card" data-time="15">
+                <div class="time-option-icon">🔥</div>
+                <div class="time-option-time">15 seconds</div>
+                <div class="time-option-difficulty extreme">Extreme</div>
+                <div class="time-option-desc">Lightning fast!</div>
+              </button>
+              
+              <button class="time-option-card active" data-time="30">
+                <div class="time-option-icon">⚡</div>
+                <div class="time-option-time">30 seconds</div>
+                <div class="time-option-difficulty hard">Hard</div>
+                <div class="time-option-desc">Recommended</div>
+              </button>
+              
+              <button class="time-option-card" data-time="45">
+                <div class="time-option-icon">⭐</div>
+                <div class="time-option-time">45 seconds</div>
+                <div class="time-option-difficulty medium">Medium</div>
+                <div class="time-option-desc">Balanced challenge</div>
+              </button>
+              
+              <button class="time-option-card" data-time="60">
+                <div class="time-option-icon">🎯</div>
+                <div class="time-option-time">60 seconds</div>
+                <div class="time-option-difficulty easy">Easy</div>
+                <div class="time-option-desc">Relaxed pace</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Challenge Game Screen -->
+      <div class="screen" id="typingGameScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">⚡ Typing Challenge</h2>
+            <p class="screen-subtitle">Type words as fast as you can!</p>
+          </div>
+          <button class="btn-secondary" id="quitTypingBtn">
+            <i class="fas fa-times"></i> Quit
+          </button>
+        </div>
+
+        <!-- Typing Game Container -->
+        <div class="typing-game-container">
+          <!-- Timer and Score -->
+          <div class="typing-stats">
+            <div class="typing-stat-item timer-display">
+              <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Time Left</div>
+                <div class="stat-value" id="typingTimer">30</div>
+              </div>
+            </div>
+            <div class="typing-stat-item score-display">
+              <div class="stat-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Score</div>
+                <div class="stat-value" id="typingScore">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Word Display -->
+          <div class="typing-word-section">
+            <div class="typing-word-label">Type this word:</div>
+            <div class="typing-word-display" id="typingWordDisplay">-</div>
+          </div>
+
+          <!-- Input Section -->
+          <div class="typing-input-section">
+            <input 
+              type="text" 
+              class="typing-input" 
+              id="typingInput" 
+              placeholder="Start typing here..."
+              autocomplete="off"
+              spellcheck="false"
+              autofocus
+            >
+            <div class="typing-hint">
+              <i class="fas fa-info-circle"></i>
+              Press Enter or type the complete word to submit
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hangman Game Screen -->
+      <div class="screen" id="hangmanGameScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">🔤 Hangman</h2>
+            <p class="screen-subtitle">Guess the word letter by letter!</p>
+          </div>
+          <button class="btn-secondary" id="quitHangmanBtn">
+            <i class="fas fa-times"></i> Quit
+          </button>
+        </div>
+
+        <!-- Hangman Game Container -->
+        <div id="hangmanGameContent">
+          <!-- Game will be rendered here by hangmanGame.js -->
+        </div>
+      </div>
+
+      <!-- Listening Dictation Game Screen -->
+      <div class="screen" id="dictationGameScreen">
+        <div class="screen-header">
+          <button class="back-btn" id="backToTopicSelectionFromDictationBtn">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="screen-header-info">
+            <h2 class="screen-title" id="dictationGameTitle">Listening Dictation</h2>
+            <p class="screen-subtitle" id="dictationGameSubtitle">Listen and type the word</p>
+          </div>
+          <div class="game-stats">
+            <div class="stat-item">
+              <i class="fas fa-star"></i>
+              <span id="dictationGameScore">0/0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Progress -->
+        <div class="quiz-progress-container">
+          <div class="quiz-progress-info">
+            <span class="progress-text" id="dictationGameStatus">Word 1 of 10</span>
+            <span class="progress-percentage" id="dictationProgressPercent">10%</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="dictationProgressFill" style="width: 10%"></div>
+          </div>
+        </div>
+
+        <!-- Dictation Game Container -->
+        <div class="dictation-game-container">
+          <!-- Audio Play Section -->
+          <div class="dictation-audio-section">
+            <button class="play-audio-btn" id="playDictationAudioBtn" type="button">
+              <i class="fas fa-volume-up"></i>
+              <span>Play Audio</span>
+            </button>
+            <p class="audio-instruction">Click to hear the word</p>
+          </div>
+
+          <!-- Word Display (Hint) -->
+          <div class="dictation-word-display" id="dictationWordDisplay">
+            <!-- Hint will be displayed here -->
+          </div>
+
+          <!-- Input Section -->
+          <div class="dictation-input-section">
+            <input 
+              type="text" 
+              class="dictation-input" 
+              id="dictationInput" 
+              placeholder="Type what you hear..."
+              autocomplete="off"
+              spellcheck="false"
+            >
+          </div>
+
+          <!-- Feedback Section -->
+          <div class="dictation-feedback" id="dictationFeedback" style="display: none;">
+            <!-- Feedback will be displayed here -->
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="dictation-actions">
+            <button class="btn-primary" id="checkDictationBtn">
+              <i class="fas fa-check"></i> Check Answer
+            </button>
+            <button class="btn-primary" id="nextDictationBtn" style="display: none;">
+              <i class="fas fa-arrow-right"></i> Next Word
+            </button>
+          </div>
+        </div>
+
+        <!-- Game Complete Overlay -->
+        <div class="game-complete-overlay" id="dictationCompleteOverlay" style="display: none;">
+          <div class="game-complete-content">
+            <div class="game-complete-icon">🎉</div>
+            <h2>Dictation Complete!</h2>
+            <div class="quiz-final-stats">
+              <div class="final-stat">
+                <span class="stat-label">Score</span>
+                <span class="stat-value"><span id="dictationFinalScore">0</span>/<span id="dictationTotalQuestions">0</span></span>
+              </div>
+              <div class="final-stat">
+                <span class="stat-label">Accuracy</span>
+                <span class="stat-value" id="dictationPercentage">0%</span>
+              </div>
+            </div>
+            <p class="quiz-message" id="dictationCompleteMessage">Great job!</p>
+            <div class="game-complete-actions">
+              <button class="btn-primary" id="playDictationAgainBtn">
+                <i class="fas fa-redo"></i> Play Again
+              </button>
+              <button class="btn-secondary" id="backToGamesFromDictationBtn">
+                <i class="fas fa-gamepad"></i> Back to Games
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scramble Game Screen -->
+      <div class="screen" id="scrambleGameScreen">
+        <div class="screen-header">
+          <div class="screen-header-info">
+            <h2 class="screen-title">🔤 Scramble Game</h2>
+            <p class="screen-subtitle">Unscramble the letters to form the word!</p>
+          </div>
+          <button class="btn-secondary" id="quitScrambleBtn">
+            <i class="fas fa-times"></i> Quit
+          </button>
+        </div>
+
+        <!-- Scramble Game Container -->
+        <div id="scrambleGameContent">
+          <!-- Game will be rendered here by scrambleGame.js -->
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Bottom Sheet for Word Details -->
+  <div class="bottom-sheet-overlay" id="bottomSheetOverlay"></div>
+  <div class="bottom-sheet" id="wordDetailSheet">
+    <div class="bottom-sheet-handle"></div>
+    <div class="bottom-sheet-content" id="wordDetailContent">
+      <!-- Word details will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+
+  <!-- Create Topic Modal -->
+  <div class="modal" id="createTopicModal">
+    <div class="modal-header">
+      <h3><i class="fas fa-folder-plus"></i> Create New Topic</h3>
+      <button class="modal-close" id="closeCreateTopicBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-content">
+      <form id="createTopicForm">
+        <div class="form-group">
+          <label for="topicName">Topic Name (English) *</label>
+          <input type="text" id="topicName" required placeholder="e.g., Business English">
+        </div>
+        
+        <div class="form-group">
+          <label for="topicNameVi">Topic Name (Vietnamese) *</label>
+          <input type="text" id="topicNameVi" required placeholder="e.g., Tiếng Anh Thương Mại">
+        </div>
+        
+        <div class="form-group">
+          <label for="newTopicIcon">Icon (Emoji) *</label>
+          <input type="text" id="newTopicIcon" required placeholder="e.g., 💼" maxlength="10">
+          <small class="form-hint">Choose an emoji that represents your topic</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="topicIconColor">Icon Background Color *</label>
+          <input type="color" id="topicIconColor" required value="#FFB3BA">
+          <small class="form-hint">Pick a pastel color that matches your emoji</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="topicLevel">Level *</label>
+          <select id="topicLevel" required>
+            <option value="">Select level</option>
+            <option value="A1-A2">A1-A2 (Beginner)</option>
+            <option value="B1-B2">B1-B2 (Intermediate)</option>
+            <option value="C1-C2">C1-C2 (Advanced)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="topicCategory">Category *</label>
+          <select id="topicCategory" required>
+            <option value="">Select category</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelCreateTopicBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Create Topic
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Word to Topic Modal -->
+  <div class="modal modal-large" id="addWordModal">
+    <div class="modal-header">
+      <h3><i class="fas fa-plus-circle"></i> Add Word to <span id="addWordTopicName"></span></h3>
+      <button class="modal-close" id="closeAddWordBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-content">
+      <!-- Step 1: Enter English Word -->
+      <div id="addWordStep1" class="modal-step active">
+        <div class="step-indicator">
+          <div class="step-number active">1</div>
+          <div class="step-title">Enter English Word</div>
+        </div>
+        <form id="enterWordForm">
+          <div class="form-group">
+            <label for="englishWord">English Word *</label>
+            <input type="text" id="englishWord" required placeholder="e.g., beautiful" autofocus>
+            <small class="form-hint">Enter the English word you want to add</small>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="cancelAddWordStep1Btn">Cancel</button>
+            <button type="submit" class="btn btn-primary">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 2: Generate AI Prompt -->
+      <div id="addWordStep2" class="modal-step">
+        <div class="step-indicator">
+          <div class="step-number active">2</div>
+          <div class="step-title">AI Prompt Generation</div>
+        </div>
+        <div class="ai-prompt-section">
+          <div class="info-box">
+            <i class="fas fa-robot"></i>
+            <div>
+              <strong>AI Assistance</strong>
+              <p>Copy the prompt below and use it with your AI assistant (ChatGPT, Claude, etc.) to generate complete word data.</p>
+            </div>
+          </div>
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <label>AI Prompt</label>
+              <button type="button" class="btn-icon btn-copy-icon" id="copyPromptBtn" title="Copy to clipboard">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <textarea id="aiPrompt" readonly rows="12"></textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="backToStep1Btn">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button type="button" class="btn btn-primary" id="continueToStep3Btn">
+              I've Got the Data <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Paste JSON Data -->
+      <div id="addWordStep3" class="modal-step">
+        <div class="step-indicator">
+          <div class="step-number active">3</div>
+          <div class="step-title">Paste Word Data</div>
+        </div>
+        <form id="pasteWordDataForm">
+          <div class="form-group">
+            <label for="wordJsonData">Word Data (JSON Format) *</label>
+            <textarea id="wordJsonData" required rows="15" placeholder='Paste the JSON data from AI here...'></textarea>
+            <small class="form-hint">Paste the complete JSON object generated by AI</small>
+          </div>
+          <div id="validationMessage" class="validation-message"></div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="backToStep2Btn">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button type="button" class="btn btn-secondary" id="validateJsonBtn">
+              <i class="fas fa-check-circle"></i> Validate
+            </button>
+            <button type="submit" class="btn btn-primary" id="submitWordBtn" disabled>
+              <i class="fas fa-plus"></i> Add Word
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hangman Result Modal -->
+  <div class="modal-overlay" id="hangmanResultModalOverlay">
+    <div class="modal hangman-result-modal" id="hangmanResultModal">
+      <div class="modal-content" id="hangmanResultContent">
+        <!-- Content will be injected by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModalOverlay">
+    <div class="modal login-modal" id="loginModal">
+      <div class="modal-header">
+        <h3>Login to English Journey</h3>
+      </div>
+      
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="loginUsername">Username *</label>
+          <input type="text" id="loginUsername" required placeholder="Enter your username" autocomplete="username">
+        </div>
+        
+        <div class="form-group">
+          <label for="loginPassword">Password *</label>
+          <input type="password" id="loginPassword" required placeholder="Enter your password" autocomplete="current-password">
+        </div>
+        
+        <div class="form-group">
+          <label for="firebaseConfig">App Configuration *</label>
+          <textarea id="firebaseConfig" rows="8" required placeholder='{"apiKey": "...", "authDomain": "...", "databaseURL": "...", "projectId": "...", "storageBucket": "...", "messagingSenderId": "...", "appId": "..."}'></textarea>
+          <small class="help-text">Paste your app configuration JSON here (Firebase + additional settings)</small>
+        </div>
+
+        <div class="login-error" id="loginError" style="display: none;"></div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  
+  <!-- JavaScript Modules -->
+  <script src="js/firebaseConfig.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/dataLoader.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/topics.js"></script>
+  <script src="js/wordCards.js"></script>
+  <script src="js/wordDetail.js"></script>
+  <script src="js/myWords.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/quizGame.js"></script>
+  <script src="js/dictationGame.js"></script>
+  <script src="js/typingGame.js"></script>
+  <script src="js/hangmanGame.js"></script>
+  <script src="js/scrambleGame.js"></script>
+  <script src="js/mixedQuestionGenerator.js"></script>
+  <script src="js/mixedQuestionGame.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

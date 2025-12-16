@@ -1,0 +1,369 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "English Learning App Data Structure",
+  "type": "object",
+  "required": ["user_profiles", "shared_vocabulary", "user_vocabulary"],
+  "properties": {
+    "user_profiles": {
+      "type": "array",
+      "description": "List of user profiles",
+      "items": {
+        "type": "object",
+        "required": ["id", "account", "password", "name", "statistics", "streak", "topic_progress"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "User ID"
+          },
+          "account": {
+            "type": "string",
+            "description": "Account username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name"
+          },
+          "statistics": {
+            "type": "object",
+            "required": ["totalLearnedWords", "totalWords", "learningProgress"],
+            "properties": {
+              "totalLearnedWords": {
+                "type": "integer",
+                "description": "Total number of learned words",
+                "minimum": 0
+              },
+              "totalWords": {
+                "type": "integer",
+                "description": "Total number of words",
+                "minimum": 0
+              },
+              "learningProgress": {
+                "type": "number",
+                "description": "Learning progress (%)",
+                "minimum": 0,
+                "maximum": 100
+              }
+            }
+          },
+          "streak": {
+            "type": "object",
+            "required": ["currentStreak", "longestStreak", "lastActiveDate"],
+            "properties": {
+              "currentStreak": {
+                "type": "integer",
+                "description": "Current learning streak (days)",
+                "minimum": 0
+              },
+              "longestStreak": {
+                "type": "integer",
+                "description": "Longest learning streak (days)",
+                "minimum": 0
+              },
+              "lastActiveDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Last active date (YYYY-MM-DD)"
+              }
+            }
+          },
+          "topic_progress": {
+            "type": "object",
+            "required": ["shared_vocabulary", "user_vocabulary"],
+            "properties": {
+              "shared_vocabulary": {
+                "type": "object",
+                "description": "Shared vocabulary progress by topic ID",
+                "patternProperties": {
+                  "^[0-9]+$": {
+                    "type": "object",
+                    "required": ["learnedWordsIdList"],
+                    "properties": {
+                      "learnedWordsIdList": {
+                        "type": "array",
+                        "description": "List of learned word IDs",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "user_vocabulary": {
+                "type": "object",
+                "description": "Personal vocabulary progress by topic ID",
+                "patternProperties": {
+                  "^[0-9]+$": {
+                    "type": "object",
+                    "required": ["learnedWordsIdList"],
+                    "properties": {
+                      "learnedWordsIdList": {
+                        "type": "array",
+                        "description": "List of learned word IDs",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "shared_vocabulary": {
+      "type": "object",
+      "description": "Shared vocabulary for all users",
+      "required": ["topic"],
+      "properties": {
+        "topic": {
+          "type": "array",
+          "description": "List of vocabulary topics",
+          "items": {
+            "$ref": "#/definitions/topic"
+          }
+        }
+      }
+    },
+    "user_vocabulary": {
+      "type": "object",
+      "description": "Personal vocabulary for each user",
+      "patternProperties": {
+        "^[0-9]+$": {
+          "type": "object",
+          "required": ["topics"],
+          "properties": {
+            "topics": {
+              "type": "array",
+              "description": "List of user's topics",
+              "items": {
+                "$ref": "#/definitions/topic"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "topic": {
+      "type": "object",
+      "required": ["id", "name", "nameVi", "icon", "iconColor", "level", "totalWords", "category", "vocabulary"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Topic ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Topic name (English)"
+        },
+        "nameVi": {
+          "type": "string",
+          "description": "Topic name (Vietnamese)"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Emoji icon"
+        },
+        "iconColor": {
+          "type": "string",
+          "description": "Icon color pastel in hex format (e.g., #4A90E2), it should fit with the color of emoji icon",
+          "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+        },
+        "level": {
+          "type": "string",
+          "description": "Level (e.g., A1-A2, B1-B2)"
+        },
+        "totalWords": {
+          "type": "integer",
+          "description": "Total number of words in topic",
+          "minimum": 0
+        },
+        "category": {
+          "type": "string",
+          "description": "Category (beginner, intermediate, advanced)"
+        },
+        "vocabulary": {
+          "type": "array",
+          "description": "List of vocabulary words",
+          "items": {
+            "$ref": "#/definitions/word"
+          }
+        }
+      }
+    },
+    "word": {
+      "type": "object",
+      "required": ["id", "english", "ipa", "type", "vietnameseMeaning", "vietnameseDescription", "examples"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Word ID"
+        },
+        "topicId": {
+          "type": "integer",
+          "description": "Topic ID"
+        },
+        "english": {
+          "type": "string",
+          "description": "English word"
+        },
+        "ipa": {
+          "type": "string",
+          "description": "IPA pronunciation"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["noun", "verb", "adjective", "adverb", "preposition", "conjunction", "pronoun", "interjection"],
+          "description": "Word type"
+        },
+        "vietnameseMeaning": {
+          "type": "string",
+          "description": "Vietnamese meaning"
+        },
+        "vietnameseDescription": {
+          "type": "string",
+          "description": "Detailed description in Vietnamese"
+        },
+        "irregular": {
+          "type": "object",
+          "description": "Irregular verb forms (for verbs)",
+          "required": ["v1", "v2", "v3", "ving"],
+          "properties": {
+            "v1": {
+              "type": "string",
+              "description": "Base form"
+            },
+            "v2": {
+              "type": "string",
+              "description": "Past simple form"
+            },
+            "v3": {
+              "type": "string",
+              "description": "Past participle form"
+            },
+            "ving": {
+              "type": "string",
+              "description": "Present participle (-ing form)"
+            }
+          }
+        },
+        "noun": {
+          "type": "object",
+          "description": "Noun information (for nouns)",
+          "required": ["singular", "plural", "countability"],
+          "properties": {
+            "singular": {
+              "type": "string",
+              "description": "Singular form"
+            },
+            "plural": {
+              "type": "string",
+              "description": "Plural form"
+            },
+            "countability": {
+              "type": "string",
+              "enum": ["C", "U", "C/U"],
+              "description": "Countable (C), Uncountable (U), or both (C/U)"
+            }
+          }
+        },
+        "examples": {
+          "type": "array",
+          "description": "Usage examples",
+          "items": {
+            "type": "object",
+            "required": ["level", "en", "vi"],
+            "properties": {
+              "level": {
+                "type": "string",
+                "enum": ["beginner", "intermediate", "advanced"],
+                "description": "Example level"
+              },
+              "en": {
+                "type": "string",
+                "description": "English example sentence"
+              },
+              "vi": {
+                "type": "string",
+                "description": "Vietnamese translation"
+              }
+            }
+          }
+        },
+        "commonMistakes": {
+          "type": "array",
+          "description": "Common mistakes that learners make with this word. Include typical errors in grammar, usage, or context. Should have at least 1-3 examples for most words, especially for frequently misused words. This helps learners avoid common pitfalls.",
+          "items": {
+            "type": "object",
+            "required": ["wrong", "correct", "explanation"],
+            "properties": {
+              "wrong": {
+                "type": "string",
+                "description": "Incorrect usage"
+              },
+              "correct": {
+                "type": "string",
+                "description": "Correct usage"
+              },
+              "explanation": {
+                "type": "string",
+                "description": "Explanation"
+              }
+            }
+          }
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "List of synonyms or near-synonyms for this word. Include 2-5 common alternatives that learners can use in similar contexts. Focus on words at similar or slightly higher proficiency levels. This helps expand vocabulary and understand nuanced differences in meaning.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collocations": {
+          "type": "array",
+          "description": "Common word combinations and phrases where this word naturally appears. Include 2-4 frequent collocations (e.g., Verb + Noun: 'make a decision', Adjective + Noun: 'strong coffee'). Prioritize natural, idiomatic expressions that native speakers use. This teaches learners how the word is actually used in authentic contexts.",
+          "items": {
+            "type": "object",
+            "required": ["type", "expression", "example", "exampleVi"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Collocation type (e.g., Verb + Noun, Adjective + Noun)"
+              },
+              "expression": {
+                "type": "string",
+                "description": "Collocation expression"
+              },
+              "example": {
+                "type": "string",
+                "description": "English example sentence"
+              },
+              "exampleVi": {
+                "type": "string",
+                "description": "Vietnamese translation"
+              }
+            }
+          }
+        },
+        "frequency": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Word frequency in English usage"
+        },
+        "cefrLevel": {
+          "type": "string",
+          "enum": ["A1", "A2", "B1", "B2", "C1", "C2"],
+          "description": "CEFR level of the word"
+        }
+      }
+    }
+  }
+}
