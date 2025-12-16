@@ -238,7 +238,7 @@ function generateAIPrompt(englishWord) {
   "ipa": "/IPA pronunciation here/",
   "type": "noun|verb|adjective|adverb|preposition|conjunction|pronoun|interjection",
   "vietnameseMeaning": "Vietnamese meaning",
-  "vietnameseDescription": "Detailed description in Vietnamese explaining usage, context, and nuances",
+  "vietnameseDescription": "Short explanation in Vietnamese",
   "irregular": {
     "v1": "base form",
     "v2": "past simple",
@@ -281,9 +281,9 @@ IMPORTANT NOTES:
 1. Include "irregular" only for verbs
 2. Include "noun" only for nouns
 3. Provide 2-4 examples at different levels
-4. Include 1-3 common mistakes
-5. List 2-5 synonyms
-6. Provide 2-4 collocations
+4. commonMistakes: Include typical errors in grammar, usage, or context. Should have at least 1-3 examples for most words, especially for frequently misused words. This helps learners avoid common pitfalls.
+5. synonyms: Include 2-5 common alternatives that learners can use in similar contexts. Focus on words at similar or slightly higher proficiency levels. This helps expand vocabulary and understand nuanced differences in meaning.
+6. collocations: Include 2-4 frequent collocations (e.g., Verb + Noun: 'make a decision', Adjective + Noun: 'strong coffee'). Prioritize natural, idiomatic expressions that native speakers use. This teaches learners how the word is actually used in authentic contexts.
 7. All Vietnamese text must be in Vietnamese
 8. Return ONLY the JSON object, no additional text`;
 }
