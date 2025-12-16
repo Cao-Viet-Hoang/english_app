@@ -35,16 +35,26 @@ function updateJourneyStats() {
   }
 }
 
-function renderTopics(filter = 'all') {
+function renderTopics(filter = 'all', searchText = '') {
   const topicsList = document.getElementById('topicsList');
   if (!topicsList) return;
 
   // Only show shared vocabulary topics in Journey screen
   const sharedTopics = getSharedTopics();
   
-  const filteredTopics = filter === 'all' 
+  let filteredTopics = filter === 'all' 
     ? sharedTopics 
     : sharedTopics.filter(topic => topic.category === filter);
+
+  // Apply search filter
+  if (searchText && searchText.trim() !== '') {
+    const searchLower = searchText.toLowerCase().trim();
+    filteredTopics = filteredTopics.filter(topic => 
+      topic.name.toLowerCase().includes(searchLower) ||
+      (topic.nameVi && topic.nameVi.toLowerCase().includes(searchLower)) ||
+      topic.level.toLowerCase().includes(searchLower)
+    );
+  }
 
   // Update journey stats
   updateJourneyStats();

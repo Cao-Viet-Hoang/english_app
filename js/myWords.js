@@ -292,7 +292,7 @@ IMPORTANT NOTES:
 // RENDER MY WORDS
 // ============================================
 
-async function renderMyWords(filter = 'all') {
+async function renderMyWords(filter = 'all', searchText = '') {
   const container = document.getElementById('myTopicsList');
   if (!container) return;
 
@@ -313,9 +313,19 @@ async function renderMyWords(filter = 'all') {
     // Get user's personal topics only (not shared vocabulary)
     const userTopics = getUserTopics();
     
-    const filteredTopics = filter === 'all' 
+    let filteredTopics = filter === 'all' 
       ? userTopics 
       : userTopics.filter(topic => topic.category === filter);
+
+    // Apply search filter
+    if (searchText && searchText.trim() !== '') {
+      const searchLower = searchText.toLowerCase().trim();
+      filteredTopics = filteredTopics.filter(topic => 
+        topic.name.toLowerCase().includes(searchLower) ||
+        (topic.nameVi && topic.nameVi.toLowerCase().includes(searchLower)) ||
+        topic.level.toLowerCase().includes(searchLower)
+      );
+    }
 
     if (filteredTopics.length === 0) {
       container.innerHTML = `

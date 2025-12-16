@@ -1426,8 +1426,17 @@ input, textarea, select {
 
 @media (max-width: 768px) {
   .modal {
-    max-width: 400px;
-    max-height: 80vh;
+    max-width: 90%;
+    width: 90%;
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    max-width: 95%;
+    width: 95%;
+    max-height: 90vh;
   }
 }
 
@@ -1977,6 +1986,50 @@ input, textarea, select {
   max-width: 480px;
   background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
   border: 1px solid var(--border-light);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 216, 234, 0.5) transparent;
+}
+
+.login-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.login-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.login-modal::-webkit-scrollbar-thumb {
+  background: rgba(168, 216, 234, 0.5);
+  border-radius: 10px;
+}
+
+.login-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 216, 234, 0.8);
+}
+
+.login-form {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 216, 234, 0.5) transparent;
+}
+
+.login-form::-webkit-scrollbar {
+  width: 5px;
+}
+
+.login-form::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.login-form::-webkit-scrollbar-thumb {
+  background: rgba(168, 216, 234, 0.5);
+  border-radius: 10px;
+}
+
+.login-form::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 216, 234, 0.8);
 }
 
 .login-modal .modal-header {
@@ -2181,6 +2234,228 @@ input, textarea, select {
   margin-top: var(--spacing-xl);
   padding-top: var(--spacing-lg);
   border-top: 1px solid var(--border-light);
+}
+
+/* ============================================
+   LOGIN MODAL - RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet Screens (768px and below) */
+@media (max-width: 768px) {
+  .login-modal {
+    max-width: 90%;
+    width: 90%;
+    max-height: 85vh;
+  }
+
+  .login-modal .modal-header {
+    padding: var(--spacing-md);
+    flex-shrink: 0;
+  }
+
+  .login-modal .modal-header h3 {
+    font-size: 18px;
+  }
+
+  .login-form {
+    padding: var(--spacing-md);
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .login-form .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .login-form textarea {
+    min-height: 100px;
+    font-size: 12px;
+  }
+
+  .btn-block {
+    padding: 12px var(--spacing-md);
+    font-size: 14px;
+  }
+
+  .login-modal .modal-actions {
+    flex-shrink: 0;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+  }
+}
+
+/* Mobile Screens (480px and below) */
+@media (max-width: 480px) {
+  .login-modal {
+    max-width: 95%;
+    width: 95%;
+    max-height: 92vh;
+  }
+
+  .login-modal .modal-header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    flex-shrink: 0;
+  }
+
+  .login-modal .modal-header h3 {
+    font-size: 16px;
+  }
+
+  .login-form {
+    padding: var(--spacing-sm) var(--spacing-md);
+    overflow-y: auto;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .login-form .form-group {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .login-form label {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .login-form label::before {
+    width: 3px;
+    height: 14px;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"],
+  .login-form textarea {
+    padding: 10px var(--spacing-sm);
+    font-size: 16px; /* Prevent zoom on iOS */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .login-form textarea {
+    min-height: 80px;
+    font-size: 12px;
+  }
+
+  .help-text {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  .btn-block {
+    padding: 11px var(--spacing-md);
+    font-size: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-block i {
+    font-size: 15px;
+  }
+
+  .login-error {
+    padding: var(--spacing-xs);
+    font-size: 11px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .login-error::before {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+
+  .login-modal .modal-actions {
+    flex-shrink: 0;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+  }
+}
+
+/* Small Mobile Screens (360px and below) */
+@media (max-width: 360px) {
+  .login-modal {
+    max-width: 98%;
+    width: 98%;
+    max-height: 94vh;
+  }
+
+  .login-modal .modal-header {
+    padding: 10px var(--spacing-sm);
+  }
+
+  .login-modal .modal-header h3 {
+    font-size: 15px;
+  }
+
+  .login-form {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .login-form .form-group {
+    margin-bottom: 10px;
+  }
+
+  .login-form label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"],
+  .login-form textarea {
+    padding: 8px 10px;
+    font-size: 16px; /* Keep at 16px to prevent zoom on iOS */
+  }
+
+  .login-form textarea {
+    min-height: 70px;
+    font-size: 11px;
+  }
+
+  .help-text {
+    font-size: 10px;
+  }
+
+  .btn-block {
+    padding: 10px var(--spacing-sm);
+    font-size: 13px;
+  }
+
+  .login-modal .modal-actions {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+}
+
+/* Landscape Mobile Screens */
+@media (max-width: 768px) and (orientation: landscape) {
+  .login-modal {
+    max-height: 96vh;
+  }
+
+  .login-modal .modal-header {
+    padding: 8px var(--spacing-md);
+  }
+
+  .login-modal .modal-header h3 {
+    font-size: 16px;
+  }
+
+  .login-form {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .login-form .form-group {
+    margin-bottom: 10px;
+  }
+
+  .login-form textarea {
+    min-height: 60px;
+  }
+
+  .login-modal .modal-actions {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
 }
 
 /* Header Actions */

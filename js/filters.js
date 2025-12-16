@@ -18,9 +18,21 @@ function setupFilterListeners() {
       this.classList.add('active');
       
       const filter = this.dataset.filter;
-      renderTopics(filter);
+      const searchInput = document.getElementById('topicsSearch');
+      const searchText = searchInput ? searchInput.value : '';
+      renderTopics(filter, searchText);
     });
   });
+
+  // Journey screen topics search
+  const topicsSearchInput = document.getElementById('topicsSearch');
+  if (topicsSearchInput) {
+    topicsSearchInput.addEventListener('input', function() {
+      const activeChip = document.querySelector('#journeyScreen .filter-chips .chip.active');
+      const filter = activeChip ? activeChip.dataset.filter : 'all';
+      renderTopics(filter, this.value);
+    });
+  }
 
   // My Words filter chips (same as Journey)
   const myWordsChips = document.querySelectorAll('#myWordsScreen .filter-chips .chip');
@@ -30,9 +42,21 @@ function setupFilterListeners() {
       this.classList.add('active');
       
       const filter = this.dataset.filter;
-      renderMyWords(filter);
+      const searchInput = document.getElementById('myTopicsSearch');
+      const searchText = searchInput ? searchInput.value : '';
+      renderMyWords(filter, searchText);
     });
   });
+
+  // My Words topics search
+  const myTopicsSearchInput = document.getElementById('myTopicsSearch');
+  if (myTopicsSearchInput) {
+    myTopicsSearchInput.addEventListener('input', function() {
+      const activeChip = document.querySelector('#myWordsScreen .filter-chips .chip.active');
+      const filter = activeChip ? activeChip.dataset.filter : 'all';
+      renderMyWords(filter, this.value);
+    });
+  }
   
   filterListenersInitialized = true;
 
