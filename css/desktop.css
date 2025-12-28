@@ -1,5 +1,6 @@
 /* ============================================
    DESKTOP LAYOUT OVERRIDES & FIXES
+   Modern Elegant Education Theme
    ============================================ */
 
 /* Desktop navigation items - horizontal header layout */
@@ -9,21 +10,24 @@
     flex-direction: row;
     align-items: center;
     gap: var(--spacing-sm);
-    padding: var(--spacing-sm) var(--spacing-md);
-    color: white;
+    padding: 10px 18px;
+    color: var(--text-secondary);
     transition: all var(--transition-fast);
     border-radius: var(--radius-md);
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: var(--bg-secondary);
     justify-content: center;
     white-space: nowrap;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 1px solid var(--border-light);
+    font-weight: 600;
   }
 
   .nav-item i {
-    font-size: 18px;
+    font-size: 16px;
     width: auto;
     text-align: center;
+    color: var(--text-tertiary);
+    transition: color var(--transition-fast);
   }
 
   .nav-item span {
@@ -32,18 +36,24 @@
   }
 
   .nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--bg-hover);
+    border-color: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .nav-item:hover i {
+    color: var(--primary);
   }
 
   .nav-item.active {
-    background: rgba(255, 255, 255, 0.35);
-    color: white;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: var(--primary);
+    color: var(--text-inverse);
+    box-shadow: var(--shadow-primary);
+    border-color: var(--primary);
   }
 
   .nav-item.active i {
+    color: var(--text-inverse);
     opacity: 1;
   }
 }
@@ -55,7 +65,7 @@
   .word-cards-list {
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   }
-  
+
   .topics-list {
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   }
@@ -69,11 +79,11 @@
     gap: var(--spacing-xl);
     align-items: start;
   }
-  
+
   .detail-word-header {
     grid-column: 1 / -1;
   }
-  
+
   .detail-section {
     break-inside: avoid;
   }
@@ -82,7 +92,7 @@
 /* Ensure filter tabs don't duplicate */
 .filter-tabs.filter-tabs {
   display: flex;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   padding: 0;
   margin-bottom: var(--spacing-xl);
   overflow-x: auto;
@@ -105,5 +115,48 @@ html {
 @media (min-width: 769px) {
   .back-btn {
     display: flex;
+  }
+}
+
+/* Mobile navigation fixes */
+@media (max-width: 768px) {
+  .nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 8px 12px;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-secondary);
+    justify-content: center;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid var(--border-light);
+    font-weight: 600;
+  }
+
+  .nav-item i {
+    font-size: 16px;
+    color: var(--text-tertiary);
+  }
+
+  .nav-item span:not(.coming-soon-badge) {
+    display: none;
+  }
+
+  .nav-item.active {
+    background: var(--primary);
+    color: var(--text-inverse);
+    border-color: var(--primary);
+  }
+
+  .nav-item.active i {
+    color: var(--text-inverse);
+  }
+
+  .stat-item i {
+    color: inherit;
   }
 }

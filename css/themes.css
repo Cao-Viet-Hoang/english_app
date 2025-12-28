@@ -1,0 +1,615 @@
+/* ============================================
+   COLOR THEMES - Education App
+   Switch themes by adding class to <html> element
+   ============================================ */
+
+/* ============================================
+   THEME 1: OCEAN BLUE & CORAL
+   Fresh, energetic, perfect for language learning
+   ============================================ */
+html[data-theme="ocean"] {
+  /* Primary - Ocean Blue */
+  --primary: #5B9BD5;
+  --primary-light: #8FC1E8;
+  --primary-lighter: #D6EAF8;
+  --primary-dark: #4A89C4;
+  --primary-darker: #3A78B3;
+
+  /* Secondary - Soft Coral */
+  --secondary: #F08080;
+  --secondary-light: #F5A9A9;
+  --secondary-lighter: #FCE4E4;
+  --secondary-dark: #E06060;
+
+  /* Accent Colors */
+  --accent-rose: #FFB6C1;
+  --accent-rose-light: #FFD6DD;
+  --accent-rose-dark: #E89CA7;
+
+  --accent-lavender: #B8A9D9;
+  --accent-lavender-light: #D6CCE8;
+  --accent-lavender-dark: #9A8AC0;
+
+  --accent-gold: #F4D03F;
+  --accent-gold-light: #F9E79F;
+  --accent-gold-dark: #D4AC0D;
+
+  --accent-coral: #FF7F7F;
+  --accent-coral-light: #FFB3B3;
+  --accent-coral-dark: #E56565;
+
+  --accent-teal: #5DADE2;
+  --accent-teal-light: #AED6F1;
+  --accent-teal-dark: #3498DB;
+
+  /* Status Colors */
+  --status-new: #F4D03F;
+  --status-new-bg: #FEF9E7;
+  --status-learning: #5DADE2;
+  --status-learning-bg: #EBF5FB;
+  --status-mastered: #58D68D;
+  --status-mastered-bg: #E8F8F5;
+
+  /* Feedback Colors */
+  --color-success: #58D68D;
+  --color-success-bg: #E8F8F5;
+  --color-warning: #F5B041;
+  --color-warning-bg: #FEF5E7;
+  --color-error: #EC7063;
+  --color-error-bg: #FDEDEC;
+  --color-info: #5DADE2;
+  --color-info-bg: #EBF5FB;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #5B9BD5 0%, #8FC1E8 100%);
+  --gradient-secondary: linear-gradient(135deg, #F08080 0%, #F5A9A9 100%);
+  --gradient-header: linear-gradient(135deg, #5B9BD5 0%, #5DADE2 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(91, 155, 213, 0.25);
+  --shadow-secondary: 0 4px 16px rgba(240, 128, 128, 0.25);
+}
+
+/* ============================================
+   THEME 2: SKY BLUE & PEACH
+   Bright, friendly, comfortable for long study
+   ============================================ */
+html[data-theme="sky"] {
+  /* Primary - Sky Blue */
+  --primary: #87CEEB;
+  --primary-light: #B0E0E6;
+  --primary-lighter: #E0F4F8;
+  --primary-dark: #6BB8D9;
+  --primary-darker: #4FA3C7;
+
+  /* Secondary - Soft Peach */
+  --secondary: #FFDAB9;
+  --secondary-light: #FFE8D1;
+  --secondary-lighter: #FFF5EB;
+  --secondary-dark: #FFCC99;
+
+  /* Accent Colors */
+  --accent-rose: #FFB6C1;
+  --accent-rose-light: #FFD6DD;
+  --accent-rose-dark: #FF9AAA;
+
+  --accent-lavender: #DDA0DD;
+  --accent-lavender-light: #E8C8E8;
+  --accent-lavender-dark: #CC77CC;
+
+  --accent-gold: #FFD700;
+  --accent-gold-light: #FFEB99;
+  --accent-gold-dark: #E6C200;
+
+  --accent-coral: #FFA07A;
+  --accent-coral-light: #FFC4AD;
+  --accent-coral-dark: #FF8C5A;
+
+  --accent-teal: #7EC8E3;
+  --accent-teal-light: #B5E2F0;
+  --accent-teal-dark: #5BB5D6;
+
+  /* Status Colors */
+  --status-new: #FFD700;
+  --status-new-bg: #FFFACD;
+  --status-learning: #87CEEB;
+  --status-learning-bg: #E0F4F8;
+  --status-mastered: #90EE90;
+  --status-mastered-bg: #F0FFF0;
+
+  /* Feedback Colors */
+  --color-success: #90EE90;
+  --color-success-bg: #F0FFF0;
+  --color-warning: #FFD93D;
+  --color-warning-bg: #FFFACD;
+  --color-error: #FF6B6B;
+  --color-error-bg: #FFE8E8;
+  --color-info: #87CEEB;
+  --color-info-bg: #E0F4F8;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+  --gradient-secondary: linear-gradient(135deg, #FFDAB9 0%, #FFE8D1 100%);
+  --gradient-header: linear-gradient(135deg, #87CEEB 0%, #ADD8E6 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(135, 206, 235, 0.30);
+  --shadow-secondary: 0 4px 16px rgba(255, 218, 185, 0.30);
+}
+
+/* ============================================
+   THEME 3: MINT & WARM YELLOW
+   Fresh, focused, motivating for learning
+   ============================================ */
+html[data-theme="mint"] {
+  /* Primary - Fresh Mint */
+  --primary: #98D8C8;
+  --primary-light: #B8E8DC;
+  --primary-lighter: #E5F7F3;
+  --primary-dark: #7CC9B5;
+  --primary-darker: #5FB9A2;
+
+  /* Secondary - Warm Yellow */
+  --secondary: #FFE066;
+  --secondary-light: #FFEB99;
+  --secondary-lighter: #FFF8E1;
+  --secondary-dark: #FFD633;
+
+  /* Accent Colors */
+  --accent-rose: #F8B4B4;
+  --accent-rose-light: #FCD5D5;
+  --accent-rose-dark: #F49393;
+
+  --accent-lavender: #C9B8E8;
+  --accent-lavender-light: #E0D6F2;
+  --accent-lavender-dark: #B29AD8;
+
+  --accent-gold: #F7DC6F;
+  --accent-gold-light: #FBEAA0;
+  --accent-gold-dark: #F4D03F;
+
+  --accent-coral: #FFAB91;
+  --accent-coral-light: #FFCCBC;
+  --accent-coral-dark: #FF8A65;
+
+  --accent-teal: #80CBC4;
+  --accent-teal-light: #B2DFDB;
+  --accent-teal-dark: #4DB6AC;
+
+  /* Status Colors */
+  --status-new: #FFE066;
+  --status-new-bg: #FFF8E1;
+  --status-learning: #80CBC4;
+  --status-learning-bg: #E0F2F1;
+  --status-mastered: #81C784;
+  --status-mastered-bg: #E8F5E9;
+
+  /* Feedback Colors */
+  --color-success: #81C784;
+  --color-success-bg: #E8F5E9;
+  --color-warning: #FFD54F;
+  --color-warning-bg: #FFF8E1;
+  --color-error: #E57373;
+  --color-error-bg: #FFEBEE;
+  --color-info: #80CBC4;
+  --color-info-bg: #E0F2F1;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #98D8C8 0%, #B8E8DC 100%);
+  --gradient-secondary: linear-gradient(135deg, #FFE066 0%, #FFEB99 100%);
+  --gradient-header: linear-gradient(135deg, #98D8C8 0%, #80CBC4 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(152, 216, 200, 0.30);
+  --shadow-secondary: 0 4px 16px rgba(255, 224, 102, 0.30);
+}
+
+/* ============================================
+   THEME 4: SOFT PURPLE & TEAL
+   Creative, intelligent, premium feel
+   ============================================ */
+html[data-theme="purple"] {
+  /* Primary - Soft Purple */
+  --primary: #A78BFA;
+  --primary-light: #C4B5FD;
+  --primary-lighter: #EDE9FE;
+  --primary-dark: #8B5CF6;
+  --primary-darker: #7C3AED;
+
+  /* Secondary - Soft Teal */
+  --secondary: #5EEAD4;
+  --secondary-light: #99F6E4;
+  --secondary-lighter: #CCFBF1;
+  --secondary-dark: #2DD4BF;
+
+  /* Accent Colors */
+  --accent-rose: #FDA4AF;
+  --accent-rose-light: #FECDD3;
+  --accent-rose-dark: #FB7185;
+
+  --accent-lavender: #C4B5FD;
+  --accent-lavender-light: #DDD6FE;
+  --accent-lavender-dark: #A78BFA;
+
+  --accent-gold: #FCD34D;
+  --accent-gold-light: #FDE68A;
+  --accent-gold-dark: #FBBF24;
+
+  --accent-coral: #FCA5A5;
+  --accent-coral-light: #FECACA;
+  --accent-coral-dark: #F87171;
+
+  --accent-teal: #5EEAD4;
+  --accent-teal-light: #99F6E4;
+  --accent-teal-dark: #2DD4BF;
+
+  /* Status Colors */
+  --status-new: #FCD34D;
+  --status-new-bg: #FEF3C7;
+  --status-learning: #A78BFA;
+  --status-learning-bg: #EDE9FE;
+  --status-mastered: #34D399;
+  --status-mastered-bg: #D1FAE5;
+
+  /* Feedback Colors */
+  --color-success: #34D399;
+  --color-success-bg: #D1FAE5;
+  --color-warning: #FBBF24;
+  --color-warning-bg: #FEF3C7;
+  --color-error: #F87171;
+  --color-error-bg: #FEE2E2;
+  --color-info: #A78BFA;
+  --color-info-bg: #EDE9FE;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #A78BFA 0%, #C4B5FD 100%);
+  --gradient-secondary: linear-gradient(135deg, #5EEAD4 0%, #99F6E4 100%);
+  --gradient-header: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(167, 139, 250, 0.30);
+  --shadow-secondary: 0 4px 16px rgba(94, 234, 212, 0.30);
+}
+
+/* ============================================
+   THEME 5: ROSE PINK & CREAM
+   Soft, elegant, romantic learning experience
+   ============================================ */
+html[data-theme="rose"] {
+  /* Primary - Rose Pink */
+  --primary: #E8A0BF;
+  --primary-light: #F2C4D6;
+  --primary-lighter: #FBE8F0;
+  --primary-dark: #D988A9;
+  --primary-darker: #CA7093;
+
+  /* Secondary - Soft Cream */
+  --secondary: #F5E6D3;
+  --secondary-light: #FAF2EA;
+  --secondary-lighter: #FDFAF7;
+  --secondary-dark: #E8D5BE;
+
+  /* Accent Colors */
+  --accent-rose: #F4A7C7;
+  --accent-rose-light: #FACCE0;
+  --accent-rose-dark: #E88AAF;
+
+  --accent-lavender: #D4B8E8;
+  --accent-lavender-light: #E6D6F2;
+  --accent-lavender-dark: #C29ED8;
+
+  --accent-gold: #E8C97A;
+  --accent-gold-light: #F2DDA8;
+  --accent-gold-dark: #D4B45C;
+
+  --accent-coral: #F5B895;
+  --accent-coral-light: #FACCB8;
+  --accent-coral-dark: #E8A07A;
+
+  --accent-teal: #A8D8D8;
+  --accent-teal-light: #C8E8E8;
+  --accent-teal-dark: #88C8C8;
+
+  /* Status Colors */
+  --status-new: #E8C97A;
+  --status-new-bg: #FDF8EB;
+  --status-learning: #E8A0BF;
+  --status-learning-bg: #FBE8F0;
+  --status-mastered: #A8D8D8;
+  --status-mastered-bg: #E8F5F5;
+
+  /* Feedback Colors */
+  --color-success: #9BD4A8;
+  --color-success-bg: #E8F5EB;
+  --color-warning: #E8C97A;
+  --color-warning-bg: #FDF8EB;
+  --color-error: #E89A9A;
+  --color-error-bg: #FBE8E8;
+  --color-info: #A8C8E8;
+  --color-info-bg: #E8F2FB;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #E8A0BF 0%, #F2C4D6 100%);
+  --gradient-secondary: linear-gradient(135deg, #F5E6D3 0%, #FAF2EA 100%);
+  --gradient-header: linear-gradient(135deg, #E8A0BF 0%, #D4B8E8 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(232, 160, 191, 0.25);
+  --shadow-secondary: 0 4px 16px rgba(245, 230, 211, 0.30);
+}
+
+/* ============================================
+   THEME 6: LAVENDER DREAM
+   Calming, creative, perfect for focus
+   ============================================ */
+html[data-theme="lavender"] {
+  /* Primary - Soft Lavender */
+  --primary: #B8A9D9;
+  --primary-light: #D0C5E8;
+  --primary-lighter: #EDE8F5;
+  --primary-dark: #9F8CC9;
+  --primary-darker: #866FBA;
+
+  /* Secondary - Dusty Rose */
+  --secondary: #E8C5D0;
+  --secondary-light: #F2DBE2;
+  --secondary-lighter: #FAF0F3;
+  --secondary-dark: #D9A8B8;
+
+  /* Accent Colors */
+  --accent-rose: #E8B8C8;
+  --accent-rose-light: #F2D0DC;
+  --accent-rose-dark: #D99AB0;
+
+  --accent-lavender: #C9B8E8;
+  --accent-lavender-light: #DCD0F2;
+  --accent-lavender-dark: #B59FD9;
+
+  --accent-gold: #E8D8A0;
+  --accent-gold-light: #F2E8C0;
+  --accent-gold-dark: #D9C880;
+
+  --accent-coral: #E8B8A0;
+  --accent-coral-light: #F2D0C0;
+  --accent-coral-dark: #D99F80;
+
+  --accent-teal: #A0D8D8;
+  --accent-teal-light: #C0E8E8;
+  --accent-teal-dark: #80C9C9;
+
+  /* Status Colors */
+  --status-new: #E8D8A0;
+  --status-new-bg: #FAF5E8;
+  --status-learning: #B8A9D9;
+  --status-learning-bg: #EDE8F5;
+  --status-mastered: #A0D8A8;
+  --status-mastered-bg: #E8F5EA;
+
+  /* Feedback Colors */
+  --color-success: #A0D8A8;
+  --color-success-bg: #E8F5EA;
+  --color-warning: #E8D8A0;
+  --color-warning-bg: #FAF5E8;
+  --color-error: #E8A0A0;
+  --color-error-bg: #FAE8E8;
+  --color-info: #A0B8E8;
+  --color-info-bg: #E8EEF9;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #B8A9D9 0%, #D0C5E8 100%);
+  --gradient-secondary: linear-gradient(135deg, #E8C5D0 0%, #F2DBE2 100%);
+  --gradient-header: linear-gradient(135deg, #B8A9D9 0%, #E8C5D0 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(184, 169, 217, 0.25);
+  --shadow-secondary: 0 4px 16px rgba(232, 197, 208, 0.25);
+}
+
+/* ============================================
+   THEME 7: SUNSET PEACH
+   Warm, inviting, energizing
+   ============================================ */
+html[data-theme="sunset"] {
+  /* Primary - Sunset Peach */
+  --primary: #FFAB91;
+  --primary-light: #FFCCBC;
+  --primary-lighter: #FFF0E8;
+  --primary-dark: #FF8A65;
+  --primary-darker: #FF7043;
+
+  /* Secondary - Soft Lilac */
+  --secondary: #CE93D8;
+  --secondary-light: #E1BEE7;
+  --secondary-lighter: #F3E5F5;
+  --secondary-dark: #BA68C8;
+
+  /* Accent Colors */
+  --accent-rose: #F48FB1;
+  --accent-rose-light: #F8BBD9;
+  --accent-rose-dark: #EC407A;
+
+  --accent-lavender: #B39DDB;
+  --accent-lavender-light: #D1C4E9;
+  --accent-lavender-dark: #9575CD;
+
+  --accent-gold: #FFD54F;
+  --accent-gold-light: #FFE082;
+  --accent-gold-dark: #FFCA28;
+
+  --accent-coral: #FFAB91;
+  --accent-coral-light: #FFCCBC;
+  --accent-coral-dark: #FF8A65;
+
+  --accent-teal: #80DEEA;
+  --accent-teal-light: #B2EBF2;
+  --accent-teal-dark: #4DD0E1;
+
+  /* Status Colors */
+  --status-new: #FFD54F;
+  --status-new-bg: #FFF8E1;
+  --status-learning: #FFAB91;
+  --status-learning-bg: #FFF0E8;
+  --status-mastered: #A5D6A7;
+  --status-mastered-bg: #E8F5E9;
+
+  /* Feedback Colors */
+  --color-success: #A5D6A7;
+  --color-success-bg: #E8F5E9;
+  --color-warning: #FFD54F;
+  --color-warning-bg: #FFF8E1;
+  --color-error: #EF9A9A;
+  --color-error-bg: #FFEBEE;
+  --color-info: #81D4FA;
+  --color-info-bg: #E1F5FE;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #FFAB91 0%, #FFCCBC 100%);
+  --gradient-secondary: linear-gradient(135deg, #CE93D8 0%, #E1BEE7 100%);
+  --gradient-header: linear-gradient(135deg, #FFAB91 0%, #CE93D8 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(255, 171, 145, 0.30);
+  --shadow-secondary: 0 4px 16px rgba(206, 147, 216, 0.25);
+}
+
+/* ============================================
+   THEME 8: CANDY PINK
+   Playful, fun, youthful energy
+   ============================================ */
+html[data-theme="candy"] {
+  /* Primary - Candy Pink */
+  --primary: #FF9ECD;
+  --primary-light: #FFB8DB;
+  --primary-lighter: #FFE8F3;
+  --primary-dark: #FF85BE;
+  --primary-darker: #FF6BAF;
+
+  /* Secondary - Baby Blue */
+  --secondary: #9DD6FF;
+  --secondary-light: #BBE4FF;
+  --secondary-lighter: #E8F5FF;
+  --secondary-dark: #7EC8FF;
+
+  /* Accent Colors */
+  --accent-rose: #FFB3D9;
+  --accent-rose-light: #FFD1E8;
+  --accent-rose-dark: #FF95CA;
+
+  --accent-lavender: #D4B3FF;
+  --accent-lavender-light: #E6D1FF;
+  --accent-lavender-dark: #C295FF;
+
+  --accent-gold: #FFE066;
+  --accent-gold-light: #FFEB99;
+  --accent-gold-dark: #FFD633;
+
+  --accent-coral: #FFB088;
+  --accent-coral-light: #FFC8AA;
+  --accent-coral-dark: #FF9866;
+
+  --accent-teal: #88E8E8;
+  --accent-teal-light: #AAF0F0;
+  --accent-teal-dark: #66E0E0;
+
+  /* Status Colors */
+  --status-new: #FFE066;
+  --status-new-bg: #FFF8E1;
+  --status-learning: #FF9ECD;
+  --status-learning-bg: #FFE8F3;
+  --status-mastered: #88E8B8;
+  --status-mastered-bg: #E8FBF0;
+
+  /* Feedback Colors */
+  --color-success: #88E8B8;
+  --color-success-bg: #E8FBF0;
+  --color-warning: #FFD066;
+  --color-warning-bg: #FFF5E1;
+  --color-error: #FF9999;
+  --color-error-bg: #FFE8E8;
+  --color-info: #88C8FF;
+  --color-info-bg: #E8F3FF;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #FF9ECD 0%, #FFB8DB 100%);
+  --gradient-secondary: linear-gradient(135deg, #9DD6FF 0%, #BBE4FF 100%);
+  --gradient-header: linear-gradient(135deg, #FF9ECD 0%, #9DD6FF 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(255, 158, 205, 0.30);
+  --shadow-secondary: 0 4px 16px rgba(157, 214, 255, 0.30);
+}
+
+/* ============================================
+   THEME 9: AQUA MARINE
+   Refreshing, clean, professional
+   ============================================ */
+html[data-theme="aqua"] {
+  /* Primary - Aqua Marine */
+  --primary: #7FDBDA;
+  --primary-light: #A8E8E8;
+  --primary-lighter: #E0F7F7;
+  --primary-dark: #5CCFCE;
+  --primary-darker: #3AC3C2;
+
+  /* Secondary - Soft Sand */
+  --secondary: #F5DEB3;
+  --secondary-light: #FAE8C8;
+  --secondary-lighter: #FDF5E8;
+  --secondary-dark: #E8C99A;
+
+  /* Accent Colors */
+  --accent-rose: #F5B5C8;
+  --accent-rose-light: #FAD0DC;
+  --accent-rose-dark: #E89AB3;
+
+  --accent-lavender: #C5B8E8;
+  --accent-lavender-light: #DBD2F2;
+  --accent-lavender-dark: #AFA0D8;
+
+  --accent-gold: #F5D88A;
+  --accent-gold-light: #FAE6B0;
+  --accent-gold-dark: #E8C964;
+
+  --accent-coral: #F5B8A0;
+  --accent-coral-light: #FAD0C0;
+  --accent-coral-dark: #E89F80;
+
+  --accent-teal: #7FDBDA;
+  --accent-teal-light: #A8E8E8;
+  --accent-teal-dark: #5CCFCE;
+
+  /* Status Colors */
+  --status-new: #F5D88A;
+  --status-new-bg: #FDF8E8;
+  --status-learning: #7FDBDA;
+  --status-learning-bg: #E0F7F7;
+  --status-mastered: #98E898;
+  --status-mastered-bg: #E8F8E8;
+
+  /* Feedback Colors */
+  --color-success: #98E898;
+  --color-success-bg: #E8F8E8;
+  --color-warning: #F5D88A;
+  --color-warning-bg: #FDF8E8;
+  --color-error: #F5A0A0;
+  --color-error-bg: #FDE8E8;
+  --color-info: #7FDBDA;
+  --color-info-bg: #E0F7F7;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #7FDBDA 0%, #A8E8E8 100%);
+  --gradient-secondary: linear-gradient(135deg, #F5DEB3 0%, #FAE8C8 100%);
+  --gradient-header: linear-gradient(135deg, #7FDBDA 0%, #5CCFCE 100%);
+
+  /* Shadows */
+  --shadow-primary: 0 4px 16px rgba(127, 219, 218, 0.30);
+  --shadow-secondary: 0 4px 16px rgba(245, 222, 179, 0.30);
+}
+
+/* ============================================
+   DEFAULT THEME (Current Sage Green)
+   Keep as fallback
+   ============================================ */
+html:not([data-theme]), html[data-theme="default"] {
+  /* Uses colors.css default values */
+}
