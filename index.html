@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="ocean">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>English Learning App</title>
   <link rel="icon" href="data:,">
   
-  <!-- Google Fonts - Modern Professional Pairing -->
+  <!-- Google Fonts - Premium Education Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/colors.css">
+  <link rel="stylesheet" href="css/themes.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/desktop.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -68,11 +69,63 @@
           </div>
         </div>
         <div class="header-actions">
+          <button class="icon-btn theme-btn" id="themeToggleBtn" title="Change Theme">
+            <i class="fas fa-palette"></i>
+          </button>
           <button class="icon-btn user-btn" id="userProfileBtn" title="Profile">
             <i class="fas fa-user-circle"></i>
           </button>
         </div>
-        
+
+        <!-- Theme Picker Panel -->
+        <div class="theme-picker" id="themePicker">
+          <div class="theme-picker-header">
+            <span class="theme-picker-title">Choose Theme</span>
+          </div>
+          <div class="theme-options">
+            <button class="theme-option" data-theme="ocean" title="Ocean Blue & Coral">
+              <span class="theme-color" style="background: linear-gradient(135deg, #5B9BD5 50%, #F08080 50%);"></span>
+              <span class="theme-name">Ocean</span>
+            </button>
+            <button class="theme-option" data-theme="sky" title="Sky Blue & Peach">
+              <span class="theme-color" style="background: linear-gradient(135deg, #87CEEB 50%, #FFDAB9 50%);"></span>
+              <span class="theme-name">Sky</span>
+            </button>
+            <button class="theme-option" data-theme="mint" title="Mint & Warm Yellow">
+              <span class="theme-color" style="background: linear-gradient(135deg, #98D8C8 50%, #FFE066 50%);"></span>
+              <span class="theme-name">Mint</span>
+            </button>
+            <button class="theme-option" data-theme="purple" title="Soft Purple & Teal">
+              <span class="theme-color" style="background: linear-gradient(135deg, #A78BFA 50%, #5EEAD4 50%);"></span>
+              <span class="theme-name">Purple</span>
+            </button>
+            <button class="theme-option" data-theme="rose" title="Rose Pink & Cream">
+              <span class="theme-color" style="background: linear-gradient(135deg, #E8A0BF 50%, #F5E6D3 50%);"></span>
+              <span class="theme-name">Rose</span>
+            </button>
+            <button class="theme-option" data-theme="lavender" title="Lavender Dream">
+              <span class="theme-color" style="background: linear-gradient(135deg, #B8A9D9 50%, #E8C5D0 50%);"></span>
+              <span class="theme-name">Lavndr</span>
+            </button>
+            <button class="theme-option" data-theme="sunset" title="Sunset Peach">
+              <span class="theme-color" style="background: linear-gradient(135deg, #FFAB91 50%, #CE93D8 50%);"></span>
+              <span class="theme-name">Sunset</span>
+            </button>
+            <button class="theme-option" data-theme="candy" title="Candy Pink">
+              <span class="theme-color" style="background: linear-gradient(135deg, #FF9ECD 50%, #9DD6FF 50%);"></span>
+              <span class="theme-name">Candy</span>
+            </button>
+            <button class="theme-option" data-theme="aqua" title="Aqua Marine">
+              <span class="theme-color" style="background: linear-gradient(135deg, #7FDBDA 50%, #F5DEB3 50%);"></span>
+              <span class="theme-name">Aqua</span>
+            </button>
+            <button class="theme-option" data-theme="default" title="Default Sage Green">
+              <span class="theme-color" style="background: linear-gradient(135deg, #7C9A92 50%, #8BA4B4 50%);"></span>
+              <span class="theme-name">Default</span>
+            </button>
+          </div>
+        </div>
+
         <!-- User Profile Menu -->
         <div class="profile-menu" id="profileMenu">
           <div class="profile-menu-header">

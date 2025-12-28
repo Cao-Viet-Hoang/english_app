@@ -1,117 +1,242 @@
 /* ============================================
-   COLOR PALETTE - Modern Education Theme
-   Based on ui-ux-pro-max recommendations
+   COLOR PALETTE - Modern Elegant Education Theme
+   Premium Pastel Design System
    ============================================ */
 
 :root {
-  /* Typography */
-  --font-primary: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Poppins', 'Inter', sans-serif;
-  
-  /* Primary Colors - Vibrant & Professional */
-  --primary: #0D9488;
-  --primary-light: #2DD4BF;
-  --primary-dark: #134E4A;
-  
-  /* Secondary Colors */
-  --secondary: #4F46E5;
-  --secondary-light: #818CF8;
-  --secondary-dark: #1E1B4B;
-  
-  /* CTA & Accent Colors */
-  --cta: #EA580C;
-  --cta-hover: #C2410C;
-  --accent-orange: #F97316;
-  --accent-green: #10B981;
-  --accent-purple: #8B5CF6;
-  --accent-blue: #3B82F6;
-  --accent-blue-dark: #2563EB;
-  
-  /* Background Colors */
-  --bg-main: #F0FDFA;
-  --bg-card: #ffffff;
-  --bg-secondary: #ECFDF5;
-  --bg-hover: #F3F4F6;
-  --bg-pressed: #E5E7EB;
-  
-  /* Text Colors - Improved Contrast */
-  --text-primary: #134E4A;
-  --text-secondary: #0F766E;
-  --text-tertiary: #6B7280;
-  --text-light: #9CA3AF;
-  
-  /* Status Colors */
-  --status-new: #FBBF24;
-  --status-learning: #3B82F6;
-  --status-mastered: #10B981;
-  
-  /* Word Type Colors */
-  --type-verb: #8B5CF6;
-  --type-noun: #0EA5E9;
-  --type-adjective: #EC4899;
-  --type-adverb: #F59E0B;
-  
-  /* Interactive Elements - Soft UI Evolution */
-  --shadow-soft: 0 2px 8px rgba(13, 148, 136, 0.08);
-  --shadow-medium: 0 4px 16px rgba(13, 148, 136, 0.12);
-  --shadow-strong: 0 8px 24px rgba(13, 148, 136, 0.16);
-  --shadow-hover: 0 12px 32px rgba(13, 148, 136, 0.2);
-  
-  /* Border & Divider */
-  --border-light: #5EEAD4;
-  --border-medium: #2DD4BF;
-  
-  /* Gradient Backgrounds */
-  --gradient-primary: linear-gradient(135deg, #0D9488 0%, #2DD4BF 100%);
-  --gradient-secondary: linear-gradient(135deg, #4F46E5 0%, #818CF8 100%);
-  --gradient-cta: linear-gradient(135deg, #EA580C 0%, #F97316 100%);
-  --gradient-success: linear-gradient(135deg, #10B981 0%, #34D399 100%);
-  
-  /* Spacing - Consistent 8px Grid */
+  /* Typography - Premium Education Fonts */
+  --font-primary: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', 'SF Pro Display', sans-serif;
+  --font-display: 'Playfair Display', 'Georgia', serif;
+
+  /* ========================================
+     ELEGANT PASTEL COLOR SYSTEM
+     ======================================== */
+
+  /* Primary - Soft Sage Green (Calm & Professional) */
+  --primary: #7C9A92;
+  --primary-light: #A8C5BB;
+  --primary-lighter: #D4E5DF;
+  --primary-dark: #5B7870;
+  --primary-darker: #4A6660;
+
+  /* Secondary - Soft Dusty Blue (Trust & Intelligence) */
+  --secondary: #8BA4B4;
+  --secondary-light: #B3CAD8;
+  --secondary-lighter: #DAE8F0;
+  --secondary-dark: #6B8899;
+
+  /* Accent - Warm Blush Pink (Engagement & Warmth) */
+  --accent-rose: #D4A5A5;
+  --accent-rose-light: #E8CBCB;
+  --accent-rose-dark: #B88A8A;
+
+  /* Accent - Soft Lavender (Creativity & Wisdom) */
+  --accent-lavender: #B8A9C9;
+  --accent-lavender-light: #D6CCE3;
+  --accent-lavender-dark: #9A8AAF;
+
+  /* Accent - Muted Gold (Achievement & Premium) */
+  --accent-gold: #C9B896;
+  --accent-gold-light: #E3D9C3;
+  --accent-gold-dark: #A89A78;
+
+  /* Accent - Soft Coral (Energy & Motivation) */
+  --accent-coral: #D4A88E;
+  --accent-coral-light: #E8CDB8;
+  --accent-coral-dark: #B88B70;
+
+  /* Accent - Soft Teal (Focus & Clarity) */
+  --accent-teal: #8CBDB6;
+  --accent-teal-light: #B8D8D3;
+  --accent-teal-dark: #6BA09A;
+
+  /* ========================================
+     BACKGROUND COLORS - Clean & Elegant
+     ======================================== */
+
+  --bg-main: #FAFBFC;
+  --bg-card: #FFFFFF;
+  --bg-secondary: #F5F7F9;
+  --bg-tertiary: #EEF1F4;
+  --bg-hover: #F0F3F6;
+  --bg-pressed: #E5E9ED;
+  --bg-overlay: rgba(45, 55, 72, 0.5);
+
+  /* ========================================
+     TEXT COLORS - High Contrast & Readable
+     ======================================== */
+
+  --text-primary: #2D3748;
+  --text-secondary: #4A5568;
+  --text-tertiary: #718096;
+  --text-light: #A0AEC0;
+  --text-muted: #CBD5E0;
+  --text-inverse: #FFFFFF;
+
+  /* ========================================
+     STATUS COLORS - Soft & Clear
+     ======================================== */
+
+  --status-new: #E6B86C;
+  --status-new-bg: #FDF6E8;
+  --status-learning: #7BA3C4;
+  --status-learning-bg: #EBF3FA;
+  --status-mastered: #7CB89F;
+  --status-mastered-bg: #EDF7F2;
+
+  /* ========================================
+     WORD TYPE COLORS - Elegant & Distinct
+     ======================================== */
+
+  --type-verb: #9B8AC4;
+  --type-verb-bg: #F3F0F9;
+  --type-noun: #7BA3C4;
+  --type-noun-bg: #EBF3FA;
+  --type-adjective: #C49B8A;
+  --type-adjective-bg: #F9F3F0;
+  --type-adverb: #C4B07B;
+  --type-adverb-bg: #F9F6EB;
+
+  /* ========================================
+     FEEDBACK COLORS
+     ======================================== */
+
+  --color-success: #7CB89F;
+  --color-success-bg: #EDF7F2;
+  --color-warning: #D4A55A;
+  --color-warning-bg: #FDF6E8;
+  --color-error: #C47B7B;
+  --color-error-bg: #F9EDED;
+  --color-info: #7BA3C4;
+  --color-info-bg: #EBF3FA;
+
+  /* ========================================
+     SHADOW SYSTEM - Subtle & Elegant
+     ======================================== */
+
+  --shadow-xs: 0 1px 2px rgba(45, 55, 72, 0.04);
+  --shadow-sm: 0 2px 4px rgba(45, 55, 72, 0.06);
+  --shadow-md: 0 4px 12px rgba(45, 55, 72, 0.08);
+  --shadow-lg: 0 8px 24px rgba(45, 55, 72, 0.10);
+  --shadow-xl: 0 16px 40px rgba(45, 55, 72, 0.12);
+  --shadow-2xl: 0 24px 56px rgba(45, 55, 72, 0.14);
+
+  /* Colored shadows for elevation */
+  --shadow-primary: 0 4px 16px rgba(124, 154, 146, 0.20);
+  --shadow-secondary: 0 4px 16px rgba(139, 164, 180, 0.20);
+  --shadow-rose: 0 4px 16px rgba(212, 165, 165, 0.20);
+  --shadow-lavender: 0 4px 16px rgba(184, 169, 201, 0.20);
+
+  /* ========================================
+     BORDER COLORS
+     ======================================== */
+
+  --border-light: #E8ECF0;
+  --border-medium: #D4DBE3;
+  --border-dark: #B8C4D0;
+  --border-focus: var(--primary);
+
+  /* ========================================
+     GRADIENTS - Soft & Premium
+     ======================================== */
+
+  --gradient-primary: linear-gradient(135deg, #7C9A92 0%, #A8C5BB 100%);
+  --gradient-secondary: linear-gradient(135deg, #8BA4B4 0%, #B3CAD8 100%);
+  --gradient-rose: linear-gradient(135deg, #D4A5A5 0%, #E8CBCB 100%);
+  --gradient-lavender: linear-gradient(135deg, #B8A9C9 0%, #D6CCE3 100%);
+  --gradient-gold: linear-gradient(135deg, #C9B896 0%, #E3D9C3 100%);
+  --gradient-coral: linear-gradient(135deg, #D4A88E 0%, #E8CDB8 100%);
+  --gradient-teal: linear-gradient(135deg, #8CBDB6 0%, #B8D8D3 100%);
+
+  /* Premium card gradient */
+  --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+  --gradient-header: linear-gradient(135deg, #7C9A92 0%, #8BA4B4 100%);
+
+  /* Subtle background gradients */
+  --gradient-bg-subtle: linear-gradient(180deg, #FAFBFC 0%, #F5F7F9 100%);
+
+  /* ========================================
+     SPACING SYSTEM - 8px Grid
+     ======================================== */
+
+  --spacing-2xs: 2px;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
-  
-  /* Border Radius - Modern & Friendly */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 50%;
-  
-  /* Transitions - Optimized for UX */
-  --transition-fast: 0.15s ease-out;
-  --transition-base: 0.2s ease-out;
-  --transition-medium: 0.3s ease-out;
-  --transition-slow: 0.4s ease-out;
-  
-  /* Interactive Colors - Better Contrast */
-  --color-primary: #0D9488;
-  --color-primary-hover: #0F766E;
-  --color-secondary: #4F46E5;
-  --color-accent: #3B82F6;
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-error: #EF4444;
-  
-  /* Shadow System */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --spacing-3xl: 64px;
+
+  /* ========================================
+     BORDER RADIUS - Modern Rectangular
+     ======================================== */
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+
+  /* ========================================
+     TRANSITIONS - Smooth & Professional
+     ======================================== */
+
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ========================================
+     LEGACY VARIABLES (for compatibility)
+     ======================================== */
+
+  --cta: var(--accent-coral);
+  --cta-hover: var(--accent-coral-dark);
+  --accent-orange: var(--accent-coral);
+  --accent-green: var(--color-success);
+  --accent-purple: var(--accent-lavender);
+  --accent-blue: var(--secondary);
+  --accent-blue-dark: var(--secondary-dark);
+
+  --success-color: var(--color-success);
+  --error-color: var(--color-error);
+  --warning-color: var(--color-warning);
+
+  --gradient-cta: var(--gradient-coral);
+  --gradient-success: linear-gradient(135deg, #7CB89F 0%, #A8D4BE 100%);
+  --gradient-pink: var(--gradient-rose);
+
+  --shadow-soft: var(--shadow-sm);
+  --shadow-medium: var(--shadow-md);
+  --shadow-strong: var(--shadow-lg);
+  --shadow-hover: var(--shadow-xl);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent-teal);
+
+  --border-color: var(--border-light);
 }
 
-/* Accessibility - Reduced Motion Support */
+/* ========================================
+   ACCESSIBILITY - Reduced Motion
+   ======================================== */
+
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --transition-fast: 0.01s;
-    --transition-medium: 0.01s;
-    --transition-slow: 0.01s;
+    --transition-fast: 0.01ms;
+    --transition-base: 0.01ms;
+    --transition-medium: 0.01ms;
+    --transition-slow: 0.01ms;
+    --transition-bounce: 0.01ms;
   }
-  
+
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -119,17 +244,31 @@
   }
 }
 
-/* Dark Mode Support (optional for future) */
+/* ========================================
+   DARK MODE SUPPORT
+   ======================================== */
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-main: #0F1419;
-    --bg-card: #1C2128;
-    --bg-secondary: #161B22;
-    --bg-hover: #21262D;
-    --text-primary: #E6EDF3;
-    --text-secondary: #7D8590;
-    --text-tertiary: #6E7681;
-    --border-light: #30363D;
-    --border-medium: #21262D;
+    --bg-main: #1A1D23;
+    --bg-card: #242830;
+    --bg-secondary: #1E2127;
+    --bg-tertiary: #2A2F38;
+    --bg-hover: #2F353F;
+    --bg-pressed: #363D49;
+
+    --text-primary: #F0F4F8;
+    --text-secondary: #B8C4D0;
+    --text-tertiary: #8896A6;
+    --text-light: #5F6B7A;
+
+    --border-light: #2D3542;
+    --border-medium: #3D4756;
+    --border-dark: #4D586A;
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 }
