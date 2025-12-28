@@ -257,6 +257,11 @@ function showQuizComplete() {
   }
   
   completeOverlay.style.display = 'flex';
+  
+  // Track learning activity and update streak
+  trackLearningActivity().catch(error => {
+    console.warn('⚠️ Could not update streak after quiz completion:', error);
+  });
 }
 
 // ============================================

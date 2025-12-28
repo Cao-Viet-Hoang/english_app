@@ -278,6 +278,15 @@ async function handleLogin(event) {
     
     // Reload data
     await loadData();
+    
+    // Check and update streak on login
+    try {
+      await checkStreakOnLogin();
+      console.log('✨ Streak check completed on login');
+    } catch (streakError) {
+      console.error('⚠️ Streak check failed, but continuing with login:', streakError);
+    }
+    
     initializeApp();
     
     console.log('Login successful:', user.name);
@@ -335,6 +344,18 @@ function showProfileMenu() {
     }
     if (profileUsername) {
       profileUsername.textContent = '@' + (user.account || 'username');
+    }
+    
+    // Update streak info in profile menu
+    const streak = getCurrentUserStreak();
+    const profileCurrentStreak = document.getElementById('profileCurrentStreak');
+    const profileLongestStreak = document.getElementById('profileLongestStreak');
+    
+    if (profileCurrentStreak) {
+      profileCurrentStreak.textContent = streak.currentStreak || 0;
+    }
+    if (profileLongestStreak) {
+      profileLongestStreak.textContent = streak.longestStreak || 0;
     }
     
     profileMenu.classList.add('active');

@@ -371,6 +371,14 @@ async function markWordAsLearned(topicId, wordId, isUserTopic = false) {
     }
     
     updateUserStatistics();
+    
+    // Track learning activity and update streak
+    try {
+      await trackLearningActivity();
+    } catch (streakError) {
+      console.warn('⚠️ Could not update streak:', streakError);
+      // Don't fail the word learning operation if streak update fails
+    }
   }
 }
 

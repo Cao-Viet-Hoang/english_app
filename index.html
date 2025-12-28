@@ -64,7 +64,7 @@
         <div class="user-stats">
           <div class="stat-item streak">
             <i class="fas fa-fire"></i>
-            <span class="streak-number">7</span>
+            <span class="streak-number" id="currentStreak">0</span>
             <span class="streak-label">Day Streak</span>
           </div>
         </div>
@@ -135,6 +135,22 @@
             <div class="profile-info">
               <div class="profile-name" id="profileMenuName">User Name</div>
               <div class="profile-username" id="profileMenuUsername">@username</div>
+            </div>
+          </div>
+          <div class="profile-menu-stats">
+            <div class="profile-stat">
+              <div class="profile-stat-value">
+                <i class="fas fa-fire" style="color: #ff6b6b;"></i>
+                <span id="profileCurrentStreak">0</span>
+              </div>
+              <div class="profile-stat-label">Current Streak</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-value">
+                <i class="fas fa-trophy" style="color: #ffd700;"></i>
+                <span id="profileLongestStreak">0</span>
+              </div>
+              <div class="profile-stat-label">Longest Streak</div>
             </div>
           </div>
           <div class="profile-menu-divider"></div>
@@ -1069,6 +1085,7 @@
   <script src="js/firebaseConfig.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/state.js"></script>
+  <script src="js/streak.js"></script>
   <script src="js/dataLoader.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/navigation.js"></script>
